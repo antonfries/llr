@@ -7,17 +7,21 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class ExcelInput {
+    private XSSFSheet ExcelSheet;
+
+    public ExcelInput() throws IOException {
+        InputStream ExcelDatei = new FileInputStream(Einstellungen.Mappe);
+        XSSFWorkbook wb = new XSSFWorkbook(ExcelDatei);
+        ExcelSheet = wb.getSheetAt(0);
+    }
+
     /**
      * @param i Zeile
      * @param j Spalte
      * @return double
      * @throws IOException Standard
      */
-    public static double Lesen(int i, int j) throws IOException {
-        InputStream ExcelDatei = new FileInputStream(Einstellungen.Mappe);
-        XSSFWorkbook wb = new XSSFWorkbook(ExcelDatei);
-        XSSFSheet ExcelSheet = wb.getSheetAt(0);
-
+    public double lesen(int i, int j) throws IOException {
         if ((ExcelSheet.getRow(i).getCell(j).getCellType() == CellType.NUMERIC)
                 && (ExcelSheet.getRow(i).getCell(j).getNumericCellValue() != 0)) {
             return ExcelSheet.getRow(i).getCell(j).getNumericCellValue();

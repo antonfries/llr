@@ -63,9 +63,10 @@ public class Rechner {
             einstellungen.addRegler(regler[i], i);
         }
         double ergebnis = 0.0;
+        ExcelInput mappe = new ExcelInput();
         for (int i = 0; i < 100; i++) {
-            double wert = ExcelInput.Lesen(i, 0);
-            int menge = (int) ExcelInput.Lesen(i, 1);
+            double wert = mappe.lesen(i, 0);
+            int menge = (int) mappe.lesen(i, 1);
             Buchung buchung = new Buchung(menge, wert, einstellungen);
             ergebnis = ergebnis + (buchung.getKoeffizient() * buchung.getMenge());
         }
