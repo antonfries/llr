@@ -52,9 +52,9 @@ public class GuiEinstellungen extends JFrame {
         anzahlDerKoeffizientenFrage = new JLabel("Anzahl Koeffizienten:");
 
         wertTextfeld = new JTextField(3);
-        wertTextfeld.setText("A");
+        wertTextfeld.setText("0");
         mengeTextfeld = new JTextField(3);
-        mengeTextfeld.setText("B");
+        mengeTextfeld.setText("1");
         maxMengeTextfeld = new JTextField(5);
         maxMengeTextfeld.setText("500");
         anzahlDerKoeffizientenTextfeld = new JTextField(3);
