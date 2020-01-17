@@ -1,9 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 
 public class GuiEinstellungen extends JFrame {
 
@@ -15,10 +11,10 @@ public class GuiEinstellungen extends JFrame {
     private JButton koeffizientenEinstellungenButton;
     private JButton speichernButton;
 
-    private JTextField wertTextfeld;
-    private JTextField mengeTextfeld;
-    private JTextField maxMengeTextfeld;
-    private JTextField anzahlDerKoeffizientenTextfeld;
+    public JTextField wertTextfeld;
+    public JTextField mengeTextfeld;
+    public JTextField maxMengeTextfeld;
+    public JTextField anzahlDerKoeffizientenTextfeld;
 
     public GuiEinstellungen(String titel) {
         setTitle(titel);
@@ -45,42 +41,25 @@ public class GuiEinstellungen extends JFrame {
     }
 
     private void initComponents() {
-        // TODO: (Allgemein Default aus Einstellungsklasse und später momentane Settings auslesen)
+        Einstellungen einstellungen = new Einstellungen();
+
         wertFrage = new JLabel("In welcher Spalte steht Wert?");
         mengeFrage = new JLabel("In welcher Spalte steht Menge?");
         maxMengeFrage = new JLabel("Maximale sinnvolle Menge:");
         anzahlDerKoeffizientenFrage = new JLabel("Anzahl Koeffizienten:");
 
         wertTextfeld = new JTextField(3);
-        wertTextfeld.setText("0");
+        wertTextfeld.setText(String.valueOf(einstellungen.getWertSpalte()));
         mengeTextfeld = new JTextField(3);
-        mengeTextfeld.setText("1");
+        mengeTextfeld.setText(String.valueOf(einstellungen.getMengeSpalte()));
         maxMengeTextfeld = new JTextField(5);
-        maxMengeTextfeld.setText("500");
+        maxMengeTextfeld.setText(String.valueOf(einstellungen.getMaximalMenge()));
         anzahlDerKoeffizientenTextfeld = new JTextField(3);
-        anzahlDerKoeffizientenTextfeld.setText("5");
+        anzahlDerKoeffizientenTextfeld.setText(String.valueOf(einstellungen.getKoeffizientAnzahl()));
 
         speichernButton = new JButton("Speichern");
         koeffizientenEinstellungenButton = new JButton("Koeffizienten-Einstellungen");
-        koeffizientenEinstellungenButton.addActionListener(e1 -> {
-            String anzahlDerKoeffizientenString = GuiEinstellungen.this.anzahlDerKoeffizientenTextfeld.getText();
-            int anzahlDerKoeffizienten = Integer.parseInt(anzahlDerKoeffizientenString);
-            new GuiKoeffizientenEinstellungen("Koeffizienten-Einstellungen", anzahlDerKoeffizienten);
-        });
-        speichernButton.addActionListener(e2 -> {
-            try {
-                // TODO: hardcoded
-                File einstellungenDatei = new File("C://ilyabykov//Spaß//Einstellungen.txt");
-                PrintWriter pw = new PrintWriter(new FileWriter(einstellungenDatei));
-                pw.println(GuiEinstellungen.this.anzahlDerKoeffizientenTextfeld.getText());
-                pw.println(GuiEinstellungen.this.wertTextfeld.getText());
-                pw.println(GuiEinstellungen.this.mengeTextfeld.getText());
-                pw.println(GuiEinstellungen.this.maxMengeTextfeld.getText());
-                pw.flush();
-                pw.close();
-            } catch (IOException fe) {
-                fe.printStackTrace();
-            }
-        });
+        koeffizientenEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(GuiEinstellungen.this));
+        speichernButton.addActionListener(new EinstellungenListener(GuiEinstellungen.this));
     }
 }

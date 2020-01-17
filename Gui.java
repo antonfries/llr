@@ -1,9 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class Gui extends JFrame {
 
@@ -13,10 +10,10 @@ public class Gui extends JFrame {
     private JButton einstellungsButton;
     private JButton startButton;
 
-    private JTextField dateipfadTextfeld;
-    private JTextField arbeitszeitTextfeld;
+    public JTextField dateipfadTextfeld;
+    public JTextField arbeitszeitTextfeld;
 
-    public Gui(String titel) {
+    public Gui(String titel) throws IOException {
         setTitle(titel);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -37,39 +34,20 @@ public class Gui extends JFrame {
         setVisible(true);
     }
 
-    private void initComponents() {
+    private void initComponents() throws IOException {
+        Einstellungen einstellungen = new Einstellungen();
         dateipfad = new JLabel("Dateipfad:");
         arbeitszeit = new JLabel("Arbeitszeit:");
 
-        dateipfadTextfeld = new JTextField(20);
+        dateipfadTextfeld = new JTextField(25);
         dateipfadTextfeld.setText(Einstellungen.Mappe);
         arbeitszeitTextfeld = new JTextField(30);
-        arbeitszeitTextfeld.setText("10");
+        arbeitszeitTextfeld.setText(String.valueOf(einstellungen.getStunden()));
 
         startButton = new JButton("Start");
         einstellungsButton = new JButton("Einstellungen öffnen");
 
         einstellungsButton.addActionListener(e1 -> new GuiEinstellungen("Einstellungen"));
-        startButton.addActionListener(e2 -> {
-            double endergebnis = 0.0;
-            try {
-                endergebnis = Rechner.rechnen();
-                JOptionPane.showMessageDialog(Gui.this, "Lager-Leistung:    " + endergebnis, "Ergebnis",
-                        JOptionPane.INFORMATION_MESSAGE);
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-            try {
-                // TODO: hardcoded
-                File arbeitszeitenDatei = new File("C://ilyabykov//Spaß//Arbeitszeit.txt");
-                PrintWriter pw = new PrintWriter(new FileWriter(arbeitszeitenDatei));
-                String arbeitszeit = Gui.this.arbeitszeitTextfeld.getText();
-                pw.println(arbeitszeit);
-                pw.flush();
-                pw.close();
-            } catch (IOException fe) {
-                fe.printStackTrace();
-            }
-        });
+        startButton.addActionListener(new StartListener(Gui.this));
     }
 }

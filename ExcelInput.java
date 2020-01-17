@@ -19,9 +19,8 @@ public class ExcelInput {
      * @param i Zeile
      * @param j Spalte
      * @return double
-     * @throws IOException Standard
      */
-    public double lesen(int i, int j) throws IOException {
+    public double lesen(int i, int j) {
         if ((ExcelSheet.getRow(i).getCell(j).getCellType() == CellType.NUMERIC)
                 && (ExcelSheet.getRow(i).getCell(j).getNumericCellValue() != 0)) {
             return ExcelSheet.getRow(i).getCell(j).getNumericCellValue();

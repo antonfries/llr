@@ -24,7 +24,7 @@ public class Buchung {
     }
 
     public void setMenge(int menge) {
-        if (menge >= einstellungen.getMaximaleMenge()) {
+        if (menge >= einstellungen.getMaximalMenge()) {
             menge = einstellungen.getStandardMenge();
         }
         this.menge = menge;
@@ -47,5 +47,9 @@ public class Buchung {
             }
         }
         return einstellungen.getStandardKoeffizient();
+    }
+
+    public double getProdukt() {
+        return getKoeffizient() * getMenge();
     }
 }
