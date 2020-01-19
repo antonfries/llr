@@ -1,3 +1,9 @@
+package Listener;
+
+import Gui.GuiEinstellungen;
+import Gui.GuiKoeffizientenEinstellungen;
+import Main.Einstellungen;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -5,7 +11,7 @@ import java.io.IOException;
 public class KoeffizientenEinstellungenListener implements ActionListener {
     private GuiEinstellungen guiEinstellungen;
 
-    KoeffizientenEinstellungenListener(GuiEinstellungen guiEinstellungen) {
+    public KoeffizientenEinstellungenListener(GuiEinstellungen guiEinstellungen) {
         this.guiEinstellungen = guiEinstellungen;
     }
 

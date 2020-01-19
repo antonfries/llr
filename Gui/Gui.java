@@ -1,17 +1,20 @@
+package Gui;
+
+import Listener.StartListener;
+import Main.Einstellungen;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
 public class Gui extends JFrame {
 
-    private JLabel dateipfad;
-    private JLabel arbeitszeit;
-
-    private JButton einstellungsButton;
-    private JButton startButton;
-
     public JTextField dateipfadTextfeld;
     public JTextField arbeitszeitTextfeld;
+    private JLabel dateipfad;
+    private JLabel arbeitszeit;
+    private JButton einstellungsButton;
+    private JButton startButton;
 
     public Gui() throws IOException {
         setTitle("LLR");

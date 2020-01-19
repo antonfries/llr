@@ -1,10 +1,12 @@
+package Main;
+
 import java.io.IOException;
 
 public class Rechner {
 
     public static double rechnen() throws IOException {
         Einstellungen einstellungen = new Einstellungen();
-        ExcelInput mappe = new ExcelInput();
+        Excel mappe = new Excel();
         double ergebnis = 0.0;
         // TODO: Algorithmus, bei dem Excel-Einlese-Operation aufhört
         for (int i = 0; i < 100; i++) {

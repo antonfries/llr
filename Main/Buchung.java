@@ -1,3 +1,5 @@
+package Main;
+
 public class Buchung {
 
     private int menge = 0;
@@ -25,7 +27,7 @@ public class Buchung {
     public double getKoeffizient() {
         Regler[] reglerListe = einstellungen.getReglerListe();
         for (int i = 0; i < reglerListe.length; i++) {
-            // TODO: Überprüfen, inwiefern die Länge der Regler-Liste herangezogen werden kann
+            // TODO: Überprüfen, inwiefern die Länge der Main.Regler-Liste herangezogen werden kann
             Regler regler = reglerListe[i];
             if (regler.getMin() <= this.wert && this.wert <= regler.getMax()) {
                 return regler.getKoeffizient();

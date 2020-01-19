@@ -1,3 +1,7 @@
+package Main;
+
+import Gui.Gui;
+
 import java.io.IOException;
 
 public class Main {

@@ -1,3 +1,8 @@
+package Listener;
+
+import Gui.GuiEinstellungen;
+import Main.Einstellungen;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -5,7 +10,7 @@ import java.io.IOException;
 public class EinstellungenListener implements ActionListener {
     private GuiEinstellungen guiEinstellungen;
 
-    EinstellungenListener(GuiEinstellungen guiEinstellungen) {
+    public EinstellungenListener(GuiEinstellungen guiEinstellungen) {
         this.guiEinstellungen = guiEinstellungen;
     }
 

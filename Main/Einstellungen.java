@@ -1,3 +1,5 @@
+package Main;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -9,6 +11,8 @@ public class Einstellungen {
     public static final String ArbeitszeitEinstellungen = Basispfad + "ArbeitszeitEinstellungen.txt";
     public static final String KoeffizientenEinstellungen = Basispfad + "KoeffizientenEinstellungen.txt";
     public static final String GrenzenEinstellungen = Basispfad + "GrenzenEinstellungen.txt";
+    public double[] grenzeListe;
+    public double[] koeffizientListe;
     private String pfad = Mappe;
     private int minimalMenge = 5;
     private int standardMenge = 10;
@@ -19,8 +23,6 @@ public class Einstellungen {
     private int wertSpalte = 0; // TODO: Refactoring auf A-Z
     private int mengeSpalte = 1;
     private Regler[] reglerListe;
-    public double[] grenzeListe;
-    public double[] koeffizientListe;
 
     public Einstellungen() {
         try {
@@ -109,7 +111,7 @@ public class Einstellungen {
             if (koeffizientStream.hasNextLine()) {
                 koeffizientListe[i] = Double.parseDouble(koeffizientStream.nextLine());
             }
-            if (koeffizientListe[i] == 0.0){
+            if (koeffizientListe[i] == 0.0) {
                 koeffizientListe[i] = getStandardKoeffizient();
             }
         }
@@ -118,8 +120,19 @@ public class Einstellungen {
         umwandelnReglerListe();
     }
 
-    public void persistGrenzenKoeffizientenEinstellungen() {
-        //  TODO: Einstellungen hier persistieren
+    public void persistGrenzenKoeffizientenEinstellungen() throws IOException {
+        PrintWriter grenzenPw = new PrintWriter(new FileWriter(new File(GrenzenEinstellungen)));
+        PrintWriter koeffizientenPw = new PrintWriter(new FileWriter(new File(KoeffizientenEinstellungen)));
+        for (int i = 0; i < getKoeffizientAnzahl(); i++) {
+            grenzenPw.println(grenzeListe[i]);
+        }
+        for (int j = 0; j < getKoeffizientAnzahl(); j++) {
+            koeffizientenPw.println(koeffizientListe[j]);
+        }
+        grenzenPw.flush();
+        grenzenPw.close();
+        koeffizientenPw.flush();
+        koeffizientenPw.close();
     }
 
     public void umwandelnReglerListe() {

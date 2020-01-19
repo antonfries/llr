@@ -1,20 +1,24 @@
+package Gui;
+
+import Listener.EinstellungenListener;
+import Listener.KoeffizientenEinstellungenListener;
+import Main.Einstellungen;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GuiEinstellungen extends JFrame {
 
-    private JLabel wertFrage;
-    private JLabel mengeFrage;
-    private JLabel maxMengeFrage;
-    private JLabel koeffizientAnzahlFrage;
-
-    private JButton koeffizientEinstellungenButton;
-    private JButton speichernButton;
-
     public JTextField wertTextfeld;
     public JTextField mengeTextfeld;
     public JTextField maxMengeTextfeld;
     public JTextField koeffizientAnzahlTextfeld;
+    private JLabel wertFrage;
+    private JLabel mengeFrage;
+    private JLabel maxMengeFrage;
+    private JLabel koeffizientAnzahlFrage;
+    private JButton koeffizientEinstellungenButton;
+    private JButton speichernButton;
 
     public GuiEinstellungen(String titel) {
         setTitle(titel);

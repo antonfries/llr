@@ -1,3 +1,5 @@
+package Main;
+
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -7,10 +9,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class ExcelInput {
+public class Excel {
     private XSSFSheet ExcelSheet;
 
-    public ExcelInput() throws IOException {
+    public Excel() throws IOException {
         InputStream ExcelDatei = new FileInputStream(Einstellungen.Mappe);
         // TODO: FileSelector einbauen
         XSSFWorkbook wb = new XSSFWorkbook(ExcelDatei);

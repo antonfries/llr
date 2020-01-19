@@ -1,12 +1,17 @@
+package Gui;
+
+import Listener.KoeffizientenSpeichernListener;
+import Main.Einstellungen;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class GuiKoeffizientenEinstellungen extends JFrame {
 
-    private JLabel koeffizientText;
-    private JLabel grenzeText;
     public JTextField[] grenzeTextfeldListe;
     public JTextField[] koeffizientTextfeldListe;
+    private JLabel koeffizientText;
+    private JLabel grenzeText;
     private JButton speichernButton;
 
     public GuiKoeffizientenEinstellungen() {
