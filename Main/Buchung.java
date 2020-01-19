@@ -17,18 +17,14 @@ public class Buchung {
     }
 
     public void setMenge(int menge) {
-        // TODO: minimale Menge berücksichtigen
-        if (menge >= konfiguration.getMaximalMenge()) {
+        if (menge < konfiguration.getMinimalMenge() || menge > konfiguration.getMaximalMenge()) {
             menge = konfiguration.getStandardMenge();
         }
         this.menge = menge;
     }
 
     public double getKoeffizient() {
-        Regler[] reglerListe = konfiguration.getReglerListe();
-        for (int i = 0; i < reglerListe.length; i++) {
-            // TODO: Überprüfen, inwiefern die Länge der Main.Regler-Liste herangezogen werden kann
-            Regler regler = reglerListe[i];
+        for (Regler regler : konfiguration.getReglerListe()) {
             if (regler.getMin() <= this.wert && this.wert <= regler.getMax()) {
                 return regler.getKoeffizient();
             }

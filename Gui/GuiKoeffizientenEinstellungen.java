@@ -24,12 +24,12 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         setLocationRelativeTo(null);
         initComponents(konfiguration);
         add(grenzeText);
-        for (int i = 0; i < konfiguration.getKoeffizientAnzahl() + 1; i++) {
-            add(grenzeTextfeldListe[i]);
+        for (JTextField grenzeTextfeld : grenzeTextfeldListe) {
+            add(grenzeTextfeld);
         }
         add(koeffizientText);
-        for (int i = 0; i < konfiguration.getKoeffizientAnzahl(); i++) {
-            add(koeffizientTextfeldListe[i]);
+        for (JTextField koeffizienttextfeld : koeffizientTextfeldListe) {
+            add(koeffizienttextfeld);
         }
         add(speichernButton);
         setVisible(true);
@@ -42,12 +42,11 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         speichernButton.addActionListener(new KoeffizientenSpeichernListener(GuiKoeffizientenEinstellungen.this));
         grenzeTextfeldListe = new JTextField[konfiguration.getKoeffizientAnzahl() + 1];
         koeffizientTextfeldListe = new JTextField[konfiguration.getKoeffizientAnzahl()];
-        for (int i = 0; i <= konfiguration.getKoeffizientAnzahl(); i++) {
+        for (int i = 0; i < konfiguration.grenzeListe.length; i++) {
             grenzeTextfeldListe[i] = new JTextField(4);
-            // TODO: Hier die Nachkommastellen auf 2 begrenzen
             grenzeTextfeldListe[i].setText(String.valueOf(konfiguration.grenzeListe[i]));
         }
-        for (int i = 0; i < konfiguration.getKoeffizientAnzahl(); i++) {
+        for (int i = 0; i < konfiguration.koeffizientListe.length; i++) {
             koeffizientTextfeldListe[i] = new JTextField(4);
             koeffizientTextfeldListe[i].setText(String.valueOf(konfiguration.koeffizientListe[i]));
         }

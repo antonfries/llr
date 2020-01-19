@@ -139,13 +139,13 @@ public class Konfiguration {
         Scanner koeffizientStream = new Scanner(KoeffizientDatei);
         grenzeListe = new double[getKoeffizientAnzahl() + 1];
         koeffizientListe = new double[getKoeffizientAnzahl()];
-        for (int i = 0; i <= getKoeffizientAnzahl(); i++) {
+        for (int i = 0; i < getKoeffizientAnzahl() + 1; i++) {
             if (grenzeStream.hasNextLine()) {
                 grenzeListe[i] = Double.parseDouble(grenzeStream.nextLine());
             }
-            if (grenzeListe[i] == 0.0 && i > 0) {
+            if (i > 0) {
                 grenzeListe[i] = grenzeListe[i - 1] + 0.01;
-                // TODO: Auf 2 Nachkommastellen runden
+                grenzeListe[i] = (double) Math.round(grenzeListe[i] * 100d) / 100d;
             }
         }
         for (int i = 0; i < getKoeffizientAnzahl(); i++) {
@@ -164,11 +164,11 @@ public class Konfiguration {
     public void persistGrenzenKoeffizientenEinstellungen() throws IOException {
         PrintWriter grenzenPw = new PrintWriter(new FileWriter(new File(GrenzeListe)));
         PrintWriter koeffizientenPw = new PrintWriter(new FileWriter(new File(KoeffizientListe)));
-        for (int i = 0; i < getKoeffizientAnzahl(); i++) {
-            grenzenPw.println(grenzeListe[i]);
+        for (double grenze : grenzeListe) {
+            grenzenPw.println(grenze);
         }
-        for (int j = 0; j < getKoeffizientAnzahl(); j++) {
-            koeffizientenPw.println(koeffizientListe[j]);
+        for (double koeffizient : koeffizientListe) {
+            koeffizientenPw.println(koeffizient);
         }
         grenzenPw.flush();
         grenzenPw.close();

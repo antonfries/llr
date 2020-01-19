@@ -18,13 +18,13 @@ public class KoeffizientenSpeichernListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         try {
             Konfiguration konfiguration = new Konfiguration();
-            for (int i = 0; i < konfiguration.getKoeffizientAnzahl(); i++) {
+            for (int i = 0; i < guiKoeffizientenEinstellungen.grenzeTextfeldListe.length; i++) {
                 konfiguration.grenzeListe[i] = Double.parseDouble(
                         guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText());
             }
-            for (int j = 0; j < konfiguration.getKoeffizientAnzahl(); j++) {
-                konfiguration.koeffizientListe[j] = Double.parseDouble(
-                        guiKoeffizientenEinstellungen.koeffizientTextfeldListe[j].getText());
+            for (int i = 0; i < guiKoeffizientenEinstellungen.koeffizientTextfeldListe.length; i++) {
+                konfiguration.koeffizientListe[i] = Double.parseDouble(
+                        guiKoeffizientenEinstellungen.koeffizientTextfeldListe[i].getText());
             }
             konfiguration.persistGrenzenKoeffizientenEinstellungen();
         } catch (IOException e) {
