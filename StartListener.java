@@ -13,10 +13,10 @@ public class StartListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         try {
             Einstellungen einstellungen = new Einstellungen();
-            einstellungen.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
-            einstellungen.persistArbeitszeitEinstellungen();
             einstellungen.setPfad(gui.dateipfadTextfeld.getText());
+            einstellungen.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
             einstellungen.persistPfadEinstellungen();
+            einstellungen.persistArbeitszeitEinstellungen();
             double endergebnis = Rechner.rechnen();
             JOptionPane.showMessageDialog(gui, "Lager-Leistung:    " + endergebnis, "Ergebnis",
                     JOptionPane.INFORMATION_MESSAGE);

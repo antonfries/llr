@@ -3,49 +3,48 @@ import java.awt.*;
 
 public class GuiKoeffizientenEinstellungen extends JFrame {
 
-    private JLabel koeffizientenText;
-    private JLabel grenzenText;
-    public JTextField[] grenzenTextfelder;
-    public JTextField[] koeffizientenTextfelder;
+    private JLabel koeffizientText;
+    private JLabel grenzeText;
+    public JTextField[] grenzeTextfeldListe;
+    public JTextField[] koeffizientTextfeldListe;
     private JButton speichernButton;
 
     public GuiKoeffizientenEinstellungen() {
+        // TODO: Nach dem Speichern immer direkt die Settings neu einpflegen (Validierung anzeigen)
         Einstellungen einstellungen = new Einstellungen();
         setTitle("Koeffizienten-Einstellungen");
-
         setLayout(new FlowLayout());
         setSize(800, 300);
         setResizable(false);
         setLocationRelativeTo(null);
-
         initComponents(einstellungen);
-
-        add(grenzenText);
-        for (int i = 0; i <= einstellungen.getKoeffizientAnzahl(); i++) {
-            add(grenzenTextfelder[i]);
+        add(grenzeText);
+        for (int i = 0; i < einstellungen.getKoeffizientAnzahl() + 1; i++) {
+            add(grenzeTextfeldListe[i]);
         }
-        add(koeffizientenText);
+        add(koeffizientText);
         for (int i = 0; i < einstellungen.getKoeffizientAnzahl(); i++) {
-            add(koeffizientenTextfelder[i]);
+            add(koeffizientTextfeldListe[i]);
         }
         add(speichernButton);
         setVisible(true);
     }
 
     private void initComponents(Einstellungen einstellungen) {
-        grenzenText = new JLabel("Grenzen:");
-        koeffizientenText = new JLabel("Koeffizienten:");
+        grenzeText = new JLabel("Grenzen:");
+        koeffizientText = new JLabel("Koeffizienten:");
         speichernButton = new JButton("Speichern");
         speichernButton.addActionListener(new KoeffizientenSpeichernListener(GuiKoeffizientenEinstellungen.this));
-        grenzenTextfelder = new JTextField[einstellungen.getKoeffizientAnzahl() +1];
-        koeffizientenTextfelder = new JTextField[einstellungen.getKoeffizientAnzahl()];
+        grenzeTextfeldListe = new JTextField[einstellungen.getKoeffizientAnzahl() + 1];
+        koeffizientTextfeldListe = new JTextField[einstellungen.getKoeffizientAnzahl()];
         for (int i = 0; i <= einstellungen.getKoeffizientAnzahl(); i++) {
-            grenzenTextfelder[i] = new JTextField(4);
-            grenzenTextfelder[i].setText(String.valueOf(einstellungen.grenzeListe[i]));
+            grenzeTextfeldListe[i] = new JTextField(4);
+            // TODO: Hier die Nachkommastellen auf 2 begrenzen
+            grenzeTextfeldListe[i].setText(String.valueOf(einstellungen.grenzeListe[i]));
         }
         for (int i = 0; i < einstellungen.getKoeffizientAnzahl(); i++) {
-            koeffizientenTextfelder[i] = new JTextField(4);
-            koeffizientenTextfelder[i].setText(String.valueOf(einstellungen.koeffizientListe[i]));
+            koeffizientTextfeldListe[i] = new JTextField(4);
+            koeffizientTextfeldListe[i].setText(String.valueOf(einstellungen.koeffizientListe[i]));
         }
     }
 }

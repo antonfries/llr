@@ -12,7 +12,7 @@ public class KoeffizientenEinstellungenListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         try {
             Einstellungen einstellungen = new Einstellungen();
-            einstellungen.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.anzahlDerKoeffizientenTextfeld.getText()));
+            einstellungen.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
             einstellungen.persistEinstellungen();
             new GuiKoeffizientenEinstellungen();
         } catch (IOException e) {

@@ -1,4 +1,5 @@
 import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -11,8 +12,10 @@ public class ExcelInput {
 
     public ExcelInput() throws IOException {
         InputStream ExcelDatei = new FileInputStream(Einstellungen.Mappe);
+        // TODO: FileSelector einbauen
         XSSFWorkbook wb = new XSSFWorkbook(ExcelDatei);
         ExcelSheet = wb.getSheetAt(0);
+        // TODO: Wie handelt man mehrere Sheets?
     }
 
     /**
@@ -21,9 +24,11 @@ public class ExcelInput {
      * @return double
      */
     public double lesen(int i, int j) {
-        if ((ExcelSheet.getRow(i).getCell(j).getCellType() == CellType.NUMERIC)
-                && (ExcelSheet.getRow(i).getCell(j).getNumericCellValue() != 0)) {
-            return ExcelSheet.getRow(i).getCell(j).getNumericCellValue();
+        XSSFCell cell = ExcelSheet.getRow(i).getCell(j);
+        if ((cell.getCellType() == CellType.NUMERIC)
+                && (cell.getNumericCellValue() != 0)) {
+            // TODO: Refactoring
+            return cell.getNumericCellValue();
         } else {
             return 0.0;
         }

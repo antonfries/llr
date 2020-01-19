@@ -16,23 +16,19 @@ public class KoeffizientenSpeichernListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         try {
             Einstellungen einstellungen = new Einstellungen();
+            // TODO: Singular/Plural generalisieren
             PrintWriter grenzenPw = new PrintWriter(new FileWriter(new File(Einstellungen.GrenzenEinstellungen)));
             PrintWriter koeffizientenPw = new PrintWriter(new FileWriter(new File(Einstellungen.KoeffizientenEinstellungen)));
-            String[] grenzenTextfelder = new String[21];
-            String[] koeffizientenTextfelder = new String[20];
             for (int i = 0; i < einstellungen.getKoeffizientAnzahl(); i++) {
-                grenzenTextfelder[i] = guiKoeffizientenEinstellungen.grenzenTextfelder[i].getText();
-                grenzenPw.println(grenzenTextfelder[i]);
+                grenzenPw.println(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText());
             }
             for (int j = 0; j < einstellungen.getKoeffizientAnzahl(); j++) {
-                koeffizientenTextfelder[j] = guiKoeffizientenEinstellungen.koeffizientenTextfelder[j].getText();
-                koeffizientenPw.println(koeffizientenTextfelder[j]);
+                koeffizientenPw.println(guiKoeffizientenEinstellungen.koeffizientTextfeldListe[j]);
             }
             grenzenPw.flush();
             grenzenPw.close();
             koeffizientenPw.flush();
             koeffizientenPw.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -12,10 +12,10 @@ public class EinstellungenListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         try {
             Einstellungen einstellungen = new Einstellungen();
-            einstellungen.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.anzahlDerKoeffizientenTextfeld.getText()));
-            einstellungen.setMaximalMenge(Integer.parseInt(guiEinstellungen.maxMengeTextfeld.getText()));
+            einstellungen.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
             einstellungen.setWertSpalte(Integer.parseInt(guiEinstellungen.wertTextfeld.getText()));
             einstellungen.setMengeSpalte(Integer.parseInt(guiEinstellungen.mengeTextfeld.getText()));
+            einstellungen.setMaximalMenge(Integer.parseInt(guiEinstellungen.maxMengeTextfeld.getText()));
             einstellungen.persistEinstellungen();
         } catch (IOException e) {
             e.printStackTrace();
