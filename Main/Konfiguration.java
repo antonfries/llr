@@ -23,14 +23,21 @@ public class Konfiguration {
     private int standardMenge = 10;
     private int maximalMenge = 500;
     private double stunden = 10.0;
-    private double standardKoeffizient = 2.0; // TODO: Check Type
+    private double standardKoeffizient = 2.0;
     private int koeffizientAnzahl = 5;
-    private int wertSpalte = 0; // TODO: Refactoring auf A-Z
-    private int mengeSpalte = 1;
+    private char wertSpalte = 'A';
+    private char mengeSpalte = 'Z';
     private Regler[] reglerListe;
 
     public Konfiguration() {
         try {
+            File KonfigurationpfadDatei = new File(Konfigurationpfad);
+            if (!KonfigurationpfadDatei.exists()) {
+                boolean Ergebnis = KonfigurationpfadDatei.mkdirs();
+                if (!Ergebnis) {
+                    throw new RuntimeException("Der Basispfad für die Einstellungen konnte nicht erzeugt werden!");
+                }
+            }
             initPfadEinstellungen();
             initArbeitszeitEinstellungen();
             initEinstellungen();
@@ -103,10 +110,10 @@ public class Konfiguration {
             setKoeffizientAnzahl(Integer.parseInt(einstellungListe[0]));
         }
         if (!einstellungListe[1].equals("")) {
-            setWertSpalte(Integer.parseInt(einstellungListe[1]));
+            setWertSpalte(einstellungListe[1].charAt(0));
         }
         if (!einstellungListe[2].equals("")) {
-            setMengeSpalte(Integer.parseInt(einstellungListe[2]));
+            setMengeSpalte(einstellungListe[2].charAt(0));
         }
         if (!einstellungListe[3].equals("")) {
             setMaximalMenge(Integer.parseInt(einstellungListe[3]));
@@ -144,6 +151,7 @@ public class Konfiguration {
                 grenzeListe[i] = Double.parseDouble(grenzeStream.nextLine());
             }
             if (i > 0) {
+                // TODO: Diese Form der Validierung direkt nach dem Speichern vornehmen
                 grenzeListe[i] = grenzeListe[i - 1] + 0.01;
                 grenzeListe[i] = (double) Math.round(grenzeListe[i] * 100d) / 100d;
             }
@@ -177,7 +185,7 @@ public class Konfiguration {
     }
 
     public void umwandelnReglerListe() {
-        reglerListe = new Regler[getKoeffizientAnzahl()];
+        setReglerListe(new Regler[getKoeffizientAnzahl()]);
         for (int i = 0; i < getKoeffizientAnzahl(); i++) {
             addRegler(new Regler(
                     grenzeListe[i],
@@ -247,27 +255,27 @@ public class Konfiguration {
         this.koeffizientAnzahl = koeffizientAnzahl;
     }
 
-    public int getWertSpalte() {
-        return wertSpalte;
-    }
-
-    public void setWertSpalte(int wertSpalte) {
-        this.wertSpalte = wertSpalte;
-    }
-
-    public int getMengeSpalte() {
-        return mengeSpalte;
-    }
-
-    public void setMengeSpalte(int mengeSpalte) {
-        this.mengeSpalte = mengeSpalte;
-    }
-
     public Regler[] getReglerListe() {
         return reglerListe;
     }
 
     public void setReglerListe(Regler[] reglerListe) {
         this.reglerListe = reglerListe;
+    }
+
+    public char getWertSpalte() {
+        return wertSpalte;
+    }
+
+    public void setWertSpalte(char wertSpalte) {
+        this.wertSpalte = wertSpalte;
+    }
+
+    public char getMengeSpalte() {
+        return mengeSpalte;
+    }
+
+    public void setMengeSpalte(char mengeSpalte) {
+        this.mengeSpalte = mengeSpalte;
     }
 }
