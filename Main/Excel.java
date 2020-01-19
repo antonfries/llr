@@ -13,7 +13,7 @@ public class Excel {
     private XSSFSheet ExcelSheet;
 
     public Excel() throws IOException {
-        InputStream ExcelDatei = new FileInputStream(Einstellungen.Mappe);
+        InputStream ExcelDatei = new FileInputStream(Konfiguration.Mappe);
         // TODO: FileSelector einbauen
         XSSFWorkbook wb = new XSSFWorkbook(ExcelDatei);
         ExcelSheet = wb.getSheetAt(0);

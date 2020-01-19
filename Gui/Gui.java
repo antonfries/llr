@@ -1,7 +1,7 @@
 package Gui;
 
 import Listener.StartListener;
-import Main.Einstellungen;
+import Main.Konfiguration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,13 +34,13 @@ public class Gui extends JFrame {
     }
 
     private void initComponents() {
-        Einstellungen einstellungen = new Einstellungen();
+        Konfiguration konfiguration = new Konfiguration();
         dateipfad = new JLabel("Dateipfad:");
         arbeitszeit = new JLabel("Arbeitszeit:");
         dateipfadTextfeld = new JTextField(25);
-        dateipfadTextfeld.setText(Einstellungen.Mappe);
+        dateipfadTextfeld.setText(Konfiguration.Mappe);
         arbeitszeitTextfeld = new JTextField(30);
-        arbeitszeitTextfeld.setText(String.valueOf(einstellungen.getStunden()));
+        arbeitszeitTextfeld.setText(String.valueOf(konfiguration.getStunden()));
         einstellungsButton = new JButton("Einstellungen öffnen");
         einstellungsButton.addActionListener(e1 -> new GuiEinstellungen("Einstellungen"));
         startButton = new JButton("Start");

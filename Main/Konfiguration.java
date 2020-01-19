@@ -1,16 +1,21 @@
 package Main;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Arrays;
 import java.util.Scanner;
 
-public class Einstellungen {
-    public static final String Basispfad = "C://ilyabykov//Spaß//";
+public class Konfiguration {
+    public static final String Basispfad = "C://antonfries//projects//llr//";
+    public static final String Konfigurationpfad = Basispfad + "config//";
     public static final String Mappe = Basispfad + "Testmappe.xlsx";
-    public static final String Einstellungen = Basispfad + "Einstellungen.txt";
-    public static final String PfadEinstellungen = Basispfad + "PfadEinstellungen.txt";
-    public static final String ArbeitszeitEinstellungen = Basispfad + "ArbeitszeitEinstellungen.txt";
-    public static final String KoeffizientenEinstellungen = Basispfad + "KoeffizientenEinstellungen.txt";
-    public static final String GrenzenEinstellungen = Basispfad + "GrenzenEinstellungen.txt";
+    public static final String BasisListe = Konfigurationpfad + "Basis-Einstellungen.txt";
+    public static final String Pfad = Konfigurationpfad + "Pfad-Einstellung.txt";
+    public static final String Arbeitszeit = Konfigurationpfad + "Arbeitszeit-Einstellung.txt";
+    public static final String KoeffizientListe = Konfigurationpfad + "Koeffizienten-Einstellungen.txt";
+    public static final String GrenzeListe = Konfigurationpfad + "Grenzen-Einstellungen.txt";
     public double[] grenzeListe;
     public double[] koeffizientListe;
     private String pfad = Mappe;
@@ -24,21 +29,26 @@ public class Einstellungen {
     private int mengeSpalte = 1;
     private Regler[] reglerListe;
 
-    public Einstellungen() {
+    public Konfiguration() {
         try {
             initPfadEinstellungen();
             initArbeitszeitEinstellungen();
             initEinstellungen();
             initGrenzenKoeffizientenEinstellungen();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void initArbeitszeitEinstellungen() throws FileNotFoundException {
-        Scanner arbeitszeitStream = new Scanner(new File(ArbeitszeitEinstellungen));
+    public void initArbeitszeitEinstellungen() throws IOException {
+        File ArbeitszeitDatei = new File(Arbeitszeit);
+        boolean Ergebnis = ArbeitszeitDatei.createNewFile();
+        if (!Ergebnis && !ArbeitszeitDatei.exists()) {
+            throw new RuntimeException("Einstellungen können nicht gespeichert werden!");
+        }
+        Scanner arbeitszeitStream = new Scanner(ArbeitszeitDatei);
         double std = getStunden();
-        while (arbeitszeitStream.hasNextLine()) {
+        if (arbeitszeitStream.hasNextLine()) {
             std = Double.parseDouble(arbeitszeitStream.nextLine());
         }
         setStunden(std);
@@ -46,16 +56,21 @@ public class Einstellungen {
     }
 
     public void persistArbeitszeitEinstellungen() throws IOException {
-        PrintWriter pw = new PrintWriter(new FileWriter(new File(ArbeitszeitEinstellungen)));
+        PrintWriter pw = new PrintWriter(new FileWriter(new File(Arbeitszeit)));
         pw.println(getStunden());
         pw.flush();
         pw.close();
     }
 
-    public void initPfadEinstellungen() throws FileNotFoundException {
-        Scanner pfadStream = new Scanner(new File(PfadEinstellungen));
+    public void initPfadEinstellungen() throws IOException {
+        File PfadDatei = new File(Pfad);
+        boolean Ergebnis = PfadDatei.createNewFile();
+        if (!Ergebnis && !PfadDatei.exists()) {
+            throw new RuntimeException("Einstellungen können nicht gespeichert werden!");
+        }
+        Scanner pfadStream = new Scanner(PfadDatei);
         String tempPfad = getPfad();
-        while (pfadStream.hasNextLine()) {
+        if (pfadStream.hasNextLine()) {
             tempPfad = pfadStream.nextLine();
         }
         setPfad(tempPfad);
@@ -63,28 +78,44 @@ public class Einstellungen {
     }
 
     public void persistPfadEinstellungen() throws IOException {
-        PrintWriter pw = new PrintWriter(new FileWriter(new File(PfadEinstellungen)));
+        PrintWriter pw = new PrintWriter(new FileWriter(new File(Pfad)));
         pw.println(getPfad());
         pw.flush();
         pw.close();
     }
 
-    public void initEinstellungen() throws FileNotFoundException {
+    public void initEinstellungen() throws IOException {
+        File BasisEinstellungenDatei = new File(BasisListe);
+        boolean Ergebnis = BasisEinstellungenDatei.createNewFile();
+        if (!Ergebnis && !BasisEinstellungenDatei.exists()) {
+            throw new RuntimeException("Einstellungen können nicht gespeichert werden!");
+        }
         int einstellungAnzahl = 4;
         String[] einstellungListe = new String[einstellungAnzahl];
-        Scanner einstellungStream = new Scanner(new File(Einstellungen));
+        Arrays.fill(einstellungListe, "");
+        Scanner einstellungStream = new Scanner(BasisEinstellungenDatei);
         for (int i = 0; i < einstellungAnzahl; i++) {
-            einstellungListe[i] = einstellungStream.nextLine();
+            if (einstellungStream.hasNextLine()) {
+                einstellungListe[i] = einstellungStream.nextLine();
+            }
         }
-        setKoeffizientAnzahl(Integer.parseInt(einstellungListe[0]));
-        setWertSpalte(Integer.parseInt(einstellungListe[1]));
-        setMengeSpalte(Integer.parseInt(einstellungListe[2]));
-        setMaximalMenge(Integer.parseInt(einstellungListe[3]));
+        if (!einstellungListe[0].equals("")) {
+            setKoeffizientAnzahl(Integer.parseInt(einstellungListe[0]));
+        }
+        if (!einstellungListe[1].equals("")) {
+            setWertSpalte(Integer.parseInt(einstellungListe[1]));
+        }
+        if (!einstellungListe[2].equals("")) {
+            setMengeSpalte(Integer.parseInt(einstellungListe[2]));
+        }
+        if (!einstellungListe[3].equals("")) {
+            setMaximalMenge(Integer.parseInt(einstellungListe[3]));
+        }
         einstellungStream.close();
     }
 
     public void persistEinstellungen() throws IOException {
-        PrintWriter pw = new PrintWriter(new FileWriter(new File(Einstellungen)));
+        PrintWriter pw = new PrintWriter(new FileWriter(new File(BasisListe)));
         pw.println(getKoeffizientAnzahl());
         pw.println(getWertSpalte());
         pw.println(getMengeSpalte());
@@ -93,9 +124,19 @@ public class Einstellungen {
         pw.close();
     }
 
-    public void initGrenzenKoeffizientenEinstellungen() throws FileNotFoundException {
-        Scanner grenzeStream = new Scanner(new File(GrenzenEinstellungen));
-        Scanner koeffizientStream = new Scanner(new File(KoeffizientenEinstellungen));
+    public void initGrenzenKoeffizientenEinstellungen() throws IOException {
+        File GrenzeDatei = new File(GrenzeListe);
+        boolean Ergebnis = GrenzeDatei.createNewFile();
+        if (!Ergebnis && !GrenzeDatei.exists()) {
+            throw new RuntimeException("Einstellungen können nicht gespeichert werden!");
+        }
+        File KoeffizientDatei = new File(KoeffizientListe);
+        Ergebnis = KoeffizientDatei.createNewFile();
+        if (!Ergebnis && !KoeffizientDatei.exists()) {
+            throw new RuntimeException("Einstellungen können nicht gespeichert werden!");
+        }
+        Scanner grenzeStream = new Scanner(GrenzeDatei);
+        Scanner koeffizientStream = new Scanner(KoeffizientDatei);
         grenzeListe = new double[getKoeffizientAnzahl() + 1];
         koeffizientListe = new double[getKoeffizientAnzahl()];
         for (int i = 0; i <= getKoeffizientAnzahl(); i++) {
@@ -121,8 +162,8 @@ public class Einstellungen {
     }
 
     public void persistGrenzenKoeffizientenEinstellungen() throws IOException {
-        PrintWriter grenzenPw = new PrintWriter(new FileWriter(new File(GrenzenEinstellungen)));
-        PrintWriter koeffizientenPw = new PrintWriter(new FileWriter(new File(KoeffizientenEinstellungen)));
+        PrintWriter grenzenPw = new PrintWriter(new FileWriter(new File(GrenzeListe)));
+        PrintWriter koeffizientenPw = new PrintWriter(new FileWriter(new File(KoeffizientListe)));
         for (int i = 0; i < getKoeffizientAnzahl(); i++) {
             grenzenPw.println(grenzeListe[i]);
         }

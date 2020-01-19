@@ -2,7 +2,7 @@ package Gui;
 
 import Listener.EinstellungenListener;
 import Listener.KoeffizientenEinstellungenListener;
-import Main.Einstellungen;
+import Main.Konfiguration;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,19 +41,19 @@ public class GuiEinstellungen extends JFrame {
     }
 
     private void initComponents() {
-        Einstellungen einstellungen = new Einstellungen();
+        Konfiguration konfiguration = new Konfiguration();
         wertFrage = new JLabel("In welcher Spalte steht Wert?");
         mengeFrage = new JLabel("In welcher Spalte steht Menge?");
         maxMengeFrage = new JLabel("Maximale sinnvolle Menge:");
         koeffizientAnzahlFrage = new JLabel("Anzahl Koeffizienten:");
         wertTextfeld = new JTextField(3);
-        wertTextfeld.setText(String.valueOf(einstellungen.getWertSpalte()));
+        wertTextfeld.setText(String.valueOf(konfiguration.getWertSpalte()));
         mengeTextfeld = new JTextField(3);
-        mengeTextfeld.setText(String.valueOf(einstellungen.getMengeSpalte()));
+        mengeTextfeld.setText(String.valueOf(konfiguration.getMengeSpalte()));
         maxMengeTextfeld = new JTextField(5);
-        maxMengeTextfeld.setText(String.valueOf(einstellungen.getMaximalMenge()));
+        maxMengeTextfeld.setText(String.valueOf(konfiguration.getMaximalMenge()));
         koeffizientAnzahlTextfeld = new JTextField(3);
-        koeffizientAnzahlTextfeld.setText(String.valueOf(einstellungen.getKoeffizientAnzahl()));
+        koeffizientAnzahlTextfeld.setText(String.valueOf(konfiguration.getKoeffizientAnzahl()));
         koeffizientEinstellungenButton = new JButton("Koeffizienten-Einstellungen");
         koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(GuiEinstellungen.this));
         speichernButton = new JButton("Speichern");

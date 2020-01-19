@@ -1,7 +1,7 @@
 package Listener;
 
 import Gui.GuiKoeffizientenEinstellungen;
-import Main.Einstellungen;
+import Main.Konfiguration;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,16 +17,16 @@ public class KoeffizientenSpeichernListener implements ActionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            Einstellungen einstellungen = new Einstellungen();
-            for (int i = 0; i < einstellungen.getKoeffizientAnzahl(); i++) {
-                einstellungen.grenzeListe[i] = Double.parseDouble(
+            Konfiguration konfiguration = new Konfiguration();
+            for (int i = 0; i < konfiguration.getKoeffizientAnzahl(); i++) {
+                konfiguration.grenzeListe[i] = Double.parseDouble(
                         guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText());
             }
-            for (int j = 0; j < einstellungen.getKoeffizientAnzahl(); j++) {
-                einstellungen.koeffizientListe[j] = Double.parseDouble(
+            for (int j = 0; j < konfiguration.getKoeffizientAnzahl(); j++) {
+                konfiguration.koeffizientListe[j] = Double.parseDouble(
                         guiKoeffizientenEinstellungen.koeffizientTextfeldListe[j].getText());
             }
-            einstellungen.persistGrenzenKoeffizientenEinstellungen();
+            konfiguration.persistGrenzenKoeffizientenEinstellungen();
         } catch (IOException e) {
             e.printStackTrace();
         }

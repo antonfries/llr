@@ -1,7 +1,7 @@
 package Listener;
 
 import Gui.GuiEinstellungen;
-import Main.Einstellungen;
+import Main.Konfiguration;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,12 +16,12 @@ public class EinstellungenListener implements ActionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            Einstellungen einstellungen = new Einstellungen();
-            einstellungen.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
-            einstellungen.setWertSpalte(Integer.parseInt(guiEinstellungen.wertTextfeld.getText()));
-            einstellungen.setMengeSpalte(Integer.parseInt(guiEinstellungen.mengeTextfeld.getText()));
-            einstellungen.setMaximalMenge(Integer.parseInt(guiEinstellungen.maxMengeTextfeld.getText()));
-            einstellungen.persistEinstellungen();
+            Konfiguration konfiguration = new Konfiguration();
+            konfiguration.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
+            konfiguration.setWertSpalte(Integer.parseInt(guiEinstellungen.wertTextfeld.getText()));
+            konfiguration.setMengeSpalte(Integer.parseInt(guiEinstellungen.mengeTextfeld.getText()));
+            konfiguration.setMaximalMenge(Integer.parseInt(guiEinstellungen.maxMengeTextfeld.getText()));
+            konfiguration.persistEinstellungen();
         } catch (IOException e) {
             e.printStackTrace();
         }

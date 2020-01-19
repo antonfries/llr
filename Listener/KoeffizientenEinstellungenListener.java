@@ -2,7 +2,7 @@ package Listener;
 
 import Gui.GuiEinstellungen;
 import Gui.GuiKoeffizientenEinstellungen;
-import Main.Einstellungen;
+import Main.Konfiguration;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,9 +17,9 @@ public class KoeffizientenEinstellungenListener implements ActionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            Einstellungen einstellungen = new Einstellungen();
-            einstellungen.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
-            einstellungen.persistEinstellungen();
+            Konfiguration konfiguration = new Konfiguration();
+            konfiguration.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
+            konfiguration.persistEinstellungen();
             new GuiKoeffizientenEinstellungen();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,7 +1,7 @@
 package Listener;
 
 import Gui.Gui;
-import Main.Einstellungen;
+import Main.Konfiguration;
 import Main.Rechner;
 
 import javax.swing.*;
@@ -18,11 +18,11 @@ public class StartListener implements ActionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            Einstellungen einstellungen = new Einstellungen();
-            einstellungen.setPfad(gui.dateipfadTextfeld.getText());
-            einstellungen.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
-            einstellungen.persistPfadEinstellungen();
-            einstellungen.persistArbeitszeitEinstellungen();
+            Konfiguration konfiguration = new Konfiguration();
+            konfiguration.setPfad(gui.dateipfadTextfeld.getText());
+            konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
+            konfiguration.persistPfadEinstellungen();
+            konfiguration.persistArbeitszeitEinstellungen();
             double endergebnis = Rechner.rechnen();
             JOptionPane.showMessageDialog(gui, "Lager-Leistung:    " + endergebnis, "Ergebnis",
                     JOptionPane.INFORMATION_MESSAGE);
