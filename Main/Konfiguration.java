@@ -8,14 +8,15 @@ import java.util.Arrays;
 import java.util.Scanner;
 
 public class Konfiguration {
-    public static final String Basispfad = "C://antonfries//projects//llr//";
-    public static final String Konfigurationpfad = Basispfad + "config//";
+    public static final String Basispfad = "C:\\antonfries\\projects\\llr\\";
+    public static final String Konfigurationpfad = Basispfad + "config\\";
     public static final String Mappe = Basispfad + "Testmappe.xlsx";
     public static final String BasisListe = Konfigurationpfad + "Basis-Einstellungen.txt";
     public static final String Pfad = Konfigurationpfad + "Pfad-Einstellung.txt";
     public static final String Arbeitszeit = Konfigurationpfad + "Arbeitszeit-Einstellung.txt";
     public static final String KoeffizientListe = Konfigurationpfad + "Koeffizienten-Einstellungen.txt";
     public static final String GrenzeListe = Konfigurationpfad + "Grenzen-Einstellungen.txt";
+    public static final String SheetListe = Konfigurationpfad + "Sheet-Einstellungen.txt";
     public double[] grenzeListe;
     public double[] koeffizientListe;
     private String pfad = Mappe;
@@ -26,7 +27,8 @@ public class Konfiguration {
     private double standardKoeffizient = 2.0;
     private int koeffizientAnzahl = 5;
     private char wertSpalte = 'A';
-    private char mengeSpalte = 'Z';
+    private char mengeSpalte = 'B';
+    private int sheetIndex = 0;
     private Regler[] reglerListe;
 
     public Konfiguration() {
@@ -41,6 +43,7 @@ public class Konfiguration {
             initPfadEinstellungen();
             initArbeitszeitEinstellungen();
             initEinstellungen();
+            initSheetEinstellungen();
             initGrenzenKoeffizientenEinstellungen();
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,7 +83,11 @@ public class Konfiguration {
         if (pfadStream.hasNextLine()) {
             tempPfad = pfadStream.nextLine();
         }
-        setPfad(tempPfad);
+        if (new File(tempPfad).exists()) {
+            setPfad(tempPfad);
+        } else {
+            setPfad("");
+        }
         pfadStream.close();
     }
 
@@ -127,6 +134,34 @@ public class Konfiguration {
         pw.println(getWertSpalte());
         pw.println(getMengeSpalte());
         pw.println(getMaximalMenge());
+        pw.flush();
+        pw.close();
+    }
+
+    public void initSheetEinstellungen() throws IOException {
+        File SheetEinstellungenDatei = new File(SheetListe);
+        boolean Ergebnis = SheetEinstellungenDatei.createNewFile();
+        if (!Ergebnis && !SheetEinstellungenDatei.exists()) {
+            throw new RuntimeException("Einstellungen können nicht gespeichert werden!");
+        }
+        int einstellungAnzahl = 1;
+        String[] sheetEinstellungListe = new String[einstellungAnzahl];
+        Arrays.fill(sheetEinstellungListe, "");
+        Scanner sheetEinstellungStream = new Scanner(SheetEinstellungenDatei);
+        for (int i = 0; i < einstellungAnzahl; i++) {
+            if (sheetEinstellungStream.hasNextLine()) {
+                sheetEinstellungListe[i] = sheetEinstellungStream.nextLine();
+            }
+        }
+        if (!sheetEinstellungListe[0].equals("")) {
+            setSheetIndex(Integer.parseInt(sheetEinstellungListe[0]));
+        }
+        sheetEinstellungStream.close();
+    }
+
+    public void persistSheetEinstellungen() throws IOException {
+        PrintWriter pw = new PrintWriter(new FileWriter(new File(SheetListe)));
+        pw.println(getSheetIndex());
         pw.flush();
         pw.close();
     }
@@ -277,5 +312,13 @@ public class Konfiguration {
 
     public void setMengeSpalte(char mengeSpalte) {
         this.mengeSpalte = mengeSpalte;
+    }
+
+    public int getSheetIndex() {
+        return sheetIndex;
+    }
+
+    public void setSheetIndex(int sheetIndex) {
+        this.sheetIndex = sheetIndex;
     }
 }

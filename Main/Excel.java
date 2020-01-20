@@ -1,22 +1,25 @@
 package Main;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.FileInputStream;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class Excel {
-    public XSSFSheet ExcelSheet;
+    public XSSFSheet[] ExcelSheetListe;
 
-    public Excel() throws IOException {
-        InputStream ExcelDatei = new FileInputStream(Konfiguration.Mappe);
-        // TODO: JFileChooser einbauen
+    public Excel() throws IOException, InvalidFormatException {
+        // TODO: Singleton-Prinzip möglich, sodass mehrere Klassen Excel-Datei nicht immer wieder neu öffnen müssen?
+        File ExcelDatei = new File(Konfiguration.Mappe);
         XSSFWorkbook wb = new XSSFWorkbook(ExcelDatei);
-        ExcelSheet = wb.getSheetAt(0);
-        // TODO: Angabe des Sheets in Hauptbildschirm
+        ExcelSheetListe = new XSSFSheet[wb.getNumberOfSheets()];
+        for (int i = 0; i < wb.getNumberOfSheets(); i++) {
+            ExcelSheetListe[i] = wb.getSheetAt(i);
+        }
         // TODO: (optional) Angabe der Zeilen
     }
 
@@ -25,8 +28,12 @@ public class Excel {
      * @param j Spalte
      * @return double
      */
-    public double lesen(int i, int j) {
-        XSSFCell cell = ExcelSheet.getRow(i).getCell(j);
-        return cell.getNumericCellValue();
+    public double lesen(int i, int j, int sheet) {
+        double cellValue = 0.0;
+        XSSFCell cell = ExcelSheetListe[sheet].getRow(i).getCell(j);
+        if (cell.getCellTypeEnum() == CellType.NUMERIC) {
+            cellValue = cell.getNumericCellValue();
+        }
+        return cellValue;
     }
 }
