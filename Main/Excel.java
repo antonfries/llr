@@ -14,7 +14,8 @@ public class Excel {
 
     public Excel() throws IOException, InvalidFormatException {
         // TODO: Singleton-Prinzip möglich, sodass mehrere Klassen Excel-Datei nicht immer wieder neu öffnen müssen?
-        File ExcelDatei = new File(Konfiguration.Mappe);
+        Konfiguration konfiguration = new Konfiguration();
+        File ExcelDatei = new File(konfiguration.getPfad());
         XSSFWorkbook wb = new XSSFWorkbook(ExcelDatei);
         ExcelSheetListe = new XSSFSheet[wb.getNumberOfSheets()];
         for (int i = 0; i < wb.getNumberOfSheets(); i++) {

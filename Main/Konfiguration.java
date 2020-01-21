@@ -10,7 +10,8 @@ import java.util.Scanner;
 public class Konfiguration {
     public static final String Basispfad = "C:\\antonfries\\projects\\llr\\";
     public static final String Konfigurationpfad = Basispfad + "config\\";
-    public static final String Mappe = Basispfad + "Testmappe.xlsx";
+    public static final String Dateipfad = Basispfad + "files\\";
+    public static final String Mappe = Dateipfad + "Testmappe1.xlsx";
     public static final String BasisListe = Konfigurationpfad + "Basis-Einstellungen.txt";
     public static final String Pfad = Konfigurationpfad + "Pfad-Einstellung.txt";
     public static final String Arbeitszeit = Konfigurationpfad + "Arbeitszeit-Einstellung.txt";
