@@ -13,16 +13,17 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     private JLabel koeffizientText;
     private JLabel grenzeText;
     private JButton speichernButton;
+    private Konfiguration konfiguration;
 
     public GuiKoeffizientenEinstellungen() {
         // TODO: Nach dem Speichern immer direkt die Settings neu einpflegen (Validierung anzeigen)
-        Konfiguration konfiguration = new Konfiguration();
+        konfiguration = new Konfiguration();
         setTitle("Koeffizienten-Einstellungen");
         setLayout(new FlowLayout());
         setSize(800, 300);
         setResizable(false);
         setLocationRelativeTo(null);
-        initComponents(konfiguration);
+        initComponents();
         add(grenzeText);
         for (JTextField grenzeTextfeld : grenzeTextfeldListe) {
             add(grenzeTextfeld);
@@ -35,7 +36,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         setVisible(true);
     }
 
-    private void initComponents(Konfiguration konfiguration) {
+    private void initComponents() {
         grenzeText = new JLabel("Grenzen:");
         koeffizientText = new JLabel("Koeffizienten:");
         speichernButton = new JButton("Speichern");
@@ -44,10 +45,18 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         koeffizientTextfeldListe = new JTextField[konfiguration.getKoeffizientAnzahl()];
         for (int i = 0; i < konfiguration.grenzeListe.length; i++) {
             grenzeTextfeldListe[i] = new JTextField(4);
-            grenzeTextfeldListe[i].setText(String.valueOf(konfiguration.grenzeListe[i]));
         }
         for (int i = 0; i < konfiguration.koeffizientListe.length; i++) {
             koeffizientTextfeldListe[i] = new JTextField(4);
+        }
+        fillView();
+    }
+
+    public void fillView(){
+        for (int i = 0; i < konfiguration.grenzeListe.length; i++) {
+            grenzeTextfeldListe[i].setText(String.valueOf(konfiguration.grenzeListe[i]));
+        }
+        for (int i = 0; i < konfiguration.koeffizientListe.length; i++) {
             koeffizientTextfeldListe[i].setText(String.valueOf(konfiguration.koeffizientListe[i]));
         }
     }
