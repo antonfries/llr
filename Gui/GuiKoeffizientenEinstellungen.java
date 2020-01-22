@@ -53,6 +53,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     }
 
     public void fillView(){
+        konfiguration = new Konfiguration();
         for (int i = 0; i < konfiguration.grenzeListe.length; i++) {
             grenzeTextfeldListe[i].setText(String.valueOf(konfiguration.grenzeListe[i]));
         }

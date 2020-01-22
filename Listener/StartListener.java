@@ -24,6 +24,7 @@ public class StartListener implements ActionListener {
             konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
             konfiguration.persistPfadEinstellungen();
             konfiguration.persistArbeitszeitEinstellungen();
+            gui.fillView();
             // Hier muss man von der Excel-Klasse wissen, welcher Index zu welchem Sheet-Namen gehört
             // TODO: Das aktuell ausgewählte Sheet speichern
             double endergebnis = Rechner.rechnen();

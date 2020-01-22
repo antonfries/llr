@@ -18,10 +18,15 @@ public class EinstellungenListener implements ActionListener {
         try {
             char wertSpalte = Character.toUpperCase(guiEinstellungen.wertTextfeld.getText().charAt(0));
             char mengeSpalte = Character.toUpperCase(guiEinstellungen.mengeTextfeld.getText().charAt(0));
+            if (wertSpalte == mengeSpalte){
+                // TODO: Warnung oder Veränderung falls 2mal A ist
+            }
             Konfiguration konfiguration = new Konfiguration();
+            // TODO: Fehler, falls Nutzer ungerade Anzahl an Koeffizienten eingibt
             konfiguration.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
             konfiguration.setWertSpalte(wertSpalte);
             konfiguration.setMengeSpalte(mengeSpalte);
+            // TODO: Fehler, falls Nutzer hier 500.3 eingibt
             konfiguration.setMaximalMenge(Integer.parseInt(guiEinstellungen.maxMengeTextfeld.getText()));
             konfiguration.persistEinstellungen();
         } catch (IOException e) {

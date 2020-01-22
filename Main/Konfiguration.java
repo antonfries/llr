@@ -186,18 +186,10 @@ public class Konfiguration {
             if (grenzeStream.hasNextLine()) {
                 grenzeListe[i] = Double.parseDouble(grenzeStream.nextLine());
             }
-            if (i > 0) {
-                // TODO: Diese Form der Validierung direkt nach dem Speichern vornehmen
-                grenzeListe[i] = grenzeListe[i - 1] + 0.01;
-                grenzeListe[i] = (double) Math.round(grenzeListe[i] * 100d) / 100d;
-            }
         }
         for (int i = 0; i < getKoeffizientAnzahl(); i++) {
             if (koeffizientStream.hasNextLine()) {
                 koeffizientListe[i] = Double.parseDouble(koeffizientStream.nextLine());
-            }
-            if (koeffizientListe[i] == 0.0) {
-                koeffizientListe[i] = getStandardKoeffizient();
             }
         }
         grenzeStream.close();

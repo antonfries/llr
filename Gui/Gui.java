@@ -20,8 +20,10 @@ public class Gui extends JFrame {
     private JLabel arbeitszeit;
     private JButton einstellungsButton;
     private JButton dateiButton;
+    private Konfiguration konfiguration;
 
     public Gui() {
+        konfiguration = new Konfiguration();
         setTitle("LLR");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
@@ -43,15 +45,13 @@ public class Gui extends JFrame {
     }
 
     private void initComponents() {
-        Konfiguration konfiguration = new Konfiguration();
         dateipfad = new JLabel("Dateipfad:");
         arbeitszeit = new JLabel("Arbeitszeit:");
         dateipfadTextfeld = new JTextField(25);
         dateipfadTextfeld.setText(konfiguration.getPfad());
         arbeitszeitTextfeld = new JTextField(30);
-        arbeitszeitTextfeld.setText(String.valueOf(konfiguration.getStunden()));
         einstellungsButton = new JButton("Einstellungen öffnen");
-        einstellungsButton.addActionListener(e1 -> new GuiEinstellungen("Einstellungen"));
+        einstellungsButton.addActionListener(e1 -> new GuiEinstellungen(Gui.this));
         startButton = new JButton("Start");
         if (konfiguration.getPfad().equals("")) {
             startButton.setEnabled(false);
@@ -60,5 +60,11 @@ public class Gui extends JFrame {
         startButton.addActionListener(new StartListener(Gui.this));
         dateiButton = new JButton("Datei auswählen...");
         dateiButton.addActionListener(new DateiListener(Gui.this));
+        fillView();
+    }
+
+    public void fillView() {
+        konfiguration = new Konfiguration();
+        arbeitszeitTextfeld.setText(String.valueOf(konfiguration.getStunden()));
     }
 }
