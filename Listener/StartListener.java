@@ -22,6 +22,7 @@ public class StartListener implements ActionListener {
             Konfiguration konfiguration = new Konfiguration();
             konfiguration.setPfad(gui.dateipfadTextfeld.getText());
             konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
+            // TODO: Validation, falls unter Arbeitszeit Buchstaben abgespeichert werden
             konfiguration.persistPfadEinstellungen();
             konfiguration.persistArbeitszeitEinstellungen();
             gui.fillView();
