@@ -21,10 +21,6 @@ public class KoeffizientenSpeichernListener implements ActionListener {
             for (int i = 0; i < guiKoeffizientenEinstellungen.grenzeTextfeldListe.length; i++) {
                 konfiguration.grenzeListe[i] = Double.parseDouble(
                         guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText());
-                if (i > 0 && konfiguration.grenzeListe[i] < konfiguration.grenzeListe[i-1]) {
-                    konfiguration.grenzeListe[i] = konfiguration.grenzeListe[i - 1] + 0.01;
-                }
-                konfiguration.grenzeListe[i] = (double) Math.round(konfiguration.grenzeListe[i] * 100d) / 100d;
             }
             for (int i = 0; i < guiKoeffizientenEinstellungen.koeffizientTextfeldListe.length; i++) {
                 konfiguration.koeffizientListe[i] = Double.parseDouble(
