@@ -29,12 +29,8 @@ public class PfadListener implements DocumentListener {
 
     private void aktualisiereStartButton() {
         String dateipfad = gui.dateipfadTextfeld.getText();
-        if (new File(dateipfad).exists() && getExtensionByStringHandling(dateipfad).equals("xlsx")) {
-            gui.startButton.setEnabled(true);
-            new SheetSelektor(gui);
-        } else {
-            gui.startButton.setEnabled(false);
-        }
+        boolean ordentlicheExcelDatei = new File(dateipfad).exists() && getExtensionByStringHandling(dateipfad).equals("xlsx");
+        gui.startButton.setEnabled(ordentlicheExcelDatei);
     }
 
     public String getExtensionByStringHandling(String filename) {

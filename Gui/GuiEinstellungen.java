@@ -6,7 +6,6 @@ import Main.Konfiguration;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 
 public class GuiEinstellungen extends JFrame {
 
@@ -26,19 +25,34 @@ public class GuiEinstellungen extends JFrame {
     public GuiEinstellungen(Gui gui) {
         this.gui = gui;
         konfiguration = new Konfiguration();
-        konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
+        persist();
+        init();
+        initComponents();
+        addComponents();
+        setVisible(true);
+    }
+
+    private void persist() {
         try {
+            konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
             konfiguration.persistArbeitszeitEinstellungen();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(gui,
+                    "Bitte geben Sie Zahlen ein!",
+                    "Arbeitszeit-Validation",
+                    JOptionPane.ERROR_MESSAGE);
         }
-        gui.fillView();
+    }
+
+    private void init() {
         setTitle("Einstellungen");
         setLayout(new FlowLayout());
         setSize(300, 400);
         setResizable(false);
         setLocationRelativeTo(null);
-        initComponents();
+    }
+
+    private void addComponents() {
         add(koeffizientAnzahlFrage);
         add(koeffizientAnzahlTextfeld);
         add(koeffizientEinstellungenButton);
@@ -49,11 +63,9 @@ public class GuiEinstellungen extends JFrame {
         add(maxMengeFrage);
         add(maxMengeTextfeld);
         add(speichernButton);
-        setVisible(true);
     }
 
     private void initComponents() {
-        Konfiguration konfiguration = new Konfiguration();
         wertFrage = new JLabel("In welcher Spalte steht Wert?");
         mengeFrage = new JLabel("In welcher Spalte steht Menge?");
         maxMengeFrage = new JLabel("Maximale sinnvolle Menge:");
@@ -66,6 +78,7 @@ public class GuiEinstellungen extends JFrame {
         koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(GuiEinstellungen.this));
         speichernButton = new JButton("Speichern");
         speichernButton.addActionListener(new EinstellungenListener(GuiEinstellungen.this));
+        gui.fillView();
         fillView();
     }
 

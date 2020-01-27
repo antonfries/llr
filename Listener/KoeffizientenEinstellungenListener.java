@@ -6,7 +6,6 @@ import Main.Konfiguration;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class KoeffizientenEinstellungenListener implements ActionListener {
     private GuiEinstellungen guiEinstellungen;
@@ -16,13 +15,10 @@ public class KoeffizientenEinstellungenListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        try {
-            Konfiguration konfiguration = new Konfiguration();
-            konfiguration.setKoeffizientAnzahl(Integer.parseInt(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
-            konfiguration.persistEinstellungen();
-            new GuiKoeffizientenEinstellungen();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Konfiguration konfiguration = new Konfiguration();
+        konfiguration.setKoeffizientAnzahl((int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
+        konfiguration.persistEinstellungen();
+        guiEinstellungen.fillView();
+        new GuiKoeffizientenEinstellungen();
     }
 }

@@ -3,12 +3,10 @@ package Listener;
 import Gui.Gui;
 import Main.Konfiguration;
 import Main.Rechner;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class StartListener implements ActionListener {
     private Gui gui;
@@ -18,21 +16,26 @@ public class StartListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
+        boolean continueFlag = true;
+        Konfiguration konfiguration = new Konfiguration();
+        konfiguration.setPfad(gui.dateipfadTextfeld.getText());
         try {
-            Konfiguration konfiguration = new Konfiguration();
-            konfiguration.setPfad(gui.dateipfadTextfeld.getText());
             konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
-            // TODO: Validation, falls unter Arbeitszeit Buchstaben abgespeichert werden
-            konfiguration.persistPfadEinstellungen();
-            konfiguration.persistArbeitszeitEinstellungen();
-            gui.fillView();
-            // Hier muss man von der Excel-Klasse wissen, welcher Index zu welchem Sheet-Namen gehört
-            // TODO: Das aktuell ausgewählte Sheet speichern
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(gui,
+                    "Bitte geben Sie Zahlen ein!",
+                    "Arbeitszeit-Validation",
+                    JOptionPane.ERROR_MESSAGE);
+            continueFlag = false;
+        }
+        konfiguration.persistPfadEinstellungen();
+        konfiguration.persistArbeitszeitEinstellungen();
+        gui.fillView();
+        // TODO: Das aktuell ausgewählte Sheet speichern
+        if (continueFlag) {
             double endergebnis = Rechner.rechnen();
             JOptionPane.showMessageDialog(gui, "Lager-Leistung:    " + endergebnis, "Ergebnis",
                     JOptionPane.INFORMATION_MESSAGE);
-        } catch (IOException | InvalidFormatException e) {
-            e.printStackTrace();
         }
     }
 }

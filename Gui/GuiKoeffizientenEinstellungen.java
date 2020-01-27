@@ -16,14 +16,22 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     private Konfiguration konfiguration;
 
     public GuiKoeffizientenEinstellungen() {
-        // TODO: Nach dem Speichern immer direkt die Settings neu einpflegen (Validierung anzeigen)
         konfiguration = new Konfiguration();
+        init();
+        initComponents();
+        addComponents();
+        setVisible(true);
+    }
+
+    private void init() {
         setTitle("Koeffizienten-Einstellungen");
         setLayout(new FlowLayout());
         setSize(800, 300);
         setResizable(false);
         setLocationRelativeTo(null);
-        initComponents();
+    }
+
+    private void addComponents() {
         add(grenzeText);
         for (JTextField grenzeTextfeld : grenzeTextfeldListe) {
             add(grenzeTextfeld);
@@ -33,7 +41,6 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
             add(koeffizienttextfeld);
         }
         add(speichernButton);
-        setVisible(true);
     }
 
     private void initComponents() {
@@ -52,7 +59,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         fillView();
     }
 
-    public void fillView(){
+    public void fillView() {
         konfiguration = new Konfiguration();
         for (int i = 0; i < konfiguration.grenzeListe.length; i++) {
             grenzeTextfeldListe[i].setText(String.valueOf(konfiguration.grenzeListe[i]));
