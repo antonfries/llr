@@ -27,10 +27,12 @@ public class Konfiguration {
     private double stunden = 10.0;
     private double standardKoeffizient = 2.0;
     private int koeffizientAnzahl = 5;
-    private char wertSpalte = 'A';
+    private char wertSpalte = 'A'; // TODO: Zu String umwandeln, der maximal 2 Zeichen haben darf von A-Z
     private char mengeSpalte = 'B';
     private int sheetIndex = 0;
+    private int buchungKoeffizient = 1;
     private Regler[] reglerListe;
+    // TODO: Anfang und Ende der Zeilen angeben, die durchlaufen werden
 
     public Konfiguration() {
         File KonfigurationpfadDatei = new File(Konfigurationpfad);
@@ -119,7 +121,7 @@ public class Konfiguration {
             if (!Ergebnis && !BasisEinstellungenDatei.exists()) {
                 throw new RuntimeException("Einstellungen können nicht gespeichert werden!");
             }
-            int einstellungAnzahl = 4;
+            int einstellungAnzahl = 5;
             String[] einstellungListe = new String[einstellungAnzahl];
             Arrays.fill(einstellungListe, "");
             Scanner einstellungStream = new Scanner(BasisEinstellungenDatei);
@@ -140,6 +142,9 @@ public class Konfiguration {
             if (!einstellungListe[3].equals("")) {
                 setMaximalMenge((int) Double.parseDouble(einstellungListe[3]));
             }
+            if (!einstellungListe[4].equals("")) {
+                setBuchungKoeffizient((int) Double.parseDouble(einstellungListe[4]));
+            }
             einstellungStream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -153,6 +158,7 @@ public class Konfiguration {
             pw.println(getWertSpalte());
             pw.println(getMengeSpalte());
             pw.println(getMaximalMenge());
+            pw.println(getBuchungKoeffizient());
             pw.flush();
             pw.close();
         } catch (IOException e) {
@@ -355,5 +361,13 @@ public class Konfiguration {
 
     public void setSheetIndex(int sheetIndex) {
         this.sheetIndex = sheetIndex;
+    }
+
+    public int getBuchungKoeffizient() {
+        return buchungKoeffizient;
+    }
+
+    public void setBuchungKoeffizient(int buchungKoeffizient) {
+        this.buchungKoeffizient = buchungKoeffizient;
     }
 }

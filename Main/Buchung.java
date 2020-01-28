@@ -25,7 +25,7 @@ public class Buchung {
 
     public double getKoeffizient() {
         for (Regler regler : konfiguration.getReglerListe()) {
-            if (regler.getMin() <= this.wert && this.wert <= regler.getMax()) {
+            if (regler.getMin() <= getWert() && getWert() <= regler.getMax()) {
                 return regler.getKoeffizient();
             }
         }

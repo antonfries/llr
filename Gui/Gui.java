@@ -35,7 +35,7 @@ public class Gui extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
         setSize(500, 300);
-        setResizable(false);
+        setResizable(true);
         setLocationRelativeTo(null);
     }
 
@@ -62,8 +62,9 @@ public class Gui extends JFrame {
         startButton.addActionListener(new StartListener(Gui.this));
         dateiButton = new JButton("Datei auswählen...");
         dateiButton.addActionListener(new DateiListener(Gui.this));
-        // TODO: Dynamische Komponenten in JPanel flow-artig anordnen
+        // TODO: Dateiselektor verschwindet, lieber ScrollPanel
         sheetContainer = new JPanel();
+        sheetContainer.setLayout(new BoxLayout(sheetContainer, BoxLayout.PAGE_AXIS));
         fillView();
     }
 

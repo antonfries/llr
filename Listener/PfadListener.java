@@ -1,6 +1,7 @@
 package Listener;
 
 import Gui.Gui;
+import Main.Konfiguration;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -31,6 +32,12 @@ public class PfadListener implements DocumentListener {
         String dateipfad = gui.dateipfadTextfeld.getText();
         boolean ordentlicheExcelDatei = new File(dateipfad).exists() && getExtensionByStringHandling(dateipfad).equals("xlsx");
         gui.startButton.setEnabled(ordentlicheExcelDatei);
+        if (ordentlicheExcelDatei) {
+            Konfiguration konfiguration = new Konfiguration();
+            konfiguration.setPfad(dateipfad);
+            konfiguration.persistPfadEinstellungen();
+            new SheetSelektor(gui);
+        }
     }
 
     public String getExtensionByStringHandling(String filename) {

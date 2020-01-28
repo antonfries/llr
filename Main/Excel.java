@@ -17,9 +17,17 @@ public class Excel {
                 .bufferSize(4096)
                 .open(ExcelDatei);
         ExcelSheetListe = new Sheet[wb.getNumberOfSheets()];
-        for (int i = 0; i < wb.getNumberOfSheets(); i++) {
+        for (int i = 0; i < ExcelSheetListe.length; i++) {
             ExcelSheetListe[i] = wb.getSheetAt(i);
         }
-        // TODO: (optional) Angabe der Zeilen
+    }
+
+    public int getSheetPosition(String sheetName) {
+        for (int i = 0; i < ExcelSheetListe.length; i++) {
+            if (ExcelSheetListe[i].getSheetName().equals(sheetName)) {
+                return i;
+            }
+        }
+        return 0;
     }
 }

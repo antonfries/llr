@@ -13,10 +13,12 @@ public class GuiEinstellungen extends JFrame {
     public JTextField mengeTextfeld;
     public JTextField maxMengeTextfeld;
     public JTextField koeffizientAnzahlTextfeld;
+    public JTextField buchungKoeffizientTextfeld;
     private JLabel wertFrage;
     private JLabel mengeFrage;
     private JLabel maxMengeFrage;
     private JLabel koeffizientAnzahlFrage;
+    private JLabel buchungKoeffizientFrage;
     private JButton koeffizientEinstellungenButton;
     private JButton speichernButton;
     private Konfiguration konfiguration;
@@ -62,18 +64,24 @@ public class GuiEinstellungen extends JFrame {
         add(mengeTextfeld);
         add(maxMengeFrage);
         add(maxMengeTextfeld);
+        add(buchungKoeffizientFrage);
+        add(buchungKoeffizientTextfeld);
         add(speichernButton);
     }
 
     private void initComponents() {
         wertFrage = new JLabel("In welcher Spalte steht Wert?");
+        wertFrage.setToolTipText("Möglich ist aktuell nur 1 Buchstabe von A-Z (Beispiele: S, Q, R)");
         mengeFrage = new JLabel("In welcher Spalte steht Menge?");
+        mengeFrage.setToolTipText("Möglich ist aktuell nur 1 Buchstabe von A-Z (Beispiele: S, Q, R)");
         maxMengeFrage = new JLabel("Maximale sinnvolle Menge:");
+        buchungKoeffizientFrage = new JLabel("Buchungs-Koeffizient:");
         koeffizientAnzahlFrage = new JLabel("Anzahl Koeffizienten:");
         wertTextfeld = new JTextField(3);
         mengeTextfeld = new JTextField(3);
         maxMengeTextfeld = new JTextField(5);
         koeffizientAnzahlTextfeld = new JTextField(3);
+        buchungKoeffizientTextfeld = new JTextField(5); // TODO: Unterschied 3/5
         koeffizientEinstellungenButton = new JButton("Koeffizienten-Einstellungen");
         koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(GuiEinstellungen.this));
         speichernButton = new JButton("Speichern");
@@ -88,5 +96,6 @@ public class GuiEinstellungen extends JFrame {
         mengeTextfeld.setText(String.valueOf(konfiguration.getMengeSpalte()));
         maxMengeTextfeld.setText(String.valueOf(konfiguration.getMaximalMenge()));
         koeffizientAnzahlTextfeld.setText(String.valueOf(konfiguration.getKoeffizientAnzahl()));
+        buchungKoeffizientTextfeld.setText(String.valueOf(konfiguration.getBuchungKoeffizient()));
     }
 }
