@@ -16,28 +16,38 @@ public class Rechner {
         Excel mappe = new Excel();
         double ergebnis = 0.0;
         Sheet sheet = mappe.ExcelSheetListe[konfiguration.getSheetIndex()];
-        int wertIndex = charZuExcelSpalte(konfiguration.getWertSpalte());
-        int mengeIndex = charZuExcelSpalte(konfiguration.getMengeSpalte());
-        double wert;
-        int menge;
+        char[] wertSpalteListe = konfiguration.getWertSpalte().toCharArray();
+        char[] mengeSpalteListe = konfiguration.getMengeSpalte().toCharArray();
+        double einzelWert, wert = 0.0;
+        int einzelMenge, menge = 0;
         int counter = 0;
+        int min = konfiguration.getZeilenAnfang();
+        int max = konfiguration.getZeilenEnde();
         for (Row r : sheet) {
-            counter++;
-            System.out.println(counter);
-            Cell wertZelle = r.getCell(wertIndex);
-            Cell mengeZelle = r.getCell(mengeIndex);
-            if (wertZelle == null || mengeZelle == null) {
+            counter++; // TODO: Randfälle testen
+            if (counter < min) {
                 continue;
             }
-            if (wertZelle.getCellTypeEnum() == CellType.NUMERIC) {
-                wert = wertZelle.getNumericCellValue();
-            } else {
-                wert = 0.0;
+            if (max != -1) {
+                if (counter > max) {
+                    break;
+                }
             }
-            if (mengeZelle.getCellTypeEnum() == CellType.NUMERIC) {
-                menge = (int) mengeZelle.getNumericCellValue();
-            } else {
-                menge = 0;
+            for (char wertSpalte : wertSpalteListe) {
+                Cell wertZelle = r.getCell(charZuExcelSpalte(wertSpalte));
+                einzelWert = wertZelle != null && wertZelle.getCellTypeEnum() == CellType.NUMERIC
+                        ? wertZelle.getNumericCellValue() : 0.0;
+                if (einzelWert != 0.0) {
+                    wert = einzelWert;
+                }
+            }
+            for (char mengeSpalte : mengeSpalteListe) {
+                Cell mengeZelle = r.getCell(charZuExcelSpalte(mengeSpalte));
+                einzelMenge = mengeZelle != null && mengeZelle.getCellTypeEnum() == CellType.NUMERIC
+                        ? (int) mengeZelle.getNumericCellValue() : 0;
+                if (einzelMenge != 0) {
+                    menge = einzelMenge;
+                }
             }
             Buchung buchung = new Buchung(menge, wert, konfiguration);
             ergebnis += buchung.getProdukt();

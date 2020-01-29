@@ -27,12 +27,14 @@ public class Konfiguration {
     private double stunden = 10.0;
     private double standardKoeffizient = 2.0;
     private int koeffizientAnzahl = 5;
-    private char wertSpalte = 'A'; // TODO: Zu String umwandeln, der maximal 2 Zeichen haben darf von A-Z
-    private char mengeSpalte = 'B';
+    // Spalten werden jetzt aneinander geklebt (PQ, RS)
+    private String wertSpalte = "A"; // TODO: Spalten ab Z zulassen: AA,AB,AC...
+    private String mengeSpalte = "B";
     private int sheetIndex = 0;
     private int buchungKoeffizient = 1;
     private Regler[] reglerListe;
-    // TODO: Anfang und Ende der Zeilen angeben, die durchlaufen werden
+    private int zeilenAnfang = 1;
+    private int zeilenEnde = -1; // -1 bedeutet dass Einschränkung nicht berücksichtigt wird
 
     public Konfiguration() {
         File KonfigurationpfadDatei = new File(Konfigurationpfad);
@@ -121,7 +123,7 @@ public class Konfiguration {
             if (!Ergebnis && !BasisEinstellungenDatei.exists()) {
                 throw new RuntimeException("Einstellungen können nicht gespeichert werden!");
             }
-            int einstellungAnzahl = 5;
+            int einstellungAnzahl = 7;
             String[] einstellungListe = new String[einstellungAnzahl];
             Arrays.fill(einstellungListe, "");
             Scanner einstellungStream = new Scanner(BasisEinstellungenDatei);
@@ -134,16 +136,22 @@ public class Konfiguration {
                 setKoeffizientAnzahl((int) Double.parseDouble(einstellungListe[0]));
             }
             if (!einstellungListe[1].equals("")) {
-                setWertSpalte(einstellungListe[1].charAt(0)); // TODO: Validation, ob hier irgendwas nicht A-Z ist?
+                setWertSpalte(einstellungListe[1]); // TODO: Eingabevalidation implementieren
             }
             if (!einstellungListe[2].equals("")) {
-                setMengeSpalte(einstellungListe[2].charAt(0));
+                setMengeSpalte(einstellungListe[2]);
             }
             if (!einstellungListe[3].equals("")) {
                 setMaximalMenge((int) Double.parseDouble(einstellungListe[3]));
             }
             if (!einstellungListe[4].equals("")) {
                 setBuchungKoeffizient((int) Double.parseDouble(einstellungListe[4]));
+            }
+            if (!einstellungListe[5].equals("")) {
+                setZeilenAnfang((int) Double.parseDouble(einstellungListe[5]));
+            }
+            if (!einstellungListe[6].equals("")) {
+                setZeilenEnde((int) Double.parseDouble(einstellungListe[6]));
             }
             einstellungStream.close();
         } catch (IOException e) {
@@ -159,6 +167,8 @@ public class Konfiguration {
             pw.println(getMengeSpalte());
             pw.println(getMaximalMenge());
             pw.println(getBuchungKoeffizient());
+            pw.println(getZeilenAnfang());
+            pw.println(getZeilenEnde());
             pw.flush();
             pw.close();
         } catch (IOException e) {
@@ -339,22 +349,6 @@ public class Konfiguration {
         this.reglerListe = reglerListe;
     }
 
-    public char getWertSpalte() {
-        return wertSpalte;
-    }
-
-    public void setWertSpalte(char wertSpalte) {
-        this.wertSpalte = wertSpalte;
-    }
-
-    public char getMengeSpalte() {
-        return mengeSpalte;
-    }
-
-    public void setMengeSpalte(char mengeSpalte) {
-        this.mengeSpalte = mengeSpalte;
-    }
-
     public int getSheetIndex() {
         return sheetIndex;
     }
@@ -369,5 +363,37 @@ public class Konfiguration {
 
     public void setBuchungKoeffizient(int buchungKoeffizient) {
         this.buchungKoeffizient = buchungKoeffizient;
+    }
+
+    public String getWertSpalte() {
+        return wertSpalte;
+    }
+
+    public void setWertSpalte(String wertSpalte) {
+        this.wertSpalte = wertSpalte;
+    }
+
+    public String getMengeSpalte() {
+        return mengeSpalte;
+    }
+
+    public void setMengeSpalte(String mengeSpalte) {
+        this.mengeSpalte = mengeSpalte;
+    }
+
+    public int getZeilenAnfang() {
+        return zeilenAnfang;
+    }
+
+    public void setZeilenAnfang(int zeilenAnfang) {
+        this.zeilenAnfang = zeilenAnfang;
+    }
+
+    public int getZeilenEnde() {
+        return zeilenEnde;
+    }
+
+    public void setZeilenEnde(int zeilenEnde) {
+        this.zeilenEnde = zeilenEnde;
     }
 }

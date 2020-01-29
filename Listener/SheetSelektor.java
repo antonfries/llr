@@ -18,6 +18,7 @@ public class SheetSelektor {
         }
         for (int i = 0; i < mappe.ExcelSheetListe.length; i++) {
             JRadioButton sheetButton = new JRadioButton(mappe.ExcelSheetListe[i].getSheetName());
+            sheetButton.setToolTipText(mappe.ExcelSheetListe[i].getLastRowNum() + " Zeilen");
             if (konfiguration.getSheetIndex() == i) {
                 sheetButton.setSelected(true);
             }

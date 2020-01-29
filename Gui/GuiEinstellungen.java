@@ -9,16 +9,20 @@ import java.awt.*;
 
 public class GuiEinstellungen extends JFrame {
 
+    public JTextField koeffizientAnzahlTextfeld;
     public JTextField wertTextfeld;
     public JTextField mengeTextfeld;
     public JTextField maxMengeTextfeld;
-    public JTextField koeffizientAnzahlTextfeld;
     public JTextField buchungKoeffizientTextfeld;
+    public JTextField zeilenAnfangTextfeld;
+    public JTextField zeilenEndeTextfeld;
+    private JLabel koeffizientAnzahlFrage;
     private JLabel wertFrage;
     private JLabel mengeFrage;
     private JLabel maxMengeFrage;
-    private JLabel koeffizientAnzahlFrage;
     private JLabel buchungKoeffizientFrage;
+    private JLabel zeilenAnfangFrage;
+    private JLabel zeilenEndeFrage;
     private JButton koeffizientEinstellungenButton;
     private JButton speichernButton;
     private Konfiguration konfiguration;
@@ -66,22 +70,32 @@ public class GuiEinstellungen extends JFrame {
         add(maxMengeTextfeld);
         add(buchungKoeffizientFrage);
         add(buchungKoeffizientTextfeld);
+        add(zeilenAnfangFrage);
+        add(zeilenAnfangTextfeld);
+        add(zeilenEndeFrage);
+        add(zeilenEndeTextfeld);
         add(speichernButton);
     }
 
     private void initComponents() {
+        koeffizientAnzahlFrage = new JLabel("Anzahl Koeffizienten:");
         wertFrage = new JLabel("In welcher Spalte steht Wert?");
-        wertFrage.setToolTipText("Möglich ist aktuell nur 1 Buchstabe von A-Z (Beispiele: S, Q, R)");
+        wertFrage.setToolTipText("Möglich sind beliebig viele aneinandergeheftete Spalten (Bsp. FZ,R,PQR");
         mengeFrage = new JLabel("In welcher Spalte steht Menge?");
-        mengeFrage.setToolTipText("Möglich ist aktuell nur 1 Buchstabe von A-Z (Beispiele: S, Q, R)");
+        mengeFrage.setToolTipText("Möglich sind beliebig viele aneinandergeheftete Spalten (Bsp. FZ,R,PQR");
         maxMengeFrage = new JLabel("Maximale sinnvolle Menge:");
         buchungKoeffizientFrage = new JLabel("Buchungs-Koeffizient:");
-        koeffizientAnzahlFrage = new JLabel("Anzahl Koeffizienten:");
+        zeilenAnfangFrage = new JLabel("Zeilenanfang:");
+        zeilenAnfangFrage.setToolTipText("Wert kleiner gleich 1 setzen, falls keine Einschränkung auftreten soll");
+        zeilenEndeFrage = new JLabel("Zeilenende:");
+        zeilenEndeFrage.setToolTipText("Wert -1 setzen, falls keine EInschränkung auftreten soll");
+        koeffizientAnzahlTextfeld = new JTextField(3);
         wertTextfeld = new JTextField(3);
         mengeTextfeld = new JTextField(3);
-        maxMengeTextfeld = new JTextField(5);
-        koeffizientAnzahlTextfeld = new JTextField(3);
-        buchungKoeffizientTextfeld = new JTextField(5); // TODO: Unterschied 3/5
+        maxMengeTextfeld = new JTextField(3);
+        buchungKoeffizientTextfeld = new JTextField(7);
+        zeilenAnfangTextfeld = new JTextField(15);
+        zeilenEndeTextfeld = new JTextField(15);
         koeffizientEinstellungenButton = new JButton("Koeffizienten-Einstellungen");
         koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(GuiEinstellungen.this));
         speichernButton = new JButton("Speichern");
@@ -92,10 +106,12 @@ public class GuiEinstellungen extends JFrame {
 
     public void fillView() {
         konfiguration = new Konfiguration();
+        koeffizientAnzahlTextfeld.setText(String.valueOf(konfiguration.getKoeffizientAnzahl()));
         wertTextfeld.setText(String.valueOf(konfiguration.getWertSpalte()));
         mengeTextfeld.setText(String.valueOf(konfiguration.getMengeSpalte()));
         maxMengeTextfeld.setText(String.valueOf(konfiguration.getMaximalMenge()));
-        koeffizientAnzahlTextfeld.setText(String.valueOf(konfiguration.getKoeffizientAnzahl()));
         buchungKoeffizientTextfeld.setText(String.valueOf(konfiguration.getBuchungKoeffizient()));
+        zeilenAnfangTextfeld.setText(String.valueOf(konfiguration.getZeilenAnfang()));
+        zeilenEndeTextfeld.setText(String.valueOf(konfiguration.getZeilenEnde()));
     }
 }
