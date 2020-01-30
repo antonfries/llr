@@ -4,11 +4,11 @@ import Gui.Gui;
 import Main.Excel;
 import Main.Konfiguration;
 import Main.Rechner;
+import Main.SheetHelper;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Enumeration;
 
 public class StartListener implements ActionListener {
     private Gui gui;
@@ -19,18 +19,10 @@ public class StartListener implements ActionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         boolean continueFlag = true;
-        String selected = "";
-        for (Enumeration<AbstractButton> buttons = gui.sheetListe.getElements(); buttons.hasMoreElements(); ) {
-            AbstractButton button = buttons.nextElement();
-            if (button.isSelected()) {
-                selected = button.getText();
-            }
-        }
         Excel excel = new Excel();
         Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setSheetIndex(excel.getSheetPosition(selected));
+        konfiguration.setSheetIndex(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
         konfiguration.persistSheetEinstellungen();
-        // TODO: Das ausgewählte Sheet speichern bei Öffnen der Einstellungen (auch Pfadselektor?)
         konfiguration.setPfad(gui.dateipfadTextfeld.getText());
         try {
             konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));

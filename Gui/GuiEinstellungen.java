@@ -2,7 +2,9 @@ package Gui;
 
 import Listener.EinstellungenListener;
 import Listener.KoeffizientenEinstellungenListener;
+import Main.Excel;
 import Main.Konfiguration;
+import Main.SheetHelper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,6 +41,9 @@ public class GuiEinstellungen extends JFrame {
     }
 
     private void persist() {
+        Excel excel = new Excel();
+        konfiguration.setSheetIndex(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
+        konfiguration.persistSheetEinstellungen();
         try {
             konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
             konfiguration.persistArbeitszeitEinstellungen();
