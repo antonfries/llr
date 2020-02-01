@@ -15,9 +15,7 @@ public class KoeffizientenEinstellungenListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setKoeffizientAnzahl((int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
-        konfiguration.persistEinstellungen();
+        Konfiguration.setKoeffizientAnzahl((int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
         guiEinstellungen.fillView();
         new GuiKoeffizientenEinstellungen();
     }

@@ -20,12 +20,10 @@ public class StartListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         boolean continueFlag = true;
         Excel excel = new Excel();
-        Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setSheetIndex(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
-        konfiguration.persistSheetEinstellungen();
-        konfiguration.setPfad(gui.dateipfadTextfeld.getText());
+        Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
+        Konfiguration.setDateiPfad(gui.dateipfadTextfeld.getText());
         try {
-            konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
+            Konfiguration.setArbeitszeit(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(gui,
                     "Bitte geben Sie Zahlen ein!",
@@ -33,8 +31,6 @@ public class StartListener implements ActionListener {
                     JOptionPane.ERROR_MESSAGE);
             continueFlag = false;
         }
-        konfiguration.persistPfadEinstellungen();
-        konfiguration.persistArbeitszeitEinstellungen();
         gui.fillView();
         if (continueFlag) {
             double endergebnis = Rechner.rechnen();

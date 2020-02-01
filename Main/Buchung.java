@@ -4,10 +4,8 @@ public class Buchung {
 
     private int menge = 0;
     private double wert = 0.0;
-    private Konfiguration konfiguration;
 
-    public Buchung(int menge, double wert, Konfiguration konfiguration) {
-        this.setKonfiguration(konfiguration);
+    public Buchung(int menge, double wert) {
         this.setMenge(menge);
         this.setWert(wert);
     }
@@ -17,19 +15,19 @@ public class Buchung {
     }
 
     public void setMenge(int menge) {
-        if (menge < konfiguration.getMinimalMenge() || menge > konfiguration.getMaximalMenge()) {
-            menge = konfiguration.getStandardMenge();
+        if (menge < Konfiguration.getMinimalMenge() || menge > Konfiguration.getMaximalMenge()) {
+            menge = Konfiguration.getStandardMenge();
         }
         this.menge = menge;
     }
 
     public double getKoeffizient() {
-        for (Regler regler : konfiguration.getReglerListe()) {
+        for (Regler regler : Konfiguration.getReglerListe()) {
             if (regler.getMin() <= getWert() && getWert() <= regler.getMax()) {
                 return regler.getKoeffizient();
             }
         }
-        return konfiguration.getStandardKoeffizient();
+        return Konfiguration.getStandardKoeffizient();
     }
 
     public double getProdukt() {
@@ -42,13 +40,5 @@ public class Buchung {
 
     public void setWert(double wert) {
         this.wert = wert;
-    }
-
-    public Konfiguration getKonfiguration() {
-        return konfiguration;
-    }
-
-    public void setKonfiguration(Konfiguration konfiguration) {
-        this.konfiguration = konfiguration;
     }
 }

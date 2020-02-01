@@ -27,12 +27,10 @@ public class GuiEinstellungen extends JFrame {
     private JLabel zeilenEndeFrage;
     private JButton koeffizientEinstellungenButton;
     private JButton speichernButton;
-    private Konfiguration konfiguration;
     private Gui gui;
 
     public GuiEinstellungen(Gui gui) {
         this.gui = gui;
-        konfiguration = new Konfiguration();
         persist();
         init();
         initComponents();
@@ -42,11 +40,9 @@ public class GuiEinstellungen extends JFrame {
 
     private void persist() {
         Excel excel = new Excel();
-        konfiguration.setSheetIndex(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
-        konfiguration.persistSheetEinstellungen();
+        Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
         try {
-            konfiguration.setStunden(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
-            konfiguration.persistArbeitszeitEinstellungen();
+            Konfiguration.setArbeitszeit(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(gui,
                     "Bitte geben Sie Zahlen ein!",
@@ -110,13 +106,12 @@ public class GuiEinstellungen extends JFrame {
     }
 
     public void fillView() {
-        konfiguration = new Konfiguration();
-        koeffizientAnzahlTextfeld.setText(String.valueOf(konfiguration.getKoeffizientAnzahl()));
-        wertTextfeld.setText(String.valueOf(konfiguration.getWertSpalte()));
-        mengeTextfeld.setText(String.valueOf(konfiguration.getMengeSpalte()));
-        maxMengeTextfeld.setText(String.valueOf(konfiguration.getMaximalMenge()));
-        buchungKoeffizientTextfeld.setText(String.valueOf(konfiguration.getBuchungKoeffizient()));
-        zeilenAnfangTextfeld.setText(String.valueOf(konfiguration.getZeilenAnfang()));
-        zeilenEndeTextfeld.setText(String.valueOf(konfiguration.getZeilenEnde()));
+        koeffizientAnzahlTextfeld.setText(String.valueOf(Konfiguration.getKoeffizientAnzahl()));
+        wertTextfeld.setText(String.valueOf(Konfiguration.getWertSpalte()));
+        mengeTextfeld.setText(String.valueOf(Konfiguration.getMengeSpalte()));
+        maxMengeTextfeld.setText(String.valueOf(Konfiguration.getMaximalMenge()));
+        buchungKoeffizientTextfeld.setText(String.valueOf(Konfiguration.getBuchungKoeffizient()));
+        zeilenAnfangTextfeld.setText(String.valueOf(Konfiguration.getZeileAnfang()));
+        zeilenEndeTextfeld.setText(String.valueOf(Konfiguration.getZeileEnde()));
     }
 }

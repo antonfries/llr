@@ -14,15 +14,13 @@ public class EinstellungenListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        Konfiguration konfiguration = new Konfiguration();
-        konfiguration.setKoeffizientAnzahl((int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
-        konfiguration.setWertSpalte(guiEinstellungen.wertTextfeld.getText());
-        konfiguration.setMengeSpalte(guiEinstellungen.mengeTextfeld.getText());
-        konfiguration.setMaximalMenge((int) Double.parseDouble(guiEinstellungen.maxMengeTextfeld.getText()));
-        konfiguration.setBuchungKoeffizient((int) Double.parseDouble(guiEinstellungen.buchungKoeffizientTextfeld.getText()));
-        konfiguration.setZeilenAnfang((int) Double.parseDouble(guiEinstellungen.zeilenAnfangTextfeld.getText()));
-        konfiguration.setZeilenEnde((int) Double.parseDouble(guiEinstellungen.zeilenEndeTextfeld.getText()));
-        konfiguration.persistEinstellungen();
+        Konfiguration.setKoeffizientAnzahl((int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
+        Konfiguration.setWertSpalte(guiEinstellungen.wertTextfeld.getText());
+        Konfiguration.setMengeSpalte(guiEinstellungen.mengeTextfeld.getText());
+        Konfiguration.setMaximalMenge((int) Double.parseDouble(guiEinstellungen.maxMengeTextfeld.getText()));
+        Konfiguration.setBuchungKoeffizient((int) Double.parseDouble(guiEinstellungen.buchungKoeffizientTextfeld.getText()));
+        Konfiguration.setZeileAnfang((int) Double.parseDouble(guiEinstellungen.zeilenAnfangTextfeld.getText()));
+        Konfiguration.setZeileEnde((int) Double.parseDouble(guiEinstellungen.zeilenEndeTextfeld.getText()));
         guiEinstellungen.fillView();
     }
 }

@@ -12,17 +12,16 @@ public class Rechner {
     }
 
     public static double rechnen() {
-        Konfiguration konfiguration = new Konfiguration();
         Excel mappe = new Excel();
         double ergebnis = 0.0;
-        Sheet sheet = mappe.ExcelSheetListe[konfiguration.getSheetIndex()];
-        char[] wertSpalteListe = konfiguration.getWertSpalte().toCharArray();
-        char[] mengeSpalteListe = konfiguration.getMengeSpalte().toCharArray();
+        Sheet sheet = mappe.ExcelSheetListe[Konfiguration.getSheetPosition()];
+        char[] wertSpalteListe = Konfiguration.getWertSpalte().toCharArray();
+        char[] mengeSpalteListe = Konfiguration.getMengeSpalte().toCharArray();
         double einzelWert, wert = 0.0;
         int einzelMenge, menge = 0;
         int counter = 0;
-        int min = konfiguration.getZeilenAnfang();
-        int max = konfiguration.getZeilenEnde();
+        int min = Konfiguration.getZeileAnfang();
+        int max = Konfiguration.getZeileEnde();
         for (Row r : sheet) {
             counter++; // TODO: Randfälle testen
             if (counter < min) {
@@ -49,9 +48,9 @@ public class Rechner {
                     menge = einzelMenge;
                 }
             }
-            Buchung buchung = new Buchung(menge, wert, konfiguration);
+            Buchung buchung = new Buchung(menge, wert);
             ergebnis += buchung.getProdukt();
         }
-        return ergebnis * konfiguration.getBuchungKoeffizient() / konfiguration.getStunden();
+        return ergebnis * Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
     }
 }

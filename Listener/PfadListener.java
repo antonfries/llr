@@ -33,9 +33,7 @@ public class PfadListener implements DocumentListener {
         boolean ordentlicheExcelDatei = new File(dateipfad).exists() && getExtensionByStringHandling(dateipfad).equals("xlsx");
         gui.startButton.setEnabled(ordentlicheExcelDatei);
         if (ordentlicheExcelDatei) {
-            Konfiguration konfiguration = new Konfiguration();
-            konfiguration.setPfad(dateipfad);
-            konfiguration.persistPfadEinstellungen();
+            Konfiguration.setDateiPfad(dateipfad);
             new SheetSelektor(gui);
         }
     }

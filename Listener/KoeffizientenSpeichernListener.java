@@ -5,6 +5,7 @@ import Main.Konfiguration;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.prefs.BackingStoreException;
 
 public class KoeffizientenSpeichernListener implements ActionListener {
 
@@ -15,16 +16,18 @@ public class KoeffizientenSpeichernListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        Konfiguration konfiguration = new Konfiguration();
+        try {
+            Konfiguration.grenzeRoot.flush();
+            Konfiguration.koeffizientRoot.flush();
+        } catch (BackingStoreException e) {
+            e.printStackTrace();
+        }
         for (int i = 0; i < guiKoeffizientenEinstellungen.grenzeTextfeldListe.length; i++) {
-            konfiguration.grenzeListe[i] = Double.parseDouble(
-                    guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText());
+            Konfiguration.grenzeRoot.putDouble(String.valueOf(i), Double.parseDouble(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
         }
         for (int i = 0; i < guiKoeffizientenEinstellungen.koeffizientTextfeldListe.length; i++) {
-            konfiguration.koeffizientListe[i] = Double.parseDouble(
-                    guiKoeffizientenEinstellungen.koeffizientTextfeldListe[i].getText());
+            Konfiguration.koeffizientRoot.putDouble(String.valueOf(i), Double.parseDouble(guiKoeffizientenEinstellungen.koeffizientTextfeldListe[i].getText()));
         }
-        konfiguration.persistGrenzenKoeffizientenEinstellungen();
         guiKoeffizientenEinstellungen.fillView();
     }
 }

@@ -18,17 +18,14 @@ public class DateiListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        Konfiguration konfiguration = new Konfiguration();
         JFileChooser jFileChooser = new JFileChooser("C:\\antonfries\\projects\\llr\\files");
         FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel files (*.xlsx)", "xlsx");
         jFileChooser.setFileFilter(excelFilter);
         int r = jFileChooser.showOpenDialog(null);
         if (r == JFileChooser.APPROVE_OPTION) {
             Excel excel = new Excel();
-            konfiguration.setSheetIndex(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
-            konfiguration.persistSheetEinstellungen();
-            konfiguration.setPfad(jFileChooser.getSelectedFile().getAbsolutePath());
-            konfiguration.persistPfadEinstellungen();
+            Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
+            Konfiguration.setDateiPfad(jFileChooser.getSelectedFile().getAbsolutePath());
             gui.fillView();
         }
     }

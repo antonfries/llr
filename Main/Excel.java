@@ -8,13 +8,14 @@ import java.io.File;
 
 public class Excel {
     public Sheet[] ExcelSheetListe;
+    public static final int BUFFER_SIZE = 4096;
+    public static final int ROW_CACHE_SIZE = 100;
 
     public Excel() {
-        Konfiguration konfiguration = new Konfiguration();
-        File ExcelDatei = new File(konfiguration.getPfad());
+        File ExcelDatei = new File(Konfiguration.getDateiPfad());
         Workbook wb = new StreamingReader.Builder()
-                .rowCacheSize(100)
-                .bufferSize(4096)
+                .rowCacheSize(ROW_CACHE_SIZE)
+                .bufferSize(BUFFER_SIZE)
                 .open(ExcelDatei);
         ExcelSheetListe = new Sheet[wb.getNumberOfSheets()];
         for (int i = 0; i < ExcelSheetListe.length; i++) {

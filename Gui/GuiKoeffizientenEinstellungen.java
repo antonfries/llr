@@ -13,10 +13,8 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     private JLabel koeffizientText;
     private JLabel grenzeText;
     private JButton speichernButton;
-    private Konfiguration konfiguration;
 
     public GuiKoeffizientenEinstellungen() {
-        konfiguration = new Konfiguration();
         init();
         initComponents();
         addComponents();
@@ -48,24 +46,23 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         koeffizientText = new JLabel("Koeffizienten:");
         speichernButton = new JButton("Speichern");
         speichernButton.addActionListener(new KoeffizientenSpeichernListener(GuiKoeffizientenEinstellungen.this));
-        grenzeTextfeldListe = new JTextField[konfiguration.getKoeffizientAnzahl() + 1];
-        koeffizientTextfeldListe = new JTextField[konfiguration.getKoeffizientAnzahl()];
-        for (int i = 0; i < konfiguration.grenzeListe.length; i++) {
+        grenzeTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl() + 1];
+        koeffizientTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl()];
+        for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
             grenzeTextfeldListe[i] = new JTextField(4);
         }
-        for (int i = 0; i < konfiguration.koeffizientListe.length; i++) {
+        for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
             koeffizientTextfeldListe[i] = new JTextField(4);
         }
         fillView();
     }
 
     public void fillView() {
-        konfiguration = new Konfiguration();
-        for (int i = 0; i < konfiguration.grenzeListe.length; i++) {
-            grenzeTextfeldListe[i].setText(String.valueOf(konfiguration.grenzeListe[i]));
+        for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
+            grenzeTextfeldListe[i].setText(Konfiguration.grenzeRoot.get(String.valueOf(i), "0.0"));
         }
-        for (int i = 0; i < konfiguration.koeffizientListe.length; i++) {
-            koeffizientTextfeldListe[i].setText(String.valueOf(konfiguration.koeffizientListe[i]));
+        for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
+            koeffizientTextfeldListe[i].setText(Konfiguration.koeffizientRoot.get(String.valueOf(i), String.valueOf(Konfiguration.getStandardKoeffizient())));
         }
     }
 }

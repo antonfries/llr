@@ -20,10 +20,8 @@ public class Gui extends JFrame {
     private JLabel arbeitszeit;
     private JButton einstellungsButton;
     private JButton dateiButton;
-    private Konfiguration konfiguration;
 
     public Gui() {
-        konfiguration = new Konfiguration();
         init();
         initComponents();
         addComponents();
@@ -69,10 +67,9 @@ public class Gui extends JFrame {
     }
 
     public void fillView() {
-        konfiguration = new Konfiguration();
-        arbeitszeitTextfeld.setText(String.valueOf(konfiguration.getStunden()));
-        dateipfadTextfeld.setText(konfiguration.getPfad());
-        startButton.setEnabled(!konfiguration.getPfad().equals(""));
+        arbeitszeitTextfeld.setText(String.valueOf(Konfiguration.getArbeitszeit()));
+        dateipfadTextfeld.setText(Konfiguration.getDateiPfad());
+        startButton.setEnabled(!Konfiguration.getDateiPfad().equals(""));
         new SheetSelektor(this);
     }
 }
