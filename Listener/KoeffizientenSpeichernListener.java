@@ -17,16 +17,16 @@ public class KoeffizientenSpeichernListener implements ActionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            Konfiguration.grenzeRoot.flush();
-            Konfiguration.koeffizientRoot.flush();
+            Konfiguration.grenzeNode.flush();
+            Konfiguration.koeffizientNode.flush();
         } catch (BackingStoreException e) {
             e.printStackTrace();
         }
         for (int i = 0; i < guiKoeffizientenEinstellungen.grenzeTextfeldListe.length; i++) {
-            Konfiguration.grenzeRoot.putDouble(String.valueOf(i), Double.parseDouble(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
+            Konfiguration.grenzeNode.putDouble(String.valueOf(i), Double.parseDouble(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
         }
         for (int i = 0; i < guiKoeffizientenEinstellungen.koeffizientTextfeldListe.length; i++) {
-            Konfiguration.koeffizientRoot.putDouble(String.valueOf(i), Double.parseDouble(guiKoeffizientenEinstellungen.koeffizientTextfeldListe[i].getText()));
+            Konfiguration.koeffizientNode.putDouble(String.valueOf(i), Double.parseDouble(guiKoeffizientenEinstellungen.koeffizientTextfeldListe[i].getText()));
         }
         guiKoeffizientenEinstellungen.fillView();
     }

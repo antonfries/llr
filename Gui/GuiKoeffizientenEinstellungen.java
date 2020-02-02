@@ -59,10 +59,10 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
 
     public void fillView() {
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
-            grenzeTextfeldListe[i].setText(Konfiguration.grenzeRoot.get(String.valueOf(i), "0.0"));
+            grenzeTextfeldListe[i].setText(Konfiguration.grenzeNode.get(String.valueOf(i), "0.0"));
         }
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
-            koeffizientTextfeldListe[i].setText(Konfiguration.koeffizientRoot.get(String.valueOf(i), String.valueOf(Konfiguration.getStandardKoeffizient())));
+            koeffizientTextfeldListe[i].setText(Konfiguration.koeffizientNode.get(String.valueOf(i), String.valueOf(Konfiguration.getStandardKoeffizient())));
         }
     }
 }

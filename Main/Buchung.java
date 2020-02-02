@@ -14,7 +14,7 @@ public class Buchung {
         return menge;
     }
 
-    public void setMenge(double menge) { // TODO: gewünschtes Verhalten überprüfen
+    public void setMenge(double menge) {
         if (menge > Konfiguration.getMaximalMenge()) {
             menge = Konfiguration.getStandardMenge();
         }

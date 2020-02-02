@@ -3,12 +3,10 @@ package Main;
 import java.util.prefs.Preferences;
 
 public class Konfiguration {
-    public static final String PROJEKT_PFAD = "C:\\antonfries\\projects\\llr\\";
-    public static final String RESOURCEN_PFAD = PROJEKT_PFAD + "files\\";
-    public static final String STANDARD_MAPPE = RESOURCEN_PFAD + "Testmappe1.xlsx";
-    public static final Preferences userRoot = Preferences.userRoot();
-    public static final Preferences grenzeRoot = Preferences.userRoot().node("Grenzen");
-    public static final Preferences koeffizientRoot = Preferences.userRoot().node("Koeffizienten");
+    public static final String STANDARD_MAPPE = "C:\\antonfries\\projects\\llr\\files\\Testmappe1.xlsx";
+    public static final Preferences basisNode = Preferences.userRoot().node("Basis");
+    public static final Preferences grenzeNode = Preferences.userRoot().node("Grenzen");
+    public static final Preferences koeffizientNode = Preferences.userRoot().node("Koeffizienten");
     public static final String WERT_SPALTE = "Wert-Spalte";
     public static final String MENGE_SPALTE = "Menge-Spalte";
     public static final String BUCHUNG_KOEFFIZIENT = "Buchung-Koeffizient";
@@ -27,118 +25,116 @@ public class Konfiguration {
         Regler[] reglerListe = new Regler[getKoeffizientAnzahl()];
         for (int i = 0; i < getKoeffizientAnzahl(); i++) {
             reglerListe[i] = new Regler(
-                    grenzeRoot.getDouble(String.valueOf(i), 0.0),
-                    grenzeRoot.getDouble(String.valueOf(i + 1), 0.0),
-                    koeffizientRoot.getDouble(String.valueOf(i), getStandardKoeffizient())
+                    grenzeNode.getDouble(String.valueOf(i), 0.0),
+                    grenzeNode.getDouble(String.valueOf(i + 1), 0.0),
+                    koeffizientNode.getDouble(String.valueOf(i), getStandardKoeffizient())
             );
         }
         return reglerListe;
     }
 
     public static String getDateiPfad() {
-        return userRoot.get(DATEI_PFAD, STANDARD_MAPPE);
+        return basisNode.get(DATEI_PFAD, STANDARD_MAPPE);
     }
 
     public static void setDateiPfad(String dateiPfad) {
-        userRoot.put(DATEI_PFAD, dateiPfad);
+        basisNode.put(DATEI_PFAD, dateiPfad);
     }
 
     public static double getMinimalMenge() {
-        return userRoot.getDouble(MINIMAL_MENGE, 5.0);
+        return basisNode.getDouble(MINIMAL_MENGE, 5.0);
     }
 
     public static void setMinimalMenge(int minimalMenge) {
-        userRoot.putInt(MINIMAL_MENGE, minimalMenge);
+        basisNode.putInt(MINIMAL_MENGE, minimalMenge);
     }
 
     public static double getStandardMenge() {
-        return userRoot.getDouble(STANDARD_MENGE, 10.0);
+        return basisNode.getDouble(STANDARD_MENGE, 10.0);
     }
 
     public static void setStandardMenge(int standardMenge) {
-        userRoot.putInt(STANDARD_MENGE, standardMenge);
+        basisNode.putInt(STANDARD_MENGE, standardMenge);
     }
 
     public static double getMaximalMenge() {
-        return userRoot.getDouble(MAXIMAL_MENGE, 500.0);
+        return basisNode.getDouble(MAXIMAL_MENGE, 500.0);
     }
 
     public static void setMaximalMenge(int maximalMenge) {
-        userRoot.putInt(MAXIMAL_MENGE, maximalMenge);
+        basisNode.putInt(MAXIMAL_MENGE, maximalMenge);
     }
 
     public static double getArbeitszeit() {
-        return userRoot.getDouble(ARBEITSZEIT, 10.0);
+        return basisNode.getDouble(ARBEITSZEIT, 10.0);
     }
 
     public static void setArbeitszeit(double arbeitszeit) {
-        userRoot.putDouble(ARBEITSZEIT, arbeitszeit);
+        basisNode.putDouble(ARBEITSZEIT, arbeitszeit);
     }
 
     public static double getStandardKoeffizient() {
-        return userRoot.getDouble(STANDARD_KOEFFIZIENT, 2.0);
+        return basisNode.getDouble(STANDARD_KOEFFIZIENT, 2.0);
     }
 
     public static void setStandardKoeffizient(double standardKoeffizient) {
-        userRoot.putDouble(STANDARD_KOEFFIZIENT, standardKoeffizient);
+        basisNode.putDouble(STANDARD_KOEFFIZIENT, standardKoeffizient);
     }
 
     public static int getKoeffizientAnzahl() {
-        return userRoot.getInt(KOEFFIZIENT_ANZAHL, 5);
+        return basisNode.getInt(KOEFFIZIENT_ANZAHL, 5);
     }
 
     public static void setKoeffizientAnzahl(int koeffizientAnzahl) {
-        userRoot.putInt(KOEFFIZIENT_ANZAHL, koeffizientAnzahl);
+        basisNode.putInt(KOEFFIZIENT_ANZAHL, koeffizientAnzahl);
     }
 
     public static int getSheetPosition() {
-        return userRoot.getInt(SHEET_POSITION, 0);
+        return basisNode.getInt(SHEET_POSITION, 0);
     }
 
     public static void setSheetPosition(int sheetPosition) {
-        userRoot.putInt(SHEET_POSITION, sheetPosition);
+        basisNode.putInt(SHEET_POSITION, sheetPosition);
     }
 
     public static double getBuchungKoeffizient() {
-        return userRoot.getDouble(BUCHUNG_KOEFFIZIENT, 1.0);
+        return basisNode.getDouble(BUCHUNG_KOEFFIZIENT, 1.0);
     }
 
     public static void setBuchungKoeffizient(double buchungKoeffizient) {
-        userRoot.putDouble(BUCHUNG_KOEFFIZIENT, buchungKoeffizient);
+        basisNode.putDouble(BUCHUNG_KOEFFIZIENT, buchungKoeffizient);
     }
 
     public static String getWertSpalte() {
-        // TODO: Spalten ab Z zulassen: AA,AB,AC...
-        return userRoot.get(WERT_SPALTE, "A");
+        return basisNode.get(WERT_SPALTE, "A");
     }
 
     public static void setWertSpalte(String wertSpalte) {
-        userRoot.put(WERT_SPALTE, wertSpalte);
+        basisNode.put(WERT_SPALTE, wertSpalte);
     }
 
     public static String getMengeSpalte() {
-        // TODO: Spalten mit Delimiter trennen und automatische Erkennung und Validierung des Delimiters
-        return userRoot.get(MENGE_SPALTE, "B");
+        return basisNode.get(MENGE_SPALTE, "B");
     }
 
     public static void setMengeSpalte(String mengeSpalte) {
-        userRoot.put(MENGE_SPALTE, mengeSpalte);
+        basisNode.put(MENGE_SPALTE, mengeSpalte);
     }
 
     public static int getZeileAnfang() {
-        return userRoot.getInt(ZEILE_ANFANG, 1);
+        return basisNode.getInt(ZEILE_ANFANG, 1);
     }
 
     public static void setZeileAnfang(int zeileAnfang) {
-        userRoot.putInt(ZEILE_ANFANG, zeileAnfang);
+        basisNode.putInt(ZEILE_ANFANG, zeileAnfang);
     }
 
     public static int getZeileEnde() {
         // -1 bedeutet dass Einschränkung nicht berücksichtigt wird
-        return userRoot.getInt(ZEILE_ENDE, -1);
+        return basisNode.getInt(ZEILE_ENDE, -1);
     }
 
     public static void setZeileEnde(int zeileEnde) {
-        userRoot.putInt(ZEILE_ENDE, zeileEnde);
+        basisNode.putInt(ZEILE_ENDE, zeileEnde);
     }
 }

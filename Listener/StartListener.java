@@ -21,7 +21,6 @@ public class StartListener implements ActionListener {
         boolean continueFlag = true;
         Excel excel = new Excel();
         Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
-        Konfiguration.setDateiPfad(gui.dateipfadTextfeld.getText());
         try {
             Konfiguration.setArbeitszeit(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
         } catch (NumberFormatException e) {

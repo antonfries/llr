@@ -17,12 +17,12 @@ public class Rechner {
         Sheet sheet = mappe.ExcelSheetListe[Konfiguration.getSheetPosition()];
         char[] wertSpalteListe = Konfiguration.getWertSpalte().toCharArray();
         char[] mengeSpalteListe = Konfiguration.getMengeSpalte().toCharArray();
-        double wert = 0.0, menge = 0.0;
+        double wert, menge;
         int counter = 0;
         int min = Konfiguration.getZeileAnfang();
         int max = Konfiguration.getZeileEnde();
         for (Row r : sheet) {
-            counter++; // TODO: Randfälle einmal durchtesten
+            counter++;
             if (counter < min) {
                 continue;
             }
@@ -31,16 +31,16 @@ public class Rechner {
                     break;
                 }
             }
-            wert = getEntitaet(wertSpalteListe, wert, r);
-            menge = getEntitaet(mengeSpalteListe, menge, r);
+            wert = getEntitaet(wertSpalteListe, r);
+            menge = getEntitaet(mengeSpalteListe, r);
             Buchung buchung = new Buchung(menge, wert);
             ergebnis += buchung.getProdukt();
         }
         return ergebnis * Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
     }
 
-    private static double getEntitaet(char[] entitaetSpalteListe, double entitaet, Row r) {
-        double einzelEntitaet;
+    private static double getEntitaet(char[] entitaetSpalteListe, Row r) {
+        double einzelEntitaet, entitaet = 0.0;
         for (char entitaetSpalte : entitaetSpalteListe) {
             Cell entitaetZelle = r.getCell(charZuExcelSpalte(entitaetSpalte));
             einzelEntitaet = entitaetZelle != null && entitaetZelle.getCellTypeEnum() == CellType.NUMERIC

@@ -4,6 +4,7 @@ import Listener.DateiListener;
 import Listener.PfadListener;
 import Listener.SheetSelektor;
 import Listener.StartListener;
+import Main.ExcelFileChecker;
 import Main.Konfiguration;
 
 import javax.swing.*;
@@ -74,8 +75,11 @@ public class Gui extends JFrame {
 
     public void fillView() {
         arbeitszeitTextfeld.setText(String.valueOf(Konfiguration.getArbeitszeit()));
-        dateipfadTextfeld.setText(Konfiguration.getDateiPfad());
-        startButton.setEnabled(!Konfiguration.getDateiPfad().equals(""));
-        new SheetSelektor(this);
+        boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad());
+        startButton.setEnabled(ordentlicheExcelDatei);
+        if (ordentlicheExcelDatei) {
+            dateipfadTextfeld.setText(Konfiguration.getDateiPfad());
+            new SheetSelektor(this);
+        }
     }
 }

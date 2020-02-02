@@ -1,12 +1,11 @@
 package Listener;
 
 import Gui.Gui;
+import Main.ExcelFileChecker;
 import Main.Konfiguration;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.io.File;
-import java.util.Optional;
 
 public class PfadListener implements DocumentListener {
 
@@ -29,19 +28,14 @@ public class PfadListener implements DocumentListener {
     }
 
     private void aktualisiereStartButton() {
-        String dateipfad = gui.dateipfadTextfeld.getText();
-        boolean ordentlicheExcelDatei = new File(dateipfad).exists() && getExtensionByStringHandling(dateipfad).equals("xlsx");
+        String dateiPfad = gui.dateipfadTextfeld.getText();
+        boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad);
         gui.startButton.setEnabled(ordentlicheExcelDatei);
         if (ordentlicheExcelDatei) {
-            Konfiguration.setDateiPfad(dateipfad);
+            Konfiguration.setDateiPfad(dateiPfad);
             new SheetSelektor(gui);
         }
     }
 
-    public String getExtensionByStringHandling(String filename) {
-        Optional<String> optional = Optional.ofNullable(filename)
-                .filter(f -> f.contains("."))
-                .map(f -> f.substring(filename.lastIndexOf(".") + 1));
-        return optional.orElse("");
-    }
+
 }
