@@ -16,6 +16,7 @@ public class Gui extends JFrame {
     public JButton startButton;
     public ButtonGroup sheetListe;
     public JPanel sheetContainer;
+    public JScrollPane jScrollPane;
     private JLabel dateipfad;
     private JLabel arbeitszeit;
     private JButton einstellungsButton;
@@ -45,7 +46,7 @@ public class Gui extends JFrame {
         add(arbeitszeitTextfeld);
         add(startButton);
         add(dateiButton);
-        add(sheetContainer);
+        add(jScrollPane);
     }
 
     private void initComponents() {
@@ -60,9 +61,14 @@ public class Gui extends JFrame {
         startButton.addActionListener(new StartListener(Gui.this));
         dateiButton = new JButton("Datei auswählen...");
         dateiButton.addActionListener(new DateiListener(Gui.this));
-        // TODO: Dateiselektor verschwindet, lieber ScrollPanel
         sheetContainer = new JPanel();
         sheetContainer.setLayout(new BoxLayout(sheetContainer, BoxLayout.PAGE_AXIS));
+        jScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane.add(sheetContainer);
+        jScrollPane.setViewportView(sheetContainer);
+        jScrollPane.setBorder(BorderFactory.createEmptyBorder());
+        jScrollPane.setPreferredSize(new Dimension(230, 174));
         fillView();
     }
 

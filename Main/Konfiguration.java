@@ -2,7 +2,7 @@ package Main;
 
 import java.util.prefs.Preferences;
 
-public class Konfiguration { // TODO: Mengen zu Double refactoren
+public class Konfiguration {
     public static final String PROJEKT_PFAD = "C:\\antonfries\\projects\\llr\\";
     public static final String RESOURCEN_PFAD = PROJEKT_PFAD + "files\\";
     public static final String STANDARD_MAPPE = RESOURCEN_PFAD + "Testmappe1.xlsx";
@@ -43,24 +43,24 @@ public class Konfiguration { // TODO: Mengen zu Double refactoren
         userRoot.put(DATEI_PFAD, dateiPfad);
     }
 
-    public static int getMinimalMenge() {
-        return userRoot.getInt(MINIMAL_MENGE, 5);
+    public static double getMinimalMenge() {
+        return userRoot.getDouble(MINIMAL_MENGE, 5.0);
     }
 
     public static void setMinimalMenge(int minimalMenge) {
         userRoot.putInt(MINIMAL_MENGE, minimalMenge);
     }
 
-    public static int getStandardMenge() {
-        return userRoot.getInt(STANDARD_MENGE, 10);
+    public static double getStandardMenge() {
+        return userRoot.getDouble(STANDARD_MENGE, 10.0);
     }
 
     public static void setStandardMenge(int standardMenge) {
         userRoot.putInt(STANDARD_MENGE, standardMenge);
     }
 
-    public static int getMaximalMenge() {
-        return userRoot.getInt(MAXIMAL_MENGE, 500);
+    public static double getMaximalMenge() {
+        return userRoot.getDouble(MAXIMAL_MENGE, 500.0);
     }
 
     public static void setMaximalMenge(int maximalMenge) {
@@ -95,8 +95,8 @@ public class Konfiguration { // TODO: Mengen zu Double refactoren
         return userRoot.getInt(SHEET_POSITION, 0);
     }
 
-    public static void setSheetPosition(int sheetIndex) {
-        userRoot.putInt(SHEET_POSITION, sheetIndex);
+    public static void setSheetPosition(int sheetPosition) {
+        userRoot.putInt(SHEET_POSITION, sheetPosition);
     }
 
     public static double getBuchungKoeffizient() {
@@ -117,7 +117,7 @@ public class Konfiguration { // TODO: Mengen zu Double refactoren
     }
 
     public static String getMengeSpalte() {
-        // TODO: Spalten mit Delimiter trennen und automatische Validierung des Delimiters
+        // TODO: Spalten mit Delimiter trennen und automatische Erkennung und Validierung des Delimiters
         return userRoot.get(MENGE_SPALTE, "B");
     }
 
@@ -129,8 +129,8 @@ public class Konfiguration { // TODO: Mengen zu Double refactoren
         return userRoot.getInt(ZEILE_ANFANG, 1);
     }
 
-    public static void setZeileAnfang(int zeilenAnfang) {
-        userRoot.putInt(ZEILE_ANFANG, zeilenAnfang);
+    public static void setZeileAnfang(int zeileAnfang) {
+        userRoot.putInt(ZEILE_ANFANG, zeileAnfang);
     }
 
     public static int getZeileEnde() {
@@ -138,7 +138,7 @@ public class Konfiguration { // TODO: Mengen zu Double refactoren
         return userRoot.getInt(ZEILE_ENDE, -1);
     }
 
-    public static void setZeileEnde(int zeilenEnde) {
-        userRoot.putInt(ZEILE_ENDE, zeilenEnde);
+    public static void setZeileEnde(int zeileEnde) {
+        userRoot.putInt(ZEILE_ENDE, zeileEnde);
     }
 }

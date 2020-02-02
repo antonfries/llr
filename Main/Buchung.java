@@ -2,21 +2,24 @@ package Main;
 
 public class Buchung {
 
-    private int menge = 0;
+    private double menge = 0.0;
     private double wert = 0.0;
 
-    public Buchung(int menge, double wert) {
+    public Buchung(double menge, double wert) {
         this.setMenge(menge);
         this.setWert(wert);
     }
 
-    public int getMenge() {
+    public double getMenge() {
         return menge;
     }
 
-    public void setMenge(int menge) {
-        if (menge < Konfiguration.getMinimalMenge() || menge > Konfiguration.getMaximalMenge()) {
+    public void setMenge(double menge) { // TODO: gewünschtes Verhalten überprüfen
+        if (menge > Konfiguration.getMaximalMenge()) {
             menge = Konfiguration.getStandardMenge();
+        }
+        if (menge < Konfiguration.getMinimalMenge()) {
+            menge = 0.0;
         }
         this.menge = menge;
     }
