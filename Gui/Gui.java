@@ -24,6 +24,7 @@ public class Gui extends JFrame {
     private JButton dateiButton;
 
     public Gui() {
+        // TODO: Konzept für Anzeige jedweder Fehlermeldung in OptionPane
         init();
         initComponents();
         addComponents();

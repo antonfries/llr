@@ -36,6 +36,7 @@ public class Rechner {
             Buchung buchung = new Buchung(menge, wert);
             ergebnis += buchung.getProdukt();
         }
+        // TODO: Anzahl der evaluierten Zellen durchgehen, um Fehlermeldung anzuzeigen
         return ergebnis * Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
     }
 

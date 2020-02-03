@@ -8,8 +8,10 @@ import Main.SheetHelper;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class DateiListener implements ActionListener {
     private Gui gui;
@@ -19,8 +21,10 @@ public class DateiListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        JFileChooser jFileChooser = new JFileChooser("C:\\antonfries\\projects\\llr\\files");
-        // TODO: Nach Entwicklung auf Home-Verzeichnis legen
+        // TODO: Nach Entwicklung Home-Directory nutzen
+        File currentDirectoryPath = FileSystemView.getFileSystemView().getHomeDirectory();
+        String developerPath = "C:\\antonfries\\projects\\llr\\files";
+        JFileChooser jFileChooser = new JFileChooser(developerPath);
         FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel files (*.xlsx)", "xlsx");
         jFileChooser.setFileFilter(excelFilter);
         int r = jFileChooser.showOpenDialog(null);

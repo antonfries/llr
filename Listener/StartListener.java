@@ -1,10 +1,7 @@
 package Listener;
 
 import Gui.Gui;
-import Main.Excel;
-import Main.Konfiguration;
-import Main.Rechner;
-import Main.SheetHelper;
+import Main.*;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -22,12 +19,15 @@ public class StartListener implements ActionListener {
         Excel excel = new Excel();
         Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
         try {
-            Konfiguration.setArbeitszeit(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
+            double arbeitszeit = Double.parseDouble(gui.arbeitszeitTextfeld.getText());
+            if (arbeitszeit <= 0.0) {
+                Validation.showNegativErrorMessage(gui);
+                continueFlag = false;
+            } else {
+                Konfiguration.setArbeitszeit(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
+            }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(gui,
-                    "Bitte geben Sie Zahlen ein!",
-                    "Arbeitszeit-Validation",
-                    JOptionPane.ERROR_MESSAGE);
+            Validation.showZahlenErrorMessage(gui);
             continueFlag = false;
         }
         gui.fillView();

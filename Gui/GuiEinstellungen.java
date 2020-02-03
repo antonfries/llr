@@ -5,6 +5,7 @@ import Listener.KoeffizientenEinstellungenListener;
 import Main.Excel;
 import Main.Konfiguration;
 import Main.SheetHelper;
+import Main.Validation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,15 +17,15 @@ public class GuiEinstellungen extends JFrame {
     public JTextField mengeTextfeld;
     public JTextField maxMengeTextfeld;
     public JTextField buchungKoeffizientTextfeld;
-    public JTextField zeilenAnfangTextfeld;
-    public JTextField zeilenEndeTextfeld;
+    public JTextField zeileAnfangTextfeld;
+    public JTextField zeileEndeTextfeld;
     private JLabel koeffizientAnzahlFrage;
     private JLabel wertFrage;
     private JLabel mengeFrage;
     private JLabel maxMengeFrage;
     private JLabel buchungKoeffizientFrage;
-    private JLabel zeilenAnfangFrage;
-    private JLabel zeilenEndeFrage;
+    private JLabel zeileAnfangFrage;
+    private JLabel zeileEndeFrage;
     private JButton koeffizientEinstellungenButton;
     private JButton speichernButton;
     private Gui gui;
@@ -42,13 +43,19 @@ public class GuiEinstellungen extends JFrame {
         Excel excel = new Excel();
         Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
         try {
-            Konfiguration.setArbeitszeit(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
+            double arbeitszeit = Double.parseDouble(gui.arbeitszeitTextfeld.getText());
+            if (arbeitszeit <= 0.0) {
+                Validation.showNegativErrorMessage(gui);
+            } else {
+                Konfiguration.setArbeitszeit(arbeitszeit);
+            }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(gui,
-                    "Bitte geben Sie Zahlen ein!",
-                    "Arbeitszeit-Validation",
-                    JOptionPane.ERROR_MESSAGE);
+            Validation.showZahlenErrorMessage(gui);
         }
+        // TODO: Grenzen und Koeffizienten automatisch +0.01 setzen
+        // TODO: Evaluation, ob falsche Settings in der Registry zu handeln sind
+        // TODO: Anderes BoxLayout für Einstellungen, sodass Textfelder nicht immer individuell angepasst werden müssen?
+        // TODO: Default-Klasse implementieren, sodass Basiswerte schnell angepasst werden können
     }
 
     private void init() {
@@ -71,10 +78,10 @@ public class GuiEinstellungen extends JFrame {
         add(maxMengeTextfeld);
         add(buchungKoeffizientFrage);
         add(buchungKoeffizientTextfeld);
-        add(zeilenAnfangFrage);
-        add(zeilenAnfangTextfeld);
-        add(zeilenEndeFrage);
-        add(zeilenEndeTextfeld);
+        add(zeileAnfangFrage);
+        add(zeileAnfangTextfeld);
+        add(zeileEndeFrage);
+        add(zeileEndeTextfeld);
         add(speichernButton);
     }
 
@@ -86,17 +93,17 @@ public class GuiEinstellungen extends JFrame {
         mengeFrage.setToolTipText("Möglich sind beliebig viele aneinandergeheftete Spalten (Bsp. FZ,R,PQR");
         maxMengeFrage = new JLabel("Maximale sinnvolle Menge:");
         buchungKoeffizientFrage = new JLabel("Buchungs-Koeffizient:");
-        zeilenAnfangFrage = new JLabel("Zeilenanfang:");
-        zeilenAnfangFrage.setToolTipText("Wert kleiner gleich 1 setzen, falls keine Einschränkung auftreten soll");
-        zeilenEndeFrage = new JLabel("Zeilenende:");
-        zeilenEndeFrage.setToolTipText("Wert -1 setzen, falls keine EInschränkung auftreten soll");
+        zeileAnfangFrage = new JLabel("Zeilenanfang:");
+        zeileAnfangFrage.setToolTipText("Wert gleich 1 setzen, falls keine Einschränkung auftreten soll");
+        zeileEndeFrage = new JLabel("Zeilenende:");
+        zeileEndeFrage.setToolTipText("Wert -1 setzen, falls keine EInschränkung auftreten soll");
         koeffizientAnzahlTextfeld = new JTextField(3);
         wertTextfeld = new JTextField(3);
         mengeTextfeld = new JTextField(3);
-        maxMengeTextfeld = new JTextField(3);
+        maxMengeTextfeld = new JTextField(5);
         buchungKoeffizientTextfeld = new JTextField(7);
-        zeilenAnfangTextfeld = new JTextField(15);
-        zeilenEndeTextfeld = new JTextField(15);
+        zeileAnfangTextfeld = new JTextField(15);
+        zeileEndeTextfeld = new JTextField(15);
         koeffizientEinstellungenButton = new JButton("Koeffizienten-Einstellungen");
         koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(GuiEinstellungen.this));
         speichernButton = new JButton("Speichern");
@@ -111,7 +118,7 @@ public class GuiEinstellungen extends JFrame {
         mengeTextfeld.setText(String.valueOf(Konfiguration.getMengeSpalte()));
         maxMengeTextfeld.setText(String.valueOf(Konfiguration.getMaximalMenge()));
         buchungKoeffizientTextfeld.setText(String.valueOf(Konfiguration.getBuchungKoeffizient()));
-        zeilenAnfangTextfeld.setText(String.valueOf(Konfiguration.getZeileAnfang()));
-        zeilenEndeTextfeld.setText(String.valueOf(Konfiguration.getZeileEnde()));
+        zeileAnfangTextfeld.setText(String.valueOf(Konfiguration.getZeileAnfang()));
+        zeileEndeTextfeld.setText(String.valueOf(Konfiguration.getZeileEnde()));
     }
 }

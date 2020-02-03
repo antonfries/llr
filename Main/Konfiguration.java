@@ -45,24 +45,24 @@ public class Konfiguration {
         return basisNode.getDouble(MINIMAL_MENGE, 5.0);
     }
 
-    public static void setMinimalMenge(int minimalMenge) {
-        basisNode.putInt(MINIMAL_MENGE, minimalMenge);
+    public static void setMinimalMenge(double minimalMenge) {
+        basisNode.putDouble(MINIMAL_MENGE, minimalMenge);
     }
 
     public static double getStandardMenge() {
         return basisNode.getDouble(STANDARD_MENGE, 10.0);
     }
 
-    public static void setStandardMenge(int standardMenge) {
-        basisNode.putInt(STANDARD_MENGE, standardMenge);
+    public static void setStandardMenge(double standardMenge) {
+        basisNode.putDouble(STANDARD_MENGE, standardMenge);
     }
 
     public static double getMaximalMenge() {
         return basisNode.getDouble(MAXIMAL_MENGE, 500.0);
     }
 
-    public static void setMaximalMenge(int maximalMenge) {
-        basisNode.putInt(MAXIMAL_MENGE, maximalMenge);
+    public static void setMaximalMenge(double maximalMenge) {
+        basisNode.putDouble(MAXIMAL_MENGE, maximalMenge);
     }
 
     public static double getArbeitszeit() {
