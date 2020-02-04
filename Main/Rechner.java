@@ -26,7 +26,7 @@ public class Rechner {
             if (counter < min) {
                 continue;
             }
-            if (max != -1) {
+            if (max >= 1) {
                 if (counter > max) {
                     break;
                 }

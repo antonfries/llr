@@ -62,4 +62,11 @@ public class Validation {
         );
     }
 
+    public static void showDuplicateErrorMessage(JFrame jFrame) {
+        showErrorMessage(
+                jFrame,
+                "Menge und Wert können nicht aus der selben Spalte ausgelesen werden!",
+                "Einstellungen-Validation"
+        );
+    }
 }

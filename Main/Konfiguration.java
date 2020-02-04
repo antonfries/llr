@@ -6,19 +6,19 @@ public class Konfiguration {
     public static final Preferences basisNode = Preferences.userRoot().node("Basis");
     public static final Preferences grenzeNode = Preferences.userRoot().node("Grenzen");
     public static final Preferences koeffizientNode = Preferences.userRoot().node("Koeffizienten");
-    public static final String WERT_SPALTE = "Wert-Spalte";
-    public static final String MENGE_SPALTE = "Menge-Spalte";
-    public static final String BUCHUNG_KOEFFIZIENT = "Buchung-Koeffizient";
-    public static final String ZEILE_ANFANG = "Zeile-Anfang";
-    public static final String ZEILE_ENDE = "Zeile-Ende";
+    public static final String DATEI_PFAD = "Datei-Pfad";
+    public static final String ARBEITSZEIT = "Arbeitszeit";
     public static final String SHEET_POSITION = "Sheet-Position";
     public static final String KOEFFIZIENT_ANZAHL = "Koeffizient-Anzahl";
-    public static final String STANDARD_KOEFFIZIENT = "Standard-Koeffizient";
-    public static final String ARBEITSZEIT = "Arbeitszeit";
+    public static final String WERT_SPALTE = "Wert-Spalte";
+    public static final String MENGE_SPALTE = "Menge-Spalte";
     public static final String MINIMAL_MENGE = "Minimal-Menge";
     public static final String STANDARD_MENGE = "Standard-Menge";
     public static final String MAXIMAL_MENGE = "Maximal-Menge";
-    public static final String DATEI_PFAD = "Datei-Pfad";
+    public static final String BUCHUNG_KOEFFIZIENT = "Buchung-Koeffizient";
+    public static final String ZEILE_ANFANG = "Zeile-Anfang";
+    public static final String ZEILE_ENDE = "Zeile-Ende";
+    public static final String STANDARD_KOEFFIZIENT = "Standard-Koeffizient";
 
     public static Regler[] getReglerListe() {
         Regler[] reglerListe = new Regler[getKoeffizientAnzahl()];

@@ -14,7 +14,35 @@ public class EinstellungenListener implements ActionListener {
         this.guiEinstellungen = guiEinstellungen;
     }
 
+    public static boolean checkDuplicates(String a, String b) {
+        String g = a + b;
+        for (int i = 0; i < g.length(); i++) {
+            for (int j = i + 1; j < g.length(); j++) {
+                if (g.charAt(i) == g.charAt(j)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean checkValidity(String s) {
+        for (Character c : s.toCharArray()) {
+            if (!isLetter(c)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private boolean isLetter(Character c) {
+        int numericValue = Character.getNumericValue(c) - 10;
+        return numericValue >= 0 && numericValue <= 25;
+    }
+
     public void actionPerformed(ActionEvent actionEvent) {
+        boolean persistMenge = false;
+        boolean persistWert = false;
         try {
             int koeffizientAnzahl = (int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText());
             if (koeffizientAnzahl < 1) {
@@ -25,26 +53,27 @@ public class EinstellungenListener implements ActionListener {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen);
         }
-        // TODO: Fehler anzeigen, falls ein Buchstabe in mehreren Textfeldern zugleich eingetragen wurde
-        try {
-            String wertSpalte = guiEinstellungen.wertTextfeld.getText();
-            if (checkValidity(wertSpalte)) {
-                Konfiguration.setWertSpalte(wertSpalte);
-            } else {
-                Validation.showSpaltenErrorMessage(guiEinstellungen, "Wert");
-            }
-        } catch (NumberFormatException e) {
-            Validation.showZahlenErrorMessage(guiEinstellungen);
+        String wertSpalte = guiEinstellungen.wertTextfeld.getText().toUpperCase();
+        if (checkValidity(wertSpalte)) {
+            persistWert = true;
+        } else {
+            Validation.showSpaltenErrorMessage(guiEinstellungen, "Wert");
         }
-        try {
-            String mengeSpalte = guiEinstellungen.mengeTextfeld.getText();
-            if (checkValidity(mengeSpalte)) {
-                Konfiguration.setMengeSpalte(guiEinstellungen.mengeTextfeld.getText());
-            } else {
-                Validation.showSpaltenErrorMessage(guiEinstellungen, "Menge");
+        String mengeSpalte = guiEinstellungen.mengeTextfeld.getText().toUpperCase();
+        if (checkValidity(mengeSpalte)) {
+            persistMenge = true;
+        } else {
+            Validation.showSpaltenErrorMessage(guiEinstellungen, "Menge");
+        }
+        if (checkDuplicates(mengeSpalte, wertSpalte)) {
+            Validation.showDuplicateErrorMessage(guiEinstellungen);
+        } else {
+            if (persistMenge) {
+                Konfiguration.setMengeSpalte(mengeSpalte);
             }
-        } catch (NumberFormatException e) {
-            Validation.showZahlenErrorMessage(guiEinstellungen);
+            if (persistWert) {
+                Konfiguration.setWertSpalte(wertSpalte);
+            }
         }
         try {
             double maximalMenge = Double.parseDouble(guiEinstellungen.maxMengeTextfeld.getText());
@@ -75,7 +104,6 @@ public class EinstellungenListener implements ActionListener {
             Konfiguration.setZeileAnfang(zeileAnfang);
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen);
-            zeileAnfang = 1;
         }
         try {
             int zeileEnde = (int) Double.parseDouble(guiEinstellungen.zeileEndeTextfeld.getText());
@@ -91,19 +119,5 @@ public class EinstellungenListener implements ActionListener {
             Validation.showZahlenErrorMessage(guiEinstellungen);
         }
         guiEinstellungen.fillView();
-    }
-
-    private boolean checkValidity(String s) {
-        for (Character c : s.toCharArray()) {
-            if (!isLetter(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    private boolean isLetter(Character c) {
-        int numericValue = Character.getNumericValue(c) - 10;
-        return numericValue >= 0 && numericValue <= 25;
     }
 }
