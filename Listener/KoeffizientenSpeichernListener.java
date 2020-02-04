@@ -8,6 +8,7 @@ import Main.Validation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.prefs.BackingStoreException;
+import java.util.prefs.Preferences;
 
 public class KoeffizientenSpeichernListener implements ActionListener {
 
@@ -19,8 +20,11 @@ public class KoeffizientenSpeichernListener implements ActionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         try {
-            Konfiguration.grenzeNode.flush();
-            Konfiguration.koeffizientNode.flush();
+            Konfiguration.grenzeNode.removeNode();
+            Konfiguration.grenzeNode = Preferences.userRoot().node("Grenzen");
+            Konfiguration.koeffizientNode.removeNode();
+            Konfiguration.koeffizientNode = Preferences.userRoot().node("Koeffizienten");
+            // TODO: Dadurch, dass diese Logik erst beim Speichern ausgeführt wird, ist es möglich, alte Werte beizubehalten
         } catch (BackingStoreException e) {
             e.printStackTrace();
         }

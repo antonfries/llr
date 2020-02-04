@@ -14,7 +14,7 @@ public class GeneralStartListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        double endergebnis = Rechner.rechnen(); // TODO: eventuell Speichern + Start-Button implementieren?
+        double endergebnis = Rechner.rechnen(); // Speichern + Start-Button für faule Leute?
         JOptionPane.showMessageDialog(jFrame, "Lager-Leistung:    " + endergebnis, "Ergebnis",
                 JOptionPane.INFORMATION_MESSAGE);
     }
