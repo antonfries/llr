@@ -4,10 +4,7 @@ import Listener.EinstellungenListener;
 import Listener.GeneralStartListener;
 import Listener.KoeffizientListener;
 import Listener.KoeffizientenEinstellungenListener;
-import Main.Excel;
-import Main.Konfiguration;
-import Main.SheetHelper;
-import Main.Validation;
+import Main.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -60,7 +57,7 @@ public class GuiEinstellungen extends JFrame {
             Validation.showZahlenErrorMessage(gui);
         }
         // TODO: Evaluation, ob falsche Settings in der Registry zu handeln sind
-        // TODO: Anderes BoxLayout für Einstellungen, sodass Textfelder nicht immer individuell angepasst werden müssen?
+        // TODO: BoxLayout für Einstellungen, sodass Textfelder-Breiten nicht immer individuell angepasst werden müssen
     }
 
     private void init() {
@@ -116,6 +113,7 @@ public class GuiEinstellungen extends JFrame {
         speichernButton = new JButton("Speichern");
         speichernButton.addActionListener(new EinstellungenListener(GuiEinstellungen.this));
         startButton = new JButton("Start");
+        startButton.setEnabled(ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad()));
         startButton.addActionListener(new GeneralStartListener(GuiEinstellungen.this));
         gui.fillView();
         fillView();

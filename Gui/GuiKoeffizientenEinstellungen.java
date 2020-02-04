@@ -2,6 +2,7 @@ package Gui;
 
 import Listener.GeneralStartListener;
 import Listener.KoeffizientenSpeichernListener;
+import Main.ExcelFileChecker;
 import Main.Konfiguration;
 import Main.Utility;
 
@@ -61,6 +62,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         speichernButton = new JButton("Speichern");
         speichernButton.addActionListener(new KoeffizientenSpeichernListener(GuiKoeffizientenEinstellungen.this));
         startButton = new JButton("Start");
+        startButton.setEnabled(ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad()));
         startButton.addActionListener(new GeneralStartListener(GuiKoeffizientenEinstellungen.this));
         grenzeTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl() + 1];
         koeffizientTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl()];

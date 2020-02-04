@@ -1,9 +1,6 @@
 package Gui;
 
-import Listener.DateiListener;
-import Listener.PfadListener;
-import Listener.SheetSelektor;
-import Listener.StartListener;
+import Listener.*;
 import Main.ExcelFileChecker;
 import Main.Konfiguration;
 
@@ -22,9 +19,10 @@ public class Gui extends JFrame {
     private JLabel arbeitszeit;
     private JButton einstellungsButton;
     private JButton dateiButton;
+    private JButton resetButton;
 
     public Gui() {
-        // TODO: Konzept für Anzeige jedweder Fehlermeldung in OptionPane
+        // TODO: Konzept für Anzeige jedweder Fehlermeldung in OptionPane (Listener+Gui's)
         init();
         initComponents();
         addComponents();
@@ -35,7 +33,7 @@ public class Gui extends JFrame {
         setTitle("LLR");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
-        setSize(500, 300);
+        setSize(500, 315);
         setResizable(true);
         setLocationRelativeTo(null);
     }
@@ -49,6 +47,7 @@ public class Gui extends JFrame {
         add(startButton);
         add(dateiButton);
         add(jScrollPane);
+        add(resetButton);
     }
 
     private void initComponents() {
@@ -71,6 +70,9 @@ public class Gui extends JFrame {
         jScrollPane.setViewportView(sheetContainer);
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
         jScrollPane.setPreferredSize(new Dimension(230, 174));
+        resetButton = new JButton("Einstellungen zurücksetzen");
+        // TODO: ConfirmationDialog einbauen, damit man nicht ausversehen alles zurücksetzt
+        resetButton.addActionListener(new ResetListener(Gui.this));
         fillView();
     }
 

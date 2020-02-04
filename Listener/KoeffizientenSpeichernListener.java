@@ -24,6 +24,7 @@ public class KoeffizientenSpeichernListener implements ActionListener {
             Konfiguration.grenzeNode = Preferences.userRoot().node("Grenzen");
             Konfiguration.koeffizientNode.removeNode();
             Konfiguration.koeffizientNode = Preferences.userRoot().node("Koeffizienten");
+            // TODO: Nur überflüssige Werte löschen, nicht ganzen Node entfernen
             // TODO: Dadurch, dass diese Logik erst beim Speichern ausgeführt wird, ist es möglich, alte Werte beizubehalten
         } catch (BackingStoreException e) {
             e.printStackTrace();
