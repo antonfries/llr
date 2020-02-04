@@ -2,6 +2,7 @@ package Listener;
 
 import Gui.GuiKoeffizientenEinstellungen;
 import Main.Konfiguration;
+import Main.Utility;
 import Main.Validation;
 
 import java.awt.event.ActionEvent;
@@ -16,15 +17,6 @@ public class KoeffizientenSpeichernListener implements ActionListener {
         this.guiKoeffizientenEinstellungen = guiKoeffizientenEinstellungen;
     }
 
-    private static double parseDouble2Digits(String valueInText) {
-        double value = Double.parseDouble(valueInText);
-        return Math.round(value * 100d) / 100d;
-    }
-
-    public static double parseDouble2Digits(double value) {
-        return Math.round(value * 100d) / 100d;
-    }
-
     public void actionPerformed(ActionEvent actionEvent) {
         try {
             Konfiguration.grenzeNode.flush();
@@ -32,16 +24,26 @@ public class KoeffizientenSpeichernListener implements ActionListener {
         } catch (BackingStoreException e) {
             e.printStackTrace();
         }
+        // TODO: diese ganze Logik muss auch ausgeführt werden, falls man die Koeffizienten erhöht ohne die View zu öffnen
         for (int i = 0; i < guiKoeffizientenEinstellungen.grenzeTextfeldListe.length; i++) {
             try {
-                Konfiguration.grenzeNode.putDouble(String.valueOf(i), parseDouble2Digits(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
+                double grenze = Utility.round2Digits(Double.parseDouble(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
+                if (grenze < 0.0) {
+                    grenze = 0.0;
+                }
+                Konfiguration.grenzeNode.putDouble(String.valueOf(i), grenze);
             } catch (NumberFormatException e) {
                 Validation.showZahlenErrorMessage(guiKoeffizientenEinstellungen);
             }
         }
         for (int i = 0; i < guiKoeffizientenEinstellungen.koeffizientTextfeldListe.length; i++) {
             try {
-                Konfiguration.koeffizientNode.putDouble(String.valueOf(i), Double.parseDouble(guiKoeffizientenEinstellungen.koeffizientTextfeldListe[i].getText()));
+                double koeffizient = Double.parseDouble(guiKoeffizientenEinstellungen.koeffizientTextfeldListe[i].getText());
+                if (koeffizient <= 0.0) {
+                    Validation.showNegativErrorMessage(guiKoeffizientenEinstellungen);
+                } else {
+                    Konfiguration.koeffizientNode.putDouble(String.valueOf(i), koeffizient);
+                }
             } catch (NumberFormatException e) {
                 Validation.showZahlenErrorMessage(guiKoeffizientenEinstellungen);
             }

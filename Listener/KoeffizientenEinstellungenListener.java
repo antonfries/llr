@@ -29,7 +29,6 @@ public class KoeffizientenEinstellungenListener implements ActionListener {
             Validation.showZahlenErrorMessage(guiEinstellungen);
             continueFlag = false;
         }
-        // TODO: Manche Doubles auf 2 Nachkommastellen runden (Preisbeträge)
         guiEinstellungen.fillView();
         if (continueFlag) {
             new GuiKoeffizientenEinstellungen();

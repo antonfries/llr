@@ -1,6 +1,7 @@
 package Gui;
 
 import Listener.EinstellungenListener;
+import Listener.GeneralStartListener;
 import Listener.KoeffizientenEinstellungenListener;
 import Main.Excel;
 import Main.Konfiguration;
@@ -28,6 +29,7 @@ public class GuiEinstellungen extends JFrame {
     private JLabel zeileEndeFrage;
     private JButton koeffizientEinstellungenButton;
     private JButton speichernButton;
+    private JButton startButton;
     private Gui gui;
 
     public GuiEinstellungen(Gui gui) {
@@ -52,7 +54,6 @@ public class GuiEinstellungen extends JFrame {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(gui);
         }
-        // TODO: Grenzen und Koeffizienten automatisch +0.01 setzen
         // TODO: Evaluation, ob falsche Settings in der Registry zu handeln sind
         // TODO: Anderes BoxLayout für Einstellungen, sodass Textfelder nicht immer individuell angepasst werden müssen?
         // TODO: Default-Klasse implementieren, sodass Basiswerte schnell angepasst werden können
@@ -83,6 +84,7 @@ public class GuiEinstellungen extends JFrame {
         add(zeileEndeFrage);
         add(zeileEndeTextfeld);
         add(speichernButton);
+        add(startButton);
     }
 
     private void initComponents() {
@@ -108,6 +110,8 @@ public class GuiEinstellungen extends JFrame {
         koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(GuiEinstellungen.this));
         speichernButton = new JButton("Speichern");
         speichernButton.addActionListener(new EinstellungenListener(GuiEinstellungen.this));
+        startButton = new JButton("Start");
+        startButton.addActionListener(new GeneralStartListener(GuiEinstellungen.this));
         gui.fillView();
         fillView();
     }

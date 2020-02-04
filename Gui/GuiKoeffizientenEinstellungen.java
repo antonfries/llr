@@ -1,7 +1,9 @@
 package Gui;
 
+import Listener.GeneralStartListener;
 import Listener.KoeffizientenSpeichernListener;
 import Main.Konfiguration;
+import Main.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +15,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     private JLabel koeffizientText;
     private JLabel grenzeText;
     private JButton speichernButton;
+    private JButton startButton;
 
     public GuiKoeffizientenEinstellungen() {
         init();
@@ -29,6 +32,16 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         setLocationRelativeTo(null);
     }
 
+    public static void adjustGrenzen() {
+        for (int i = 1; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
+            double previous = Konfiguration.grenzeNode.getDouble(String.valueOf(i), 0.0);
+            double current = Konfiguration.grenzeNode.getDouble(String.valueOf(i - 1), 0.0);
+            if (current <= previous) {
+                Konfiguration.grenzeNode.putDouble(String.valueOf(i), Utility.round2Digits(previous + 0.01));
+            }
+        }
+    }
+
     private void addComponents() {
         add(grenzeText);
         for (JTextField grenzeTextfeld : grenzeTextfeldListe) {
@@ -39,13 +52,16 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
             add(koeffizienttextfeld);
         }
         add(speichernButton);
+        add(startButton);
     }
 
     private void initComponents() {
         grenzeText = new JLabel("Grenzen:");
         koeffizientText = new JLabel("Koeffizienten:");
-        speichernButton = new JButton("Speichern"); // TODO: Start-Button hinzufügen, falls neue Settings ausprobiert werden wollen
+        speichernButton = new JButton("Speichern");
         speichernButton.addActionListener(new KoeffizientenSpeichernListener(GuiKoeffizientenEinstellungen.this));
+        startButton = new JButton("Start");
+        startButton.addActionListener(new GeneralStartListener(GuiKoeffizientenEinstellungen.this));
         grenzeTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl() + 1];
         koeffizientTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl()];
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
@@ -58,11 +74,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     }
 
     public void fillView() {
-        for (int i = 1; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
-            if (Konfiguration.grenzeNode.getDouble(String.valueOf(i), 0.0) <= Konfiguration.grenzeNode.getDouble(String.valueOf(i - 1), 0.0)) {
-                Konfiguration.grenzeNode.putDouble(String.valueOf(i), KoeffizientenSpeichernListener.parseDouble2Digits(Konfiguration.grenzeNode.getDouble(String.valueOf(i - 1), 0.0) + 0.01));
-            } // TODO: nach +0.01 muss noch mal gerundet werden, aber das geht auch schöner
-        }
+        adjustGrenzen();
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
             grenzeTextfeldListe[i].setText(Konfiguration.grenzeNode.get(String.valueOf(i), "0.0"));
         }
