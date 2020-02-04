@@ -56,7 +56,6 @@ public class GuiEinstellungen extends JFrame {
         }
         // TODO: Evaluation, ob falsche Settings in der Registry zu handeln sind
         // TODO: Anderes BoxLayout für Einstellungen, sodass Textfelder nicht immer individuell angepasst werden müssen?
-        // TODO: Default-Klasse implementieren, sodass Basiswerte schnell angepasst werden können
     }
 
     private void init() {

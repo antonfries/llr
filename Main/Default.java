@@ -1,0 +1,17 @@
+package Main;
+
+public class Default {
+    public static final String DATEI_PFAD = "C:\\antonfries\\projects\\llr\\files\\Testmappe1.xlsx";
+    public static final double ARBEITSZEIT = 10.0;
+    public static final int SHEET_POSITION = 0;
+    public static final int KOEFFIZIENT_ANZAHL = 5;
+    public static final String WERT_SPALTE = "V";
+    public static final String MENGE_SPALTE = "PQ";
+    public static final double MINIMAL_MENGE = 5.0; // TODO: Minimalmenge und Standardmenge in Settings ermöglichen
+    public static final double STANDARD_MENGE = 10.0;
+    public static final double MAXIMAL_MENGE = 500.0;
+    public static final double BUCHUNG_KOEFFIZIENT = 1.0;
+    public static final int ZEILE_ANFANG = 1;
+    public static final int ZEILE_ENDE = -1;
+    public static final double STANDARD_KOEFFIZIENT = 2.0;
+}

@@ -8,9 +8,6 @@ import java.util.Enumeration;
 public class SheetHelper {
 
     public static String getSelectedSheetName(Gui gui) {
-        if (gui.sheetListe == null) {
-            return "";
-        }
         for (Enumeration<AbstractButton> buttons = gui.sheetListe.getElements(); buttons.hasMoreElements(); ) {
             AbstractButton button = buttons.nextElement();
             if (button.isSelected()) {

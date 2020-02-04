@@ -3,7 +3,6 @@ package Main;
 import java.util.prefs.Preferences;
 
 public class Konfiguration {
-    public static final String STANDARD_MAPPE = "C:\\antonfries\\projects\\llr\\files\\Testmappe1.xlsx";
     public static final Preferences basisNode = Preferences.userRoot().node("Basis");
     public static final Preferences grenzeNode = Preferences.userRoot().node("Grenzen");
     public static final Preferences koeffizientNode = Preferences.userRoot().node("Koeffizienten");
@@ -17,8 +16,8 @@ public class Konfiguration {
     public static final String STANDARD_KOEFFIZIENT = "Standard-Koeffizient";
     public static final String ARBEITSZEIT = "Arbeitszeit";
     public static final String MINIMAL_MENGE = "Minimal-Menge";
-    public static final String MAXIMAL_MENGE = "Maximal-Menge";
     public static final String STANDARD_MENGE = "Standard-Menge";
+    public static final String MAXIMAL_MENGE = "Maximal-Menge";
     public static final String DATEI_PFAD = "Datei-Pfad";
 
     public static Regler[] getReglerListe() {
@@ -34,7 +33,7 @@ public class Konfiguration {
     }
 
     public static String getDateiPfad() {
-        return basisNode.get(DATEI_PFAD, STANDARD_MAPPE);
+        return basisNode.get(DATEI_PFAD, Default.DATEI_PFAD);
     }
 
     public static void setDateiPfad(String dateiPfad) {
@@ -42,7 +41,7 @@ public class Konfiguration {
     }
 
     public static double getMinimalMenge() {
-        return basisNode.getDouble(MINIMAL_MENGE, 5.0);
+        return basisNode.getDouble(MINIMAL_MENGE, Default.MINIMAL_MENGE);
     }
 
     public static void setMinimalMenge(double minimalMenge) {
@@ -50,7 +49,7 @@ public class Konfiguration {
     }
 
     public static double getStandardMenge() {
-        return basisNode.getDouble(STANDARD_MENGE, 10.0);
+        return basisNode.getDouble(STANDARD_MENGE, Default.STANDARD_MENGE);
     }
 
     public static void setStandardMenge(double standardMenge) {
@@ -58,7 +57,7 @@ public class Konfiguration {
     }
 
     public static double getMaximalMenge() {
-        return basisNode.getDouble(MAXIMAL_MENGE, 500.0);
+        return basisNode.getDouble(MAXIMAL_MENGE, Default.MAXIMAL_MENGE);
     }
 
     public static void setMaximalMenge(double maximalMenge) {
@@ -66,7 +65,7 @@ public class Konfiguration {
     }
 
     public static double getArbeitszeit() {
-        return basisNode.getDouble(ARBEITSZEIT, 10.0);
+        return basisNode.getDouble(ARBEITSZEIT, Default.ARBEITSZEIT);
     }
 
     public static void setArbeitszeit(double arbeitszeit) {
@@ -74,7 +73,7 @@ public class Konfiguration {
     }
 
     public static double getStandardKoeffizient() {
-        return basisNode.getDouble(STANDARD_KOEFFIZIENT, 2.0);
+        return basisNode.getDouble(STANDARD_KOEFFIZIENT, Default.STANDARD_KOEFFIZIENT);
     }
 
     public static void setStandardKoeffizient(double standardKoeffizient) {
@@ -82,7 +81,7 @@ public class Konfiguration {
     }
 
     public static int getKoeffizientAnzahl() {
-        return basisNode.getInt(KOEFFIZIENT_ANZAHL, 5);
+        return basisNode.getInt(KOEFFIZIENT_ANZAHL, Default.KOEFFIZIENT_ANZAHL);
     }
 
     public static void setKoeffizientAnzahl(int koeffizientAnzahl) {
@@ -90,7 +89,7 @@ public class Konfiguration {
     }
 
     public static int getSheetPosition() {
-        return basisNode.getInt(SHEET_POSITION, 0);
+        return basisNode.getInt(SHEET_POSITION, Default.SHEET_POSITION);
     }
 
     public static void setSheetPosition(int sheetPosition) {
@@ -98,7 +97,7 @@ public class Konfiguration {
     }
 
     public static double getBuchungKoeffizient() {
-        return basisNode.getDouble(BUCHUNG_KOEFFIZIENT, 1.0);
+        return basisNode.getDouble(BUCHUNG_KOEFFIZIENT, Default.BUCHUNG_KOEFFIZIENT);
     }
 
     public static void setBuchungKoeffizient(double buchungKoeffizient) {
@@ -106,7 +105,7 @@ public class Konfiguration {
     }
 
     public static String getWertSpalte() {
-        return basisNode.get(WERT_SPALTE, "A");
+        return basisNode.get(WERT_SPALTE, Default.WERT_SPALTE);
     }
 
     public static void setWertSpalte(String wertSpalte) {
@@ -114,7 +113,7 @@ public class Konfiguration {
     }
 
     public static String getMengeSpalte() {
-        return basisNode.get(MENGE_SPALTE, "B");
+        return basisNode.get(MENGE_SPALTE, Default.MENGE_SPALTE);
     }
 
     public static void setMengeSpalte(String mengeSpalte) {
@@ -122,7 +121,7 @@ public class Konfiguration {
     }
 
     public static int getZeileAnfang() {
-        return basisNode.getInt(ZEILE_ANFANG, 1);
+        return basisNode.getInt(ZEILE_ANFANG, Default.ZEILE_ANFANG);
     }
 
     public static void setZeileAnfang(int zeileAnfang) {
@@ -130,8 +129,7 @@ public class Konfiguration {
     }
 
     public static int getZeileEnde() {
-        // -1 bedeutet dass Einschränkung nicht berücksichtigt wird
-        return basisNode.getInt(ZEILE_ENDE, -1);
+        return basisNode.getInt(ZEILE_ENDE, Default.ZEILE_ENDE);
     }
 
     public static void setZeileEnde(int zeileEnde) {
