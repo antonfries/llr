@@ -32,9 +32,10 @@ public class DateiListener implements ActionListener {
             String dateiPfad = jFileChooser.getSelectedFile().getAbsolutePath();
             boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad);
             if (ordentlicheExcelDatei) {
+                Konfiguration.setDateiPfad(dateiPfad);
+                // TODO: Damit kann die Sheet-Position mit nur einer Persistenzschicht nicht gespeichert werden ohne Argument
                 Excel excel = new Excel();
                 Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
-                Konfiguration.setDateiPfad(dateiPfad);
                 gui.fillView();
             }
         }
