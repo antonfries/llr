@@ -29,14 +29,6 @@ public class Validation {
         );
     }
 
-    public static void showKoeffizientErrorMessage(JFrame jFrame) {
-        showErrorMessage(
-                jFrame,
-                "Es muss mindestens einen Koeffizienten geben!", // TODO: muss es nicht
-                "Einstellungen-Validation"
-        );
-    }
-
     public static void showSpaltenErrorMessage(JFrame jFrame, String spalte) {
         showErrorMessage(
                 jFrame,

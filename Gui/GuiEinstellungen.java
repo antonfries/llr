@@ -2,6 +2,7 @@ package Gui;
 
 import Listener.EinstellungenListener;
 import Listener.GeneralStartListener;
+import Listener.KoeffizientListener;
 import Listener.KoeffizientenEinstellungenListener;
 import Main.Excel;
 import Main.Konfiguration;
@@ -27,7 +28,7 @@ public class GuiEinstellungen extends JFrame {
     private JLabel buchungKoeffizientFrage;
     private JLabel zeileAnfangFrage;
     private JLabel zeileEndeFrage;
-    private JButton koeffizientEinstellungenButton;
+    public JButton koeffizientEinstellungenButton;
     private JButton speichernButton;
     private JButton startButton;
     private Gui gui;
@@ -99,6 +100,7 @@ public class GuiEinstellungen extends JFrame {
         zeileEndeFrage = new JLabel("Zeilenende:");
         zeileEndeFrage.setToolTipText("Wert -1 setzen, falls keine EInschränkung auftreten soll");
         koeffizientAnzahlTextfeld = new JTextField(3);
+        koeffizientAnzahlTextfeld.getDocument().addDocumentListener(new KoeffizientListener(GuiEinstellungen.this));
         wertTextfeld = new JTextField(3);
         mengeTextfeld = new JTextField(3);
         maxMengeTextfeld = new JTextField(5);

@@ -19,8 +19,8 @@ public class KoeffizientenEinstellungenListener implements ActionListener {
         boolean continueFlag = true;
         try {
             int koeffizientAnzahl = (int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText());
-            if (koeffizientAnzahl < 1) {
-                Validation.showKoeffizientErrorMessage(guiEinstellungen);
+            if (koeffizientAnzahl < 0) {
+                Validation.showNegativErrorMessage(guiEinstellungen);
                 continueFlag = false;
             } else {
                 Konfiguration.setKoeffizientAnzahl((int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
