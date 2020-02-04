@@ -110,7 +110,7 @@ public class EinstellungenListener implements ActionListener {
             if (zeileEnde < 1) {
                 zeileEnde = -1;
             }
-            if (zeileEnde < zeileAnfang) {
+            if (zeileEnde < zeileAnfang && zeileEnde != -1) {
                 Validation.showZeileErrorMessage(guiEinstellungen);
             } else {
                 Konfiguration.setZeileEnde(zeileEnde);
