@@ -34,8 +34,8 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
 
     public static void adjustGrenzen() {
         for (int i = 1; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
-            double previous = Konfiguration.grenzeNode.getDouble(String.valueOf(i), 0.0);
-            double current = Konfiguration.grenzeNode.getDouble(String.valueOf(i - 1), 0.0);
+            double current = Konfiguration.grenzeNode.getDouble(String.valueOf(i), 0.0);
+            double previous = Konfiguration.grenzeNode.getDouble(String.valueOf(i - 1), 0.0);
             if (current <= previous) {
                 Konfiguration.grenzeNode.putDouble(String.valueOf(i), Utility.round2Digits(previous + 0.01));
             }
