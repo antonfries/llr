@@ -41,7 +41,7 @@ public class Validation {
         showErrorMessage(
                 jFrame,
                 "Die Maximal-Menge darf nicht kleiner als die Minimal-Menge sein! ("
-                        + Konfiguration.getMinimalMenge() + ")",
+                        + Konfiguration.getMinimalSummand() + ")",
                 "Einstellungen-Validation"
         );
     }

@@ -76,12 +76,20 @@ public class EinstellungenListener implements ActionListener {
             }
         }
         try {
-            double maximalMenge = Double.parseDouble(guiEinstellungen.maxMengeTextfeld.getText());
-            if (maximalMenge < Konfiguration.getMinimalMenge()) {
-                Validation.showMengeErrorMessage(guiEinstellungen);
-            } else {
-                Konfiguration.setMaximalMenge(maximalMenge);
-            }
+            double minimalSummand = Double.parseDouble(guiEinstellungen.minSummandTextfeld.getText());
+            Konfiguration.setMinimalSummand(minimalSummand);
+        } catch (NumberFormatException e) {
+            Validation.showZahlenErrorMessage(guiEinstellungen);
+        }
+        try {
+            double standardSummand = Double.parseDouble(guiEinstellungen.standardSummandTextfeld.getText());
+            Konfiguration.setStandardSummand(standardSummand);
+        } catch (NumberFormatException e) {
+            Validation.showZahlenErrorMessage(guiEinstellungen);
+        }
+        try {
+            double maximalMenge = Double.parseDouble(guiEinstellungen.maxSummandTextfeld.getText());
+            Konfiguration.setMaximalSummand(maximalMenge);
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen);
         }

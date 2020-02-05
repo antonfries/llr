@@ -12,9 +12,9 @@ public class Konfiguration {
     public static final String KOEFFIZIENT_ANZAHL = "Koeffizient-Anzahl";
     public static final String WERT_SPALTE = "Wert-Spalte";
     public static final String MENGE_SPALTE = "Menge-Spalte";
-    public static final String MINIMAL_MENGE = "Minimal-Menge";
-    public static final String STANDARD_MENGE = "Standard-Menge";
-    public static final String MAXIMAL_MENGE = "Maximal-Menge";
+    public static final String MINIMAL_SUMMAND = "Minimal-Summand";
+    public static final String STANDARD_SUMMAND = "Standard-Summand";
+    public static final String MAXIMAL_SUMMAND = "Maximal-Summand";
     public static final String BUCHUNG_KOEFFIZIENT = "Buchung-Koeffizient";
     public static final String ZEILE_ANFANG = "Zeile-Anfang";
     public static final String ZEILE_ENDE = "Zeile-Ende";
@@ -40,28 +40,28 @@ public class Konfiguration {
         basisNode.put(DATEI_PFAD, dateiPfad);
     }
 
-    public static double getMinimalMenge() {
-        return basisNode.getDouble(MINIMAL_MENGE, Default.MINIMAL_MENGE);
+    public static double getMinimalSummand() {
+        return basisNode.getDouble(MINIMAL_SUMMAND, Default.MINIMAL_SUMMAND);
     }
 
-    public static void setMinimalMenge(double minimalMenge) {
-        basisNode.putDouble(MINIMAL_MENGE, minimalMenge);
+    public static void setMinimalSummand(double minimalSummand) {
+        basisNode.putDouble(MINIMAL_SUMMAND, minimalSummand);
     }
 
-    public static double getStandardMenge() {
-        return basisNode.getDouble(STANDARD_MENGE, Default.STANDARD_MENGE);
+    public static double getStandardSummand() {
+        return basisNode.getDouble(STANDARD_SUMMAND, Default.STANDARD_SUMMAND);
     }
 
-    public static void setStandardMenge(double standardMenge) {
-        basisNode.putDouble(STANDARD_MENGE, standardMenge);
+    public static void setStandardSummand(double standardSummand) {
+        basisNode.putDouble(STANDARD_SUMMAND, standardSummand);
     }
 
-    public static double getMaximalMenge() {
-        return basisNode.getDouble(MAXIMAL_MENGE, Default.MAXIMAL_MENGE);
+    public static double getMaximalSummand() {
+        return basisNode.getDouble(MAXIMAL_SUMMAND, Default.MAXIMAL_SUMMAND);
     }
 
-    public static void setMaximalMenge(double maximalMenge) {
-        basisNode.putDouble(MAXIMAL_MENGE, maximalMenge);
+    public static void setMaximalSummand(double maximalSummand) {
+        basisNode.putDouble(MAXIMAL_SUMMAND, maximalSummand);
     }
 
     public static double getArbeitszeit() {

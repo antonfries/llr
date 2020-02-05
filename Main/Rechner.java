@@ -35,6 +35,12 @@ public class Rechner {
             menge = getEntitaet(mengeSpalteListe, r);
             Buchung buchung = new Buchung(menge, wert);
             ergebnis += buchung.getProdukt();
+            if (ergebnis < Konfiguration.getMinimalSummand()) {
+                ergebnis = Konfiguration.getMinimalSummand();
+            }
+            if (ergebnis > Konfiguration.getMaximalSummand()) {
+                ergebnis = Konfiguration.getStandardSummand();
+            }
         }
         // TODO: Anzahl der evaluierten Zellen durchgehen, um Fehlermeldung anzuzeigen
         return ergebnis * Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
