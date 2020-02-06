@@ -34,7 +34,7 @@ public class DateiListener implements ActionListener {
             boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad);
             if (ordentlicheExcelDatei) {
                 Konfiguration.setDateiPfad(dateiPfad);
-                // TODO: Damit kann die Sheet-Position mit nur einer Persistenzschicht nicht gespeichert werden ohne Argument
+                // TODO: Sheet-Position speichern durch Übergeben des alten Dateipfads an den Excel-Konstruktor
                 Excel excel = new Excel();
                 Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
                 try {

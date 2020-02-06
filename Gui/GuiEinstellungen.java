@@ -65,7 +65,7 @@ public class GuiEinstellungen extends JFrame {
             Validation.showZahlenErrorMessage(gui);
         }
         // TODO: Evaluation, ob falsche Settings in der Registry zu handeln sind
-        // TODO: BoxLayout für Einstellungen, sodass Textfelder-Breiten nicht immer individuell angepasst werden müssen
+        // TODO: BoxLayout/GridLayout für Gui's, sodass individuelle Feinjustierungen nicht notwendig sind
     }
 
     private void init() {

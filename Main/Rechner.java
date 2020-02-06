@@ -23,6 +23,7 @@ public class Rechner {
         int counter = 0;
         int min = Konfiguration.getZeileAnfang();
         int max = Konfiguration.getZeileEnde();
+        int erfolgCounter = 0;
         for (Row r : sheet) {
             counter++;
             if (counter < min) {
@@ -37,14 +38,18 @@ public class Rechner {
             menge = getEntitaet(mengeSpalteListe, r);
             Buchung buchung = new Buchung(menge, wert);
             ergebnis += buchung.getProdukt();
-            if (ergebnis < Konfiguration.getMinimalSummand()) {
+            if (ergebnis > 0.0) {
+                erfolgCounter++;
+            }
+            if (ergebnis < Konfiguration.getMinimalSummand() && ergebnis != 0.0) {
                 ergebnis = Konfiguration.getMinimalSummand();
             }
             if (ergebnis > Konfiguration.getMaximalSummand()) {
                 ergebnis = Konfiguration.getStandardSummand();
             }
         }
-        // TODO: Anzahl der evaluierten Zellen durchgehen, um Fehlermeldung anzuzeigen
+        // TODO: Wenn eine Buchung aus leerer Zeile erstellt wird, ist das Ergebnis der Minimal-Summand?
+        // TODO: Anzahl der evaluierten Zellen als Statistik anzeigen
         try {
             excel.wb.close();
         } catch (IOException e) {

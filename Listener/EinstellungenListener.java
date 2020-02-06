@@ -87,7 +87,7 @@ public class EinstellungenListener implements ActionListener {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen);
         }
-        // TODO: Hier Validierung wieder implementieren
+        // TODO: Hier Validierung der Summanden wieder implementieren
         try {
             double maximalMenge = Double.parseDouble(guiEinstellungen.maxSummandTextfeld.getText());
             Konfiguration.setMaximalSummand(maximalMenge);
@@ -127,6 +127,7 @@ public class EinstellungenListener implements ActionListener {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen);
         }
+        // TODO: Beim Start des Rechners Fehlermeldung anzeigen, falls Zeilenanfang/Zeilenende größer als Nummer der Zeilen
         guiEinstellungen.fillView();
     }
 }

@@ -19,7 +19,7 @@ public class StartListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        // TODO: da der untere Teil doppelt ist, kann man das hier in Abhängigkeit einer bestimmten Gui ausführen?
+        // TODO: Duplikate vermeiden durch Abhängigkeit einer bestimmten Gui
         boolean continueFlag = true;
         Excel excel = new Excel();
         Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
