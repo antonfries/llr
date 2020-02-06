@@ -87,6 +87,7 @@ public class EinstellungenListener implements ActionListener {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen);
         }
+        // TODO: Hier Validierung wieder implementieren
         try {
             double maximalMenge = Double.parseDouble(guiEinstellungen.maxSummandTextfeld.getText());
             Konfiguration.setMaximalSummand(maximalMenge);
