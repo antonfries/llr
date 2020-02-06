@@ -68,6 +68,6 @@ public class Rechner {
                 entitaet = einzelEntitaet;
             }
         }
-        return entitaet;
+        return Math.abs(entitaet); // Es gibt manchmal negative Mengen
     }
 }
