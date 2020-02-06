@@ -71,7 +71,6 @@ public class Gui extends JFrame {
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
         jScrollPane.setPreferredSize(new Dimension(230, 174));
         resetButton = new JButton("Einstellungen zurücksetzen");
-        // TODO: ConfirmationDialog einbauen, damit man nicht ausversehen alles zurücksetzt
         resetButton.addActionListener(new ResetListener(Gui.this));
         fillView();
     }
