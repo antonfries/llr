@@ -53,7 +53,7 @@ public class Gui extends JFrame {
     private void initComponents() {
         dateipfad = new JLabel("Dateipfad:");
         arbeitszeit = new JLabel("Arbeitszeit:");
-        dateipfadTextfeld = new JTextField(25);
+        dateipfadTextfeld = new JTextField(20);
         arbeitszeitTextfeld = new JTextField(30);
         einstellungsButton = new JButton("Einstellungen öffnen");
         einstellungsButton.addActionListener(e1 -> new GuiEinstellungen(Gui.this));
