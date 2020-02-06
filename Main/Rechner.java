@@ -48,8 +48,7 @@ public class Rechner {
                 ergebnis = Konfiguration.getStandardSummand();
             }
         }
-        // TODO: Wenn eine Buchung aus leerer Zeile erstellt wird, ist das Ergebnis der Minimal-Summand?
-        // TODO: Anzahl der evaluierten Zellen als Statistik anzeigen
+        // TODO: [Prio] Anzahl der evaluierten Zellen als Statistik anzeigen
         try {
             excel.wb.close();
         } catch (IOException e) {

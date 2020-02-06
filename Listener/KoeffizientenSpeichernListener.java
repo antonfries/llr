@@ -24,12 +24,12 @@ public class KoeffizientenSpeichernListener implements ActionListener {
             Konfiguration.grenzeNode = Preferences.userRoot().node("Grenzen");
             Konfiguration.koeffizientNode.removeNode();
             Konfiguration.koeffizientNode = Preferences.userRoot().node("Koeffizienten");
-            // TODO: Nur überflüssige Werte löschen beim Verkleinern der Koeffizient-Anzahl
+            // TODO: [Prio] Nur überflüssige Werte löschen beim Verkleinern der Koeffizient-Anzahl
             // Dadurch, dass diese Logik erst beim Speichern ausgeführt wird, ist es möglich, alte Werte beizubehalten
         } catch (BackingStoreException e) {
             e.printStackTrace();
         }
-        // TODO: Diese Logik auslagern für valide Grenzen und Koeffizienten bei Anpassung nur der Koeffizient-Anzahl
+        // TODO: [Prio] Diese Logik auslagern für valide Grenzen und Koeffizienten bei Anpassung nur der Koeffizient-Anzahl
         for (int i = 0; i < guiKoeffizientenEinstellungen.grenzeTextfeldListe.length; i++) {
             try {
                 double grenze = Utility.round2Digits(Double.parseDouble(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
