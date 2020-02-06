@@ -48,8 +48,6 @@ public class GuiEinstellungen extends JFrame {
             Excel excel = new Excel(); // Initial sollen die Einstellungen geöffnet werden können
             Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
         }
-        Excel excel = new Excel();
-        Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
         try {
             double arbeitszeit = Double.parseDouble(gui.arbeitszeitTextfeld.getText());
             if (arbeitszeit <= 0.0) {
