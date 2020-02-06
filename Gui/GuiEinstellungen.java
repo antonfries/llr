@@ -8,6 +8,7 @@ import Main.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class GuiEinstellungen extends JFrame {
 
@@ -47,6 +48,11 @@ public class GuiEinstellungen extends JFrame {
         if (ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad())) {
             Excel excel = new Excel(); // Initial sollen die Einstellungen geöffnet werden können
             Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
+            try {
+                excel.wb.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
         try {
             double arbeitszeit = Double.parseDouble(gui.arbeitszeitTextfeld.getText());

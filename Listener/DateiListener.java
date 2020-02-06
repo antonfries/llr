@@ -12,6 +12,7 @@ import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 
 public class DateiListener implements ActionListener {
     private Gui gui;
@@ -36,6 +37,11 @@ public class DateiListener implements ActionListener {
                 // TODO: Damit kann die Sheet-Position mit nur einer Persistenzschicht nicht gespeichert werden ohne Argument
                 Excel excel = new Excel();
                 Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
+                try {
+                    excel.wb.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 gui.fillView();
             }
         }

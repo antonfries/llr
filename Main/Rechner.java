@@ -5,6 +5,8 @@ import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import java.io.IOException;
+
 public class Rechner {
 
     public static int charZuExcelSpalte(char c) {
@@ -12,9 +14,9 @@ public class Rechner {
     }
 
     public static double rechnen() {
-        Excel mappe = new Excel();
+        Excel excel = new Excel();
         double ergebnis = 0.0;
-        Sheet sheet = mappe.ExcelSheetListe[Konfiguration.getSheetPosition()];
+        Sheet sheet = excel.ExcelSheetListe[Konfiguration.getSheetPosition()];
         char[] wertSpalteListe = Konfiguration.getWertSpalte().toCharArray();
         char[] mengeSpalteListe = Konfiguration.getMengeSpalte().toCharArray();
         double wert, menge;
@@ -43,6 +45,11 @@ public class Rechner {
             }
         }
         // TODO: Anzahl der evaluierten Zellen durchgehen, um Fehlermeldung anzuzeigen
+        try {
+            excel.wb.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return ergebnis * Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
     }
 
