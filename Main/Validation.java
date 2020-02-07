@@ -32,7 +32,7 @@ public class Validation {
     public static void showSpaltenErrorMessage(JFrame jFrame, String spalte) {
         showErrorMessage(
                 jFrame,
-                "Bitte geben Sie für alle Spalten Buchstaben von A-Z an!",
+                "Bitte geben Sie Buchstaben von A-Z an!",
                 spalte + "-Validation"
         );
     }
@@ -50,6 +50,30 @@ public class Validation {
                 jFrame,
                 "Menge und Wert können nicht aus der selben Spalte ausgelesen werden!",
                 "Menge/Wert-Validation"
+        );
+    }
+
+    public static void showMinimalErrorMessage(JFrame jframe) {
+        showErrorMessage(
+                jframe,
+                "Der Minimal-Summand darf nicht größer als der Standard-Summand sein!",
+                Konfiguration.MINIMAL_SUMMAND + "-Validation"
+        );
+    }
+
+    public static void showMaximalErrorMessage(JFrame jframe) {
+        showErrorMessage(
+                jframe,
+                "Der Maximal-Summand darf nicht kleiner als der Standard-Summand sein!",
+                Konfiguration.MAXIMAL_SUMMAND + "-Validation"
+        );
+    }
+
+    public static void showStandardErrorMessage(JFrame jframe) {
+        showErrorMessage(
+                jframe,
+                "Der Standard-Summand muss zwischen Minimal- und Maximal-Summand liegen!",
+                Konfiguration.STANDARD_SUMMAND + "-Validation"
         );
     }
 }

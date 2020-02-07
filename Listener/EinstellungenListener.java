@@ -66,9 +66,13 @@ public class EinstellungenListener implements ActionListener {
         } else {
             Validation.showSpaltenErrorMessage(guiEinstellungen, "Menge");
         }
-        if (checkDuplicates(mengeSpalte, wertSpalte)) {
-            // TODO: Wenn in beiden Feldern ein Fehler auftritt, soll nicht behauptet werden, dass eine Spalte eingefüllt werden
-            Validation.showDuplicateErrorMessage(guiEinstellungen);
+        if (persistMenge && persistWert) {
+            if (checkDuplicates(mengeSpalte, wertSpalte)) {
+                Validation.showDuplicateErrorMessage(guiEinstellungen);
+            } else {
+                Konfiguration.setMengeSpalte(mengeSpalte);
+                Konfiguration.setWertSpalte(wertSpalte);
+            }
         } else {
             if (persistMenge) {
                 Konfiguration.setMengeSpalte(mengeSpalte);
@@ -77,24 +81,43 @@ public class EinstellungenListener implements ActionListener {
                 Konfiguration.setWertSpalte(wertSpalte);
             }
         }
+        double minimalSummand = Konfiguration.getMinimalSummand();
+        double standardSummand = Konfiguration.getStandardSummand();
+        double maximalSummand = Konfiguration.getMaximalSummand();
         try {
-            double minimalSummand = Utility.parseDouble(guiEinstellungen.minSummandTextfeld.getText());
-            Konfiguration.setMinimalSummand(minimalSummand);
+            minimalSummand = Utility.parseDouble(guiEinstellungen.minSummandTextfeld.getText());
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MINIMAL_SUMMAND);
         }
         try {
-            double standardSummand = Utility.parseDouble(guiEinstellungen.standardSummandTextfeld.getText());
-            Konfiguration.setStandardSummand(standardSummand);
+            standardSummand = Utility.parseDouble(guiEinstellungen.standardSummandTextfeld.getText());
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.STANDARD_SUMMAND);
         }
-        // TODO: [Prio] Hier Validierung der Summanden wieder implementieren
         try {
-            double maximalSummand = Utility.parseDouble(guiEinstellungen.maxSummandTextfeld.getText());
-            Konfiguration.setMaximalSummand(maximalSummand);
+            maximalSummand = Utility.parseDouble(guiEinstellungen.maxSummandTextfeld.getText());
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_SUMMAND);
+        }
+        boolean showedMindestensOneError = false;
+        if (minimalSummand > standardSummand) {
+            Validation.showMinimalErrorMessage(guiEinstellungen);
+            showedMindestensOneError = true;
+        } else {
+            Konfiguration.setMinimalSummand(minimalSummand);
+        }
+        if (maximalSummand < standardSummand) {
+            Validation.showMaximalErrorMessage(guiEinstellungen);
+            showedMindestensOneError = true;
+        } else {
+            Konfiguration.setMaximalSummand(maximalSummand);
+        }
+        if (standardSummand < minimalSummand || standardSummand > maximalSummand) {
+            if (!showedMindestensOneError) {
+                Validation.showStandardErrorMessage(guiEinstellungen);
+            }
+        } else {
+            Konfiguration.setStandardSummand(standardSummand);
         }
         try {
             double buchungKoeffizient = Utility.parseDouble(guiEinstellungen.buchungKoeffizientTextfeld.getText());
@@ -106,28 +129,29 @@ public class EinstellungenListener implements ActionListener {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.BUCHUNG_KOEFFIZIENT);
         }
-        int zeileAnfang = 1;
+        int zeileAnfang = Konfiguration.getZeileAnfang();
+        int zeileEnde = Konfiguration.getZeileEnde();
         try {
             zeileAnfang = (int) Utility.parseDouble(guiEinstellungen.zeileAnfangTextfeld.getText());
             if (zeileAnfang < 1) {
                 zeileAnfang = 1;
             }
-            Konfiguration.setZeileAnfang(zeileAnfang);
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.ZEILE_ANFANG);
         }
         try {
-            int zeileEnde = (int) Utility.parseDouble(guiEinstellungen.zeileEndeTextfeld.getText());
+            zeileEnde = (int) Utility.parseDouble(guiEinstellungen.zeileEndeTextfeld.getText());
             if (zeileEnde < 1) {
                 zeileEnde = -1;
             }
-            if (zeileEnde < zeileAnfang && zeileEnde != -1) {
-                Validation.showZeileErrorMessage(guiEinstellungen);
-            } else {
-                Konfiguration.setZeileEnde(zeileEnde);
-            }
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.ZEILE_ENDE);
+        }
+        if (zeileEnde < zeileAnfang && zeileEnde != -1) {
+            Validation.showZeileErrorMessage(guiEinstellungen);
+        } else {
+            Konfiguration.setZeileAnfang(zeileAnfang);
+            Konfiguration.setZeileEnde(zeileEnde);
         }
         // TODO: [Prio] Beim Start des Rechners Fehlermeldung anzeigen, falls Zeilenanfang/Zeilenende größer als Nummer der Zeilen
         guiEinstellungen.fillView();
