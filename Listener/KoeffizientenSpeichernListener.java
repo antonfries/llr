@@ -32,25 +32,25 @@ public class KoeffizientenSpeichernListener implements ActionListener {
         // TODO: [Prio] Diese Logik auslagern für valide Grenzen und Koeffizienten bei Anpassung nur der Koeffizient-Anzahl
         for (int i = 0; i < guiKoeffizientenEinstellungen.grenzeTextfeldListe.length; i++) {
             try {
-                double grenze = Utility.round2Digits(Double.parseDouble(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
+                double grenze = Utility.round2Digits(Utility.parseDouble(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
                 if (grenze < 0.0) {
                     grenze = 0.0;
                 }
                 Konfiguration.grenzeNode.putDouble(String.valueOf(i), grenze);
             } catch (NumberFormatException e) {
-                Validation.showZahlenErrorMessage(guiKoeffizientenEinstellungen);
+                Validation.showZahlenErrorMessage(guiKoeffizientenEinstellungen, "Grenzen");
             }
         }
         for (int i = 0; i < guiKoeffizientenEinstellungen.koeffizientTextfeldListe.length; i++) {
             try {
-                double koeffizient = Double.parseDouble(guiKoeffizientenEinstellungen.koeffizientTextfeldListe[i].getText());
+                double koeffizient = Utility.parseDouble(guiKoeffizientenEinstellungen.koeffizientTextfeldListe[i].getText());
                 if (koeffizient <= 0.0) {
-                    Validation.showNegativErrorMessage(guiKoeffizientenEinstellungen);
+                    Validation.showNegativErrorMessage(guiKoeffizientenEinstellungen, "Koeffizienten");
                 } else {
                     Konfiguration.koeffizientNode.putDouble(String.valueOf(i), koeffizient);
                 }
             } catch (NumberFormatException e) {
-                Validation.showZahlenErrorMessage(guiKoeffizientenEinstellungen);
+                Validation.showZahlenErrorMessage(guiKoeffizientenEinstellungen, "Koeffizienten");
             }
         }
         guiKoeffizientenEinstellungen.fillView();

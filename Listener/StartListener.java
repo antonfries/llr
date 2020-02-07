@@ -29,15 +29,15 @@ public class StartListener implements ActionListener {
             e.printStackTrace();
         }
         try {
-            double arbeitszeit = Double.parseDouble(gui.arbeitszeitTextfeld.getText());
+            double arbeitszeit = Utility.parseDouble(gui.arbeitszeitTextfeld.getText());
             if (arbeitszeit <= 0.0) {
-                Validation.showNegativErrorMessage(gui);
+                Validation.showNegativErrorMessage(gui, Konfiguration.ARBEITSZEIT);
                 continueFlag = false;
             } else {
-                Konfiguration.setArbeitszeit(Double.parseDouble(gui.arbeitszeitTextfeld.getText()));
+                Konfiguration.setArbeitszeit(arbeitszeit);
             }
         } catch (NumberFormatException e) {
-            Validation.showZahlenErrorMessage(gui);
+            Validation.showZahlenErrorMessage(gui, Konfiguration.ARBEITSZEIT);
             continueFlag = false;
         }
         gui.fillView();

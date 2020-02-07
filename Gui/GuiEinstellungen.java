@@ -55,14 +55,14 @@ public class GuiEinstellungen extends JFrame {
             }
         }
         try {
-            double arbeitszeit = Double.parseDouble(gui.arbeitszeitTextfeld.getText());
+            double arbeitszeit = Utility.parseDouble(gui.arbeitszeitTextfeld.getText());
             if (arbeitszeit <= 0.0) {
-                Validation.showNegativErrorMessage(gui);
+                Validation.showNegativErrorMessage(gui, Konfiguration.ARBEITSZEIT);
             } else {
                 Konfiguration.setArbeitszeit(arbeitszeit);
             }
         } catch (NumberFormatException e) {
-            Validation.showZahlenErrorMessage(gui);
+            Validation.showZahlenErrorMessage(gui, Konfiguration.ARBEITSZEIT);
         }
         // TODO: Evaluation, ob falsche Settings in der Registry zu handeln sind
         // TODO: BoxLayout/GridLayout für Gui's, sodass individuelle Feinjustierungen nicht notwendig sind

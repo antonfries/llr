@@ -13,19 +13,19 @@ public class Validation {
         );
     }
 
-    public static void showZahlenErrorMessage(JFrame jFrame) {
+    public static void showZahlenErrorMessage(JFrame jFrame, String spalte) {
         showErrorMessage(
                 jFrame,
                 "Bitte geben Sie Zahlen ein!",
-                "Einstellungen-Validation"
+                spalte + "-Validation"
         );
     }
 
-    public static void showNegativErrorMessage(JFrame jFrame) {
+    public static void showNegativErrorMessage(JFrame jFrame, String spalte) {
         showErrorMessage(
                 jFrame,
                 "Bitte geben Sie positive Zahlen ein!",
-                "Einstellungen-Validation"
+                spalte + "-Validation"
         );
     }
 
@@ -41,7 +41,7 @@ public class Validation {
         showErrorMessage(
                 jFrame,
                 "Das Zeilenende darf nicht kleiner als der Zeilenanfang!",
-                "Einstellungen-Validation"
+                "Zeilen-Validation"
         );
     }
 
@@ -49,7 +49,7 @@ public class Validation {
         showErrorMessage(
                 jFrame,
                 "Menge und Wert können nicht aus der selben Spalte ausgelesen werden!",
-                "Einstellungen-Validation"
+                "Menge/Wert-Validation"
         );
     }
 }

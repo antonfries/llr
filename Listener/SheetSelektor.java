@@ -40,7 +40,6 @@ public class SheetSelektor {
             gui.sheetContainer.add(new JLabel("<html>Die Excel-Datei enthält<br>keine nicht leeren Sheets!</html>"));
         }
         gui.repaint(); // Sheet-Container enthält sonst manchmal noch alten Text
-        // TODO: [Prio] Bei der Eingabe von Doubles Kommas zu Punkten umwandeln mit eigener parse-Methode
         gui.revalidate();
     }
 }

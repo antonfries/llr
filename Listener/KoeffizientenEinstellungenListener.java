@@ -3,6 +3,7 @@ package Listener;
 import Gui.GuiEinstellungen;
 import Gui.GuiKoeffizientenEinstellungen;
 import Main.Konfiguration;
+import Main.Utility;
 import Main.Validation;
 
 import java.awt.event.ActionEvent;
@@ -18,15 +19,15 @@ public class KoeffizientenEinstellungenListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         boolean continueFlag = true;
         try {
-            int koeffizientAnzahl = (int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText());
+            int koeffizientAnzahl = (int) Utility.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText());
             if (koeffizientAnzahl < 0) {
-                Validation.showNegativErrorMessage(guiEinstellungen);
+                Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);
                 continueFlag = false;
             } else {
-                Konfiguration.setKoeffizientAnzahl((int) Double.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText()));
+                Konfiguration.setKoeffizientAnzahl(koeffizientAnzahl);
             }
         } catch (NumberFormatException e) {
-            Validation.showZahlenErrorMessage(guiEinstellungen);
+            Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);
             continueFlag = false;
         }
         guiEinstellungen.fillView();
