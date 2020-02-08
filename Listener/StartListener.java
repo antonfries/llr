@@ -3,10 +3,6 @@ package Listener;
 import Gui.Gui;
 import Main.*;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -19,7 +15,6 @@ public class StartListener implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        // TODO: Duplikate vermeiden durch Abhängigkeit einer bestimmten Gui
         boolean continueFlag = true;
         Excel excel = new Excel();
         Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
@@ -42,12 +37,7 @@ public class StartListener implements ActionListener {
         }
         gui.fillView();
         if (continueFlag) {
-            double endergebnis = Rechner.rechnen();
-            StringSelection stringSelection = new StringSelection(String.valueOf(endergebnis));
-            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-            clipboard.setContents(stringSelection, null);
-            JOptionPane.showMessageDialog(gui, "Lager-Leistung:    " + endergebnis, "Ergebnis",
-                    JOptionPane.INFORMATION_MESSAGE);
+            Rechner.rechnen(gui);
         }
     }
 }

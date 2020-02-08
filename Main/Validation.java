@@ -76,4 +76,12 @@ public class Validation {
                 Konfiguration.STANDARD_SUMMAND + "-Validation"
         );
     }
+
+    public static void showZeilenEndeErrorMessage(JFrame jframe) {
+        showErrorMessage(
+                jframe,
+                "Das Zeilenende darf nicht größer als die Anzahl der Zeilen sein!",
+                "Rechner-Validation"
+        );
+    }
 }

@@ -1,10 +1,13 @@
 package Main;
 
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.io.IOException;
 
 public class Rechner {
@@ -13,7 +16,7 @@ public class Rechner {
         return Character.getNumericValue(c) - 10;
     }
 
-    public static double rechnen() {
+    public static void rechnen(JFrame jFrame) {
         Excel excel = new Excel();
         double ergebnis = 0.0;
         Sheet sheet = excel.ExcelSheetListe[Konfiguration.getSheetPosition()];
@@ -24,6 +27,11 @@ public class Rechner {
         int min = Konfiguration.getZeileAnfang();
         int max = Konfiguration.getZeileEnde();
         int erfolgCounter = 0;
+        int zellenAnzahl = sheet.getLastRowNum();
+        if (zellenAnzahl < max) { // TODO: überprüfen
+            Validation.showZeilenEndeErrorMessage(jFrame);
+            return;
+        }
         for (Row r : sheet) {
             counter++;
             if (counter < min) {
@@ -48,21 +56,26 @@ public class Rechner {
                 ergebnis = Konfiguration.getStandardSummand();
             }
         }
-        // TODO: [Prio] Anzahl der evaluierten Zellen als Statistik anzeigen
         try {
             excel.wb.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return ergebnis * Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
+        ergebnis *= Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
+        StringSelection stringSelection = new StringSelection(String.valueOf(ergebnis));
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(stringSelection, null);
+        JOptionPane.showMessageDialog(jFrame, "Lager-Leistung:    " + ergebnis,
+                "Ergebnis über " + erfolgCounter + " Zeilen",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     private static double getEntitaet(char[] entitaetSpalteListe, Row r) {
         double einzelEntitaet, entitaet = 0.0;
         for (char entitaetSpalte : entitaetSpalteListe) {
             Cell entitaetZelle = r.getCell(charZuExcelSpalte(entitaetSpalte));
-            einzelEntitaet = entitaetZelle != null && entitaetZelle.getCellTypeEnum() == CellType.NUMERIC
-                    ? entitaetZelle.getNumericCellValue() : 0.0;
+            einzelEntitaet = entitaetZelle != null
+                    ? Utility.parseDoubleIgnoreError(entitaetZelle.getStringCellValue()) : 0.0;
             if (einzelEntitaet != 0.0) {
                 entitaet = einzelEntitaet;
             }

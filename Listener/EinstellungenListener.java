@@ -153,7 +153,6 @@ public class EinstellungenListener implements ActionListener {
             Konfiguration.setZeileAnfang(zeileAnfang);
             Konfiguration.setZeileEnde(zeileEnde);
         }
-        // TODO: [Prio] Beim Start des Rechners Fehlermeldung anzeigen, falls Zeilenanfang/Zeilenende größer als Nummer der Zeilen
         guiEinstellungen.fillView();
     }
 }

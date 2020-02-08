@@ -9,4 +9,13 @@ public class Utility {
     public static double parseDouble(String value) {
         return Double.parseDouble(value.replace(',', '.'));
     }
+
+    public static double parseDoubleIgnoreError(String value) {
+        try {
+            return parseDouble(value);
+        } catch (NumberFormatException e) {
+            return 0.0;
+        }
+
+    }
 }
