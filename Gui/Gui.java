@@ -81,7 +81,7 @@ public class Gui extends JFrame {
         startButton.setEnabled(ordentlicheExcelDatei);
         if (ordentlicheExcelDatei) {
             dateipfadTextfeld.setText(Konfiguration.getDateiPfad());
-            new SheetSelektor(this, Konfiguration.getDateiPfad());
+            new SheetSelektor(this);
         }
     }
 }

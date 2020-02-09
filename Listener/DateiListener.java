@@ -33,9 +33,8 @@ public class DateiListener implements ActionListener {
             String dateiPfad = jFileChooser.getSelectedFile().getAbsolutePath();
             boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad);
             if (ordentlicheExcelDatei) {
-                String dateiPfadAlt = Konfiguration.getDateiPfad();
+                Excel excel = new Excel(Konfiguration.getDateiPfad());
                 Konfiguration.setDateiPfad(dateiPfad);
-                Excel excel = new Excel(dateiPfadAlt);
                 int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
                 if (sheetPosition != -1) {
                     Konfiguration.setSheetPosition(sheetPosition);

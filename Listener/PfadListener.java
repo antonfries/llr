@@ -46,7 +46,7 @@ public class PfadListener implements DocumentListener {
                 e.printStackTrace();
             }
             Konfiguration.setDateiPfad(dateiPfad);
-            new SheetSelektor(gui, Konfiguration.getDateiPfad());
+            new SheetSelektor(gui);
         }
     }
 
