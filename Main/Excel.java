@@ -12,8 +12,8 @@ public class Excel {
     public static final int ROW_CACHE_SIZE = 100;
     public Workbook wb;
 
-    public Excel(String dateiPfad) {
-        File ExcelDatei = new File(dateiPfad);
+    public Excel() {
+        File ExcelDatei = new File(Konfiguration.getDateiPfad());
         wb = new StreamingReader.Builder()
                 .rowCacheSize(ROW_CACHE_SIZE)
                 .bufferSize(BUFFER_SIZE)

@@ -17,7 +17,7 @@ public class Rechner {
     }
 
     public static void rechnen(JFrame jFrame) {
-        Excel excel = new Excel(Konfiguration.getDateiPfad());
+        Excel excel = new Excel();
         double ergebnis = 0.0;
         Sheet sheet = excel.ExcelSheetListe[Konfiguration.getSheetPosition()];
         char[] wertSpalteListe = Konfiguration.getWertSpalte().toCharArray();

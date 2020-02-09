@@ -46,7 +46,7 @@ public class GuiEinstellungen extends JFrame {
 
     private void persist() {
         if (ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad())) {
-            Excel excel = new Excel(Konfiguration.getDateiPfad()); // Initial sollen die Einstellungen geöffnet werden können
+            Excel excel = new Excel(); // Initial sollen die Einstellungen geöffnet werden können
             int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
             if (sheetPosition != -1) {
                 Konfiguration.setSheetPosition(sheetPosition);

@@ -16,7 +16,7 @@ public class StartListener implements ActionListener {
 
     public void actionPerformed(ActionEvent actionEvent) {
         boolean continueFlag = true;
-        Excel excel = new Excel(Konfiguration.getDateiPfad());
+        Excel excel = new Excel();
         int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
         if (sheetPosition != -1) {
             Konfiguration.setSheetPosition(sheetPosition);

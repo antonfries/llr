@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class SheetSelektor {
     public SheetSelektor(Gui gui) {
-        Excel excel = new Excel(Konfiguration.getDateiPfad());
+        Excel excel = new Excel();
         gui.sheetContainer.removeAll();
         gui.sheetListe = new ButtonGroup();
         if (Konfiguration.getSheetPosition() >= excel.ExcelSheetListe.length) {
