@@ -40,7 +40,7 @@ public class Validation {
     public static void showZeileErrorMessage(JFrame jFrame) {
         showErrorMessage(
                 jFrame,
-                "Das Zeilenende darf nicht kleiner als der Zeilenanfang!",
+                "Das Zeilenende darf nicht kleiner als der Zeilenanfang sein!",
                 "Zeilen-Validation"
         );
     }
@@ -80,7 +80,7 @@ public class Validation {
     public static void showZeilenEndeErrorMessage(JFrame jframe) {
         showErrorMessage(
                 jframe,
-                "Das Zeilenende darf nicht größer als die Anzahl der Zeilen sein!",
+                "Der Zeilenanfang darf nicht größer als die Anzahl der Zeilen sein!",
                 "Rechner-Validation"
         );
     }

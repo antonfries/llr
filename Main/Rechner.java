@@ -18,17 +18,17 @@ public class Rechner {
 
     public static void rechnen(JFrame jFrame) {
         Excel excel = new Excel();
-        double ergebnis = 0.0;
         Sheet sheet = excel.ExcelSheetListe[Konfiguration.getSheetPosition()];
-        char[] wertSpalteListe = Konfiguration.getWertSpalte().toCharArray();
-        char[] mengeSpalteListe = Konfiguration.getMengeSpalte().toCharArray();
-        double wert, menge;
-        int counter = 0;
+        double wert, menge, summand, ergebnis = 0.0;
+        int counter = 0, erfolgCounter = 0;
+        String wertSpalte = new StringBuilder(Konfiguration.getWertSpalte()).reverse().toString();
+        String mengeSpalte = new StringBuilder(Konfiguration.getMengeSpalte()).reverse().toString();
+        char[] wertSpalteListe = wertSpalte.toCharArray();
+        char[] mengeSpalteListe = mengeSpalte.toCharArray();
         int min = Konfiguration.getZeileAnfang();
         int max = Konfiguration.getZeileEnde();
-        int erfolgCounter = 0;
-        int zellenAnzahl = sheet.getLastRowNum();
-        if (zellenAnzahl < max) { // TODO: überprüfen
+        int zeilenAnzahl = sheet.getLastRowNum() + 1;
+        if (zeilenAnzahl < min) {
             Validation.showZeilenEndeErrorMessage(jFrame);
             return;
         }
@@ -45,16 +45,11 @@ public class Rechner {
             wert = getEntitaet(wertSpalteListe, r);
             menge = getEntitaet(mengeSpalteListe, r);
             Buchung buchung = new Buchung(menge, wert);
-            ergebnis += buchung.getProdukt();
-            if (ergebnis > 0.0) {
+            summand = buchung.getSummand();
+            if (summand > 0.0) {
                 erfolgCounter++;
             }
-            if (ergebnis < Konfiguration.getMinimalSummand() && ergebnis != 0.0) {
-                ergebnis = Konfiguration.getMinimalSummand();
-            }
-            if (ergebnis > Konfiguration.getMaximalSummand()) {
-                ergebnis = Konfiguration.getStandardSummand();
-            }
+            ergebnis += summand;
         }
         try {
             excel.wb.close();

@@ -18,8 +18,8 @@ public class SheetSelektor {
         int counter = 0;
         for (int i = 0; i < excel.ExcelSheetListe.length; i++) {
             JRadioButton sheetButton = new JRadioButton(excel.ExcelSheetListe[i].getSheetName());
-            int zeilenAnzahl = excel.ExcelSheetListe[i].getLastRowNum();
-            if (zeilenAnzahl == 0) {
+            int zeilenAnzahl = excel.ExcelSheetListe[i].getLastRowNum() + 1;
+            if (zeilenAnzahl <= 1) {
                 continue;
             } else {
                 counter++;
