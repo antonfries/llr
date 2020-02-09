@@ -1,7 +1,7 @@
 package Main;
 
 public class Default {
-    public static final String DATEI_PFAD = "C:\\antonfries\\projects\\llr\\files\\Testmappe1.xlsx";
+    public static final String DATEI_PFAD = "C:\\Users\\Ilya\\Desktop\\richtig.xlsx";
     public static final double ARBEITSZEIT = 10.0;
     public static final int SHEET_POSITION = 0;
     public static final int KOEFFIZIENT_ANZAHL = 5;
