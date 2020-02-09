@@ -33,10 +33,13 @@ public class DateiListener implements ActionListener {
             String dateiPfad = jFileChooser.getSelectedFile().getAbsolutePath();
             boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad);
             if (ordentlicheExcelDatei) {
+                String dateiPfadAlt = Konfiguration.getDateiPfad();
                 Konfiguration.setDateiPfad(dateiPfad);
-                // TODO: [Prio] Sheet-Position speichern durch Übergeben des alten Dateipfads an den Excel-Konstruktor
-                Excel excel = new Excel();
-                Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
+                Excel excel = new Excel(dateiPfadAlt);
+                int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
+                if (sheetPosition != -1) {
+                    Konfiguration.setSheetPosition(sheetPosition);
+                }
                 try {
                     excel.wb.close();
                 } catch (IOException e) {

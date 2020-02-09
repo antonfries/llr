@@ -46,8 +46,11 @@ public class GuiEinstellungen extends JFrame {
 
     private void persist() {
         if (ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad())) {
-            Excel excel = new Excel(); // Initial sollen die Einstellungen geöffnet werden können
-            Konfiguration.setSheetPosition(excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui)));
+            Excel excel = new Excel(Konfiguration.getDateiPfad()); // Initial sollen die Einstellungen geöffnet werden können
+            int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
+            if (sheetPosition != -1) {
+                Konfiguration.setSheetPosition(sheetPosition);
+            }
             try {
                 excel.wb.close();
             } catch (IOException e) {
@@ -64,7 +67,6 @@ public class GuiEinstellungen extends JFrame {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(gui, Konfiguration.ARBEITSZEIT);
         }
-        // TODO: Evaluation, ob falsche Settings in der Registry zu handeln sind
         // TODO: BoxLayout/GridLayout für Gui's, sodass individuelle Feinjustierungen nicht notwendig sind
     }
 

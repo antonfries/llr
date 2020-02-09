@@ -5,7 +5,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.File;
-import java.io.IOException;
 
 public class Excel {
     public Sheet[] ExcelSheetListe;
@@ -13,8 +12,8 @@ public class Excel {
     public static final int ROW_CACHE_SIZE = 100;
     public Workbook wb;
 
-    public Excel() {
-        File ExcelDatei = new File(Konfiguration.getDateiPfad());
+    public Excel(String dateiPfad) {
+        File ExcelDatei = new File(dateiPfad);
         wb = new StreamingReader.Builder()
                 .rowCacheSize(ROW_CACHE_SIZE)
                 .bufferSize(BUFFER_SIZE)
@@ -31,10 +30,6 @@ public class Excel {
                 return i;
             }
         }
-        return 0;
-    }
-
-    public void close() {
-
+        return -1;
     }
 }

@@ -1,11 +1,14 @@
 package Listener;
 
 import Gui.Gui;
+import Main.Excel;
 import Main.ExcelFileChecker;
 import Main.Konfiguration;
+import Main.SheetHelper;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import java.io.IOException;
 
 public class PfadListener implements DocumentListener {
 
@@ -32,8 +35,18 @@ public class PfadListener implements DocumentListener {
         boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad);
         gui.startButton.setEnabled(ordentlicheExcelDatei);
         if (ordentlicheExcelDatei) {
+            Excel excel = new Excel(Konfiguration.getDateiPfad());
+            int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
+            if (sheetPosition != -1) {
+                Konfiguration.setSheetPosition(sheetPosition);
+            }
+            try {
+                excel.wb.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             Konfiguration.setDateiPfad(dateiPfad);
-            new SheetSelektor(gui);
+            new SheetSelektor(gui, Konfiguration.getDateiPfad());
         }
     }
 

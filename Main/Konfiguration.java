@@ -6,6 +6,7 @@ public class Konfiguration {
     public static Preferences basisNode = Preferences.userRoot().node("Basis");
     public static Preferences grenzeNode = Preferences.userRoot().node("Grenzen");
     public static Preferences koeffizientNode = Preferences.userRoot().node("Koeffizienten");
+    // Sollen händisch falsche Einstellungen in der Registry abgefangen werden?
     public static final String DATEI_PFAD = "Datei-Pfad";
     public static final String ARBEITSZEIT = "Arbeitszeit";
     public static final String SHEET_POSITION = "Sheet-Position";
