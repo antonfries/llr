@@ -84,6 +84,7 @@ public class EinstellungenListener implements ActionListener {
         double minimalSummand = Konfiguration.getMinimalSummand();
         double standardMenge = Konfiguration.getStandardMenge();
         double maximalMenge = Konfiguration.getMaximalMenge();
+        // TODO: Validation von Summanden und Mengen wieder entkoppeln
         try {
             minimalSummand = Utility.parseDouble(guiEinstellungen.minSummandTextfeld.getText());
         } catch (NumberFormatException e) {
