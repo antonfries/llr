@@ -65,7 +65,7 @@ public class Validation {
         showErrorMessage(
                 jframe,
                 "Der Maximal-Summand darf nicht kleiner als der Standard-Summand sein!",
-                Konfiguration.MAXIMAL_SUMMAND + "-Validation"
+                Konfiguration.MAXIMAL_MENGE + "-Validation"
         );
     }
 
@@ -73,7 +73,7 @@ public class Validation {
         showErrorMessage(
                 jframe,
                 "Der Standard-Summand muss zwischen Minimal- und Maximal-Summand liegen!",
-                Konfiguration.STANDARD_SUMMAND + "-Validation"
+                Konfiguration.STANDARD_MENGE + "-Validation"
         );
     }
 

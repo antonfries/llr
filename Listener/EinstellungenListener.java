@@ -82,42 +82,42 @@ public class EinstellungenListener implements ActionListener {
             }
         }
         double minimalSummand = Konfiguration.getMinimalSummand();
-        double standardSummand = Konfiguration.getStandardSummand();
-        double maximalSummand = Konfiguration.getMaximalSummand();
+        double standardMenge = Konfiguration.getStandardMenge();
+        double maximalMenge = Konfiguration.getMaximalMenge();
         try {
             minimalSummand = Utility.parseDouble(guiEinstellungen.minSummandTextfeld.getText());
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MINIMAL_SUMMAND);
         }
         try {
-            standardSummand = Utility.parseDouble(guiEinstellungen.standardSummandTextfeld.getText());
+            standardMenge = Utility.parseDouble(guiEinstellungen.standardMengeTextfeld.getText());
         } catch (NumberFormatException e) {
-            Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.STANDARD_SUMMAND);
+            Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.STANDARD_MENGE);
         }
         try {
-            maximalSummand = Utility.parseDouble(guiEinstellungen.maxSummandTextfeld.getText());
+            maximalMenge = Utility.parseDouble(guiEinstellungen.maxMengeTextfeld.getText());
         } catch (NumberFormatException e) {
-            Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_SUMMAND);
+            Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_MENGE);
         }
         boolean showedMindestensOneError = false;
-        if (minimalSummand > standardSummand) {
+        if (minimalSummand > standardMenge) {
             Validation.showMinimalErrorMessage(guiEinstellungen);
             showedMindestensOneError = true;
         } else {
             Konfiguration.setMinimalSummand(minimalSummand);
         }
-        if (maximalSummand < standardSummand) {
+        if (maximalMenge < standardMenge) {
             Validation.showMaximalErrorMessage(guiEinstellungen);
             showedMindestensOneError = true;
         } else {
-            Konfiguration.setMaximalSummand(maximalSummand);
+            Konfiguration.setMaximalMenge(maximalMenge);
         }
-        if (standardSummand < minimalSummand || standardSummand > maximalSummand) {
+        if (standardMenge < minimalSummand || standardMenge > maximalMenge) {
             if (!showedMindestensOneError) {
                 Validation.showStandardErrorMessage(guiEinstellungen);
             }
         } else {
-            Konfiguration.setStandardSummand(standardSummand);
+            Konfiguration.setStandardMenge(standardMenge);
         }
         try {
             double buchungKoeffizient = Utility.parseDouble(guiEinstellungen.buchungKoeffizientTextfeld.getText());
