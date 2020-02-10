@@ -10,6 +10,7 @@ public class ExcelFileChecker {
     public static boolean checkExcelFile(String dateiPfad) {
         return new File(dateiPfad).exists() &&
                 getExtensionByStringHandling(dateiPfad).equals(EXCEL_ENDUNG);
+        // TODO: hier auch auf Strict OOXML prüfen?
     }
 
     private static String getExtensionByStringHandling(String dateiPfad) {

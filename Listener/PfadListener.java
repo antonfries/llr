@@ -49,6 +49,4 @@ public class PfadListener implements DocumentListener {
             new SheetSelektor(gui);
         }
     }
-
-
 }

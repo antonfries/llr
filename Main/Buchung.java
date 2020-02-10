@@ -17,6 +17,7 @@ public class Buchung {
     public void setMenge(double menge) {
         // TODO: Maximal-Summand + Standard-Summand in Menge umbenennen
         // TODO: Maximale Grenze -1 implementieren
+        // TODO: Zeilenanfang+Zeilenende mit +-1 haben noch nicht gestimmt in Einstellungen
         if (menge > Konfiguration.getMaximalSummand()) {
             menge = Konfiguration.getStandardSummand();
         }

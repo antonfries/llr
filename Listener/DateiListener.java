@@ -31,19 +31,28 @@ public class DateiListener implements ActionListener {
         int r = jFileChooser.showOpenDialog(null);
         if (r == JFileChooser.APPROVE_OPTION) {
             String dateiPfad = jFileChooser.getSelectedFile().getAbsolutePath();
+            // Hier muss sowohl der Konfigurationspfad als auch der ausgewählte Pfad überprüft werden
             boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad);
             if (ordentlicheExcelDatei) {
-                Excel excel = new Excel();
+                boolean konfigurationOrdentlicheExcelDatei = ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad());
+                if (konfigurationOrdentlicheExcelDatei) {
+                    Excel excel = new Excel();
+                    int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
+                    if (sheetPosition != -1) {
+                        Konfiguration.setSheetPosition(sheetPosition);
+                    }
+                    try {
+                        excel.wb.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
                 Konfiguration.setDateiPfad(dateiPfad);
-                int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
-                if (sheetPosition != -1) {
-                    Konfiguration.setSheetPosition(sheetPosition);
-                }
-                try {
-                    excel.wb.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                // TODO: Fehlermeldung anzeigen, falls Nutzer irgendeine Datei öffnet?
+                // TODO: Fehlermeldung zu Strict OOXML anzeigen
+                // TODO: Prominente Shortcuts binden (Strg+s, Enter, Escape)
+                // TODO: Progressbar implementieren
+                // TODO: Evaluation, ob Fehlermeldung angezeigt werden soll, Verbesserung oder ein Mix von beidem
                 gui.fillView();
             }
         }
