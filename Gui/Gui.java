@@ -54,6 +54,7 @@ public class Gui extends JFrame {
         dateipfad = new JLabel("Dateipfad:");
         arbeitszeit = new JLabel("Arbeitszeit:");
         dateipfadTextfeld = new JTextField(20);
+        // TODO: Auf dem letzten Grenzen-Textfeld -1-Tooltip anzeigen
         arbeitszeitTextfeld = new JTextField(30);
         einstellungsButton = new JButton("Einstellungen öffnen");
         einstellungsButton.addActionListener(e1 -> new GuiEinstellungen(Gui.this));

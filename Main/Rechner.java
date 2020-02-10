@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 
 public class Rechner {
@@ -19,8 +20,6 @@ public class Rechner {
     public static void rechnen(JFrame jFrame) {
         Excel excel = new Excel();
         Sheet sheet = excel.ExcelSheetListe[Konfiguration.getSheetPosition()];
-        double wert, menge, summand, ergebnis = 0.0;
-        int counter = 0, erfolgCounter = 0;
         String wertSpalte = new StringBuilder(Konfiguration.getWertSpalte()).reverse().toString();
         String mengeSpalte = new StringBuilder(Konfiguration.getMengeSpalte()).reverse().toString();
         char[] wertSpalteListe = wertSpalte.toCharArray();
@@ -28,41 +27,63 @@ public class Rechner {
         int min = Konfiguration.getZeileAnfang();
         int max = Konfiguration.getZeileEnde();
         int zeilenAnzahl = sheet.getLastRowNum() + 1;
+        int progressLength;
+        if (max == -1) {
+            progressLength = zeilenAnzahl - min;
+        } else {
+            progressLength = max - min;
+        }
         if (zeilenAnzahl < min) {
             Validation.showZeilenEndeErrorMessage(jFrame);
             return;
         }
-        for (Row r : sheet) {
-            counter++;
-            if (counter < min) {
-                continue;
-            }
-            if (max >= 1) {
-                if (counter > max) {
-                    break;
+        JFrame rechenFrame = new JFrame();
+        rechenFrame.setTitle("Rechen-Operationen");
+        rechenFrame.setSize(300, 100);
+        JProgressBar jProgressBar = new JProgressBar(0, progressLength);
+        jProgressBar.setStringPainted(true);
+        jProgressBar.setValue(0);
+        Thread t = new Thread(() -> {
+            double wert, menge, summand, ergebnis = 0.0;
+            int counter = 0, erfolgCounter = 0;
+            for (Row r : sheet) {
+                final int percent = counter;
+                SwingUtilities.invokeLater(() -> jProgressBar.setValue(percent));
+                counter++;
+                if (counter < min) {
+                    continue;
                 }
+                if (max >= 1) {
+                    if (counter > max) {
+                        break;
+                    }
+                }
+                wert = getEntitaet(wertSpalteListe, r);
+                menge = getEntitaet(mengeSpalteListe, r);
+                Buchung buchung = new Buchung(menge, wert);
+                summand = buchung.getSummand();
+                if (summand > 0.0) {
+                    erfolgCounter++;
+                }
+                ergebnis += summand;
             }
-            wert = getEntitaet(wertSpalteListe, r);
-            menge = getEntitaet(mengeSpalteListe, r);
-            Buchung buchung = new Buchung(menge, wert);
-            summand = buchung.getSummand();
-            if (summand > 0.0) {
-                erfolgCounter++;
+            try {
+                excel.wb.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            ergebnis += summand;
-        }
-        try {
-            excel.wb.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        ergebnis *= Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
-        StringSelection stringSelection = new StringSelection(String.valueOf(ergebnis));
-        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        clipboard.setContents(stringSelection, null);
-        JOptionPane.showMessageDialog(jFrame, "Lager-Leistung:    " + ergebnis,
-                "Ergebnis über " + erfolgCounter + " Zeilen",
-                JOptionPane.INFORMATION_MESSAGE);
+            ergebnis *= Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
+            rechenFrame.dispatchEvent(new WindowEvent(rechenFrame, WindowEvent.WINDOW_CLOSING));
+            StringSelection stringSelection = new StringSelection(String.valueOf(ergebnis));
+            Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+            clipboard.setContents(stringSelection, null);
+            JOptionPane.showMessageDialog(jFrame, "Lager-Leistung:    " + ergebnis,
+                    "Ergebnis über " + erfolgCounter + " Zeilen",
+                    JOptionPane.INFORMATION_MESSAGE);
+        });
+        rechenFrame.add(jProgressBar);
+        rechenFrame.setVisible(true);
+        t.start();
     }
 
     private static double getEntitaet(char[] entitaetSpalteListe, Row r) {
