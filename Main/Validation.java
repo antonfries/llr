@@ -53,31 +53,15 @@ public class Validation {
         );
     }
 
-    public static void showMinimalErrorMessage(JFrame jframe) {
-        showErrorMessage(
-                jframe,
-                "Der Minimal-Summand darf nicht größer als der Standard-Summand sein!",
-                Konfiguration.MINIMAL_SUMMAND + "-Validation"
-        );
-    }
-
     public static void showMaximalErrorMessage(JFrame jframe) {
         showErrorMessage(
                 jframe,
-                "Der Maximal-Summand darf nicht kleiner als der Standard-Summand sein!",
+                "Die Minimal-Menge darf nicht kleiner als die Standard-Menge sein!",
                 Konfiguration.MAXIMAL_MENGE + "-Validation"
         );
     }
 
-    public static void showStandardErrorMessage(JFrame jframe) {
-        showErrorMessage(
-                jframe,
-                "Der Standard-Summand muss zwischen Minimal- und Maximal-Summand liegen!",
-                Konfiguration.STANDARD_MENGE + "-Validation"
-        );
-    }
-
-    public static void showZeilenEndeErrorMessage(JFrame jframe) {
+    public static void showZeileAnfangErrorMessage(JFrame jframe) {
         showErrorMessage(
                 jframe,
                 "Der Zeilenanfang darf nicht größer als die Anzahl der Zeilen sein!",

@@ -34,7 +34,7 @@ public class Rechner {
             progressLength = max - min;
         }
         if (zeilenAnzahl < min) {
-            Validation.showZeilenEndeErrorMessage(jFrame);
+            Validation.showZeileAnfangErrorMessage(jFrame);
             return;
         }
         JFrame rechenFrame = new JFrame();
