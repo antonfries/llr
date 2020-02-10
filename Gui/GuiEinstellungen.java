@@ -45,7 +45,7 @@ public class GuiEinstellungen extends JFrame {
     }
 
     private void persist() {
-        if (ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad())) {
+        if (ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad(), this)) {
             Excel excel = new Excel(); // Initial sollen die Einstellungen geöffnet werden können
             int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
             if (sheetPosition != -1) {
@@ -131,7 +131,7 @@ public class GuiEinstellungen extends JFrame {
         speichernButton = new JButton("Speichern");
         speichernButton.addActionListener(new EinstellungenListener(GuiEinstellungen.this));
         startButton = new JButton("Start");
-        startButton.setEnabled(ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad()));
+        startButton.setEnabled(ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad(), this));
         startButton.addActionListener(new GeneralStartListener(GuiEinstellungen.this));
         gui.fillView();
         fillView();

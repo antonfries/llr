@@ -1,10 +1,7 @@
 package Listener;
 
 import Gui.Gui;
-import Main.Excel;
-import Main.ExcelFileChecker;
-import Main.Konfiguration;
-import Main.SheetHelper;
+import Main.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -32,9 +29,9 @@ public class DateiListener implements ActionListener {
         if (r == JFileChooser.APPROVE_OPTION) {
             String dateiPfad = jFileChooser.getSelectedFile().getAbsolutePath();
             // Hier muss sowohl der Konfigurationspfad als auch der ausgewählte Pfad überprüft werden
-            boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad);
+            boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad, gui);
             if (ordentlicheExcelDatei) {
-                boolean konfigurationOrdentlicheExcelDatei = ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad());
+                boolean konfigurationOrdentlicheExcelDatei = ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad(), gui);
                 if (konfigurationOrdentlicheExcelDatei) {
                     Excel excel = new Excel();
                     int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
@@ -48,11 +45,12 @@ public class DateiListener implements ActionListener {
                     }
                 }
                 Konfiguration.setDateiPfad(dateiPfad);
-                // TODO: Fehlermeldung anzeigen, falls Nutzer irgendeine Datei öffnet?
-                // TODO: Fehlermeldung zu Strict OOXML anzeigen
                 // TODO: Prominente Shortcuts binden (Strg+s, Enter, Escape)
                 // TODO: Evaluation, ob Fehlermeldung angezeigt werden soll, Verbesserung oder ein Mix von beidem
+                // TODO: Anton -> Testmappe 1 keine Default Sheet Position
                 gui.fillView();
+            } else {
+                Validation.showSelectionErrorMessage(gui);
             }
         }
     }

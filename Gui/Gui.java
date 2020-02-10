@@ -77,7 +77,7 @@ public class Gui extends JFrame {
 
     public void fillView() {
         arbeitszeitTextfeld.setText(String.valueOf(Konfiguration.getArbeitszeit()));
-        boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad());
+        boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad(), this);
         startButton.setEnabled(ordentlicheExcelDatei);
         if (ordentlicheExcelDatei) {
             dateipfadTextfeld.setText(Konfiguration.getDateiPfad());

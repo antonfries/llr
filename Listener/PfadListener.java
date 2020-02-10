@@ -32,7 +32,7 @@ public class PfadListener implements DocumentListener {
 
     private void aktualisiereStartButton() {
         String dateiPfad = gui.dateipfadTextfeld.getText();
-        boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad);
+        boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad, gui);
         gui.startButton.setEnabled(ordentlicheExcelDatei);
         if (ordentlicheExcelDatei) {
             Excel excel = new Excel();

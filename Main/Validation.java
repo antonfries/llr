@@ -68,4 +68,20 @@ public class Validation {
                 "Rechner-Validation"
         );
     }
+
+    public static void showStrictErrorMessage(JFrame jFrame) {
+        showErrorMessage(
+                jFrame,
+                "Speichern Sie die Mappe bitte nicht als Strict Open XML-Arbeitsmappe!",
+                "Excel-Validation"
+        );
+    }
+
+    public static void showSelectionErrorMessage(JFrame jFrame) {
+        showErrorMessage(
+                jFrame,
+                "Bitte nutzen Sie den vorgeschlagenen Excel-Filter zur Selektion von Arbeitsmappen!",
+                "Datei-Validation"
+        );
+    }
 }
