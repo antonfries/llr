@@ -122,7 +122,7 @@ public class GuiEinstellungen extends JFrame {
         mengeTextfeld = new JTextField(3);
         minSummandTextfeld = new JTextField(7);
         standardMengeTextfeld = new JTextField(8);
-        maxMengeTextfeld = new JTextField(5);
+        maxMengeTextfeld = new JTextField(6);
         buchungKoeffizientTextfeld = new JTextField(7);
         zeileAnfangTextfeld = new JTextField(15);
         zeileEndeTextfeld = new JTextField(15);
