@@ -15,8 +15,6 @@ public class Buchung {
     }
 
     public void setMenge(double menge) {
-        // TODO: Maximale Grenze -1 implementieren
-        // TODO: Zeilenanfang+Zeilenende mit +-1 haben noch nicht gestimmt in Einstellungen
         if (menge > Konfiguration.getMaximalMenge()) {
             menge = Konfiguration.getStandardMenge();
         }
@@ -25,8 +23,14 @@ public class Buchung {
 
     public double getKoeffizient() {
         for (Regler regler : Konfiguration.getReglerListe()) {
-            if (regler.getMin() <= getWert() && getWert() <= regler.getMax()) {
-                return regler.getKoeffizient();
+            if (regler.getMin() <= getWert()) {
+                if (regler.getMax() == -1) {
+                    return regler.getKoeffizient();
+                } else {
+                    if (getWert() <= regler.getMax()) {
+                        return regler.getKoeffizient();
+                    }
+                }
             }
         }
         return Konfiguration.getStandardKoeffizient();

@@ -33,8 +33,10 @@ public class KoeffizientenSpeichernListener implements ActionListener {
         for (int i = 0; i < guiKoeffizientenEinstellungen.grenzeTextfeldListe.length; i++) {
             try {
                 double grenze = Utility.round2Digits(Utility.parseDouble(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
-                if (grenze < 0.0) {
-                    grenze = 0.0;
+                if (i == guiKoeffizientenEinstellungen.grenzeTextfeldListe.length - 1) {
+                    grenze = Math.max(-1.0, grenze);
+                } else {
+                    grenze = Math.max(0.0, grenze);
                 }
                 Konfiguration.grenzeNode.putDouble(String.valueOf(i), grenze);
             } catch (NumberFormatException e) {

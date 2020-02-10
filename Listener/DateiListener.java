@@ -51,7 +51,6 @@ public class DateiListener implements ActionListener {
                 // TODO: Fehlermeldung anzeigen, falls Nutzer irgendeine Datei öffnet?
                 // TODO: Fehlermeldung zu Strict OOXML anzeigen
                 // TODO: Prominente Shortcuts binden (Strg+s, Enter, Escape)
-                // TODO: Progressbar implementieren
                 // TODO: Evaluation, ob Fehlermeldung angezeigt werden soll, Verbesserung oder ein Mix von beidem
                 gui.fillView();
             }
