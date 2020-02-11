@@ -34,7 +34,8 @@ public class PfadListener implements DocumentListener {
         String dateiPfad = gui.dateipfadTextfeld.getText();
         boolean ordentlicheExcelDatei = ExcelFileChecker.checkExcelFile(dateiPfad, gui);
         gui.startButton.setEnabled(ordentlicheExcelDatei);
-        if (ordentlicheExcelDatei) {
+        // Bugfix: Falls Gui erneut gefüllt wird, macht es keinen Sinn, die Sheet-Position neu zu berechnen
+        if (ordentlicheExcelDatei && !Konfiguration.getDateiPfad().equals(dateiPfad)) {
             Excel excel = new Excel();
             int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
             if (sheetPosition != -1) {

@@ -12,7 +12,7 @@ public class SheetSelektor {
         Excel excel = new Excel();
         gui.sheetContainer.removeAll();
         gui.sheetListe = new ButtonGroup();
-        if (Konfiguration.getSheetPosition() >= excel.ExcelSheetListe.length) { // TODO: macht das Sinn?
+        if (Konfiguration.getSheetPosition() >= excel.ExcelSheetListe.length) {
             Konfiguration.setSheetPosition(0);
         }
         int counter = 0;
@@ -20,7 +20,6 @@ public class SheetSelektor {
             JRadioButton sheetButton = new JRadioButton(excel.ExcelSheetListe[i].getSheetName());
             int zeilenAnzahl = excel.ExcelSheetListe[i].getLastRowNum() + 1;
             if (zeilenAnzahl <= 1) {
-                // TODO: Sheetposition kann nicht übernommen werden bei geskippten Zeilen
                 continue;
             } else {
                 counter++;
