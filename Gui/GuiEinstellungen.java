@@ -72,7 +72,7 @@ public class GuiEinstellungen extends JFrame {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(gui, Konfiguration.ARBEITSZEIT);
         }
-        // TODO: BoxLayout/GridLayout für Gui's, sodass individuelle Feinjustierungen nicht notwendig sind
+        // TODO: Geeignetes Layout für Gui's, sodass individuelle Feinjustierungen nicht notwendig sind
     }
 
     private void init() {

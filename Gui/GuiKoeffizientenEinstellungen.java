@@ -95,6 +95,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
 
     public void fillView() {
         adjustGrenzen();
+        // TODO: Bei Initialisierung -1 als letzten Wert anzeigen
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
             grenzeTextfeldListe[i].setText(Konfiguration.grenzeNode.get(String.valueOf(i), "0.0"));
         }

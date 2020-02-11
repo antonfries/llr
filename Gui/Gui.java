@@ -26,7 +26,7 @@ public class Gui extends JFrame {
     private JButton resetButton;
 
     public Gui() {
-        // TODO: [Prio] Konzept für Anzeige jedweder Fehlermeldung in OptionPane (Listener+Gui's)
+        // TODO: [Prio] Konzept für Anzeige jedweder Fehlermeldung in Dialog
         init();
         initComponents();
         addComponents();
