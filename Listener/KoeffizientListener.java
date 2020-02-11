@@ -6,7 +6,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
 public class KoeffizientListener implements DocumentListener {
-
     private GuiEinstellungen guiEinstellungen;
 
     public KoeffizientListener(GuiEinstellungen guiEinstellungen) {

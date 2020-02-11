@@ -9,7 +9,6 @@ import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 public class KoeffizientenEinstellungenSpeichern {
-
     public KoeffizientenEinstellungenSpeichern(GuiKoeffizientenEinstellungen guiKoeffizientenEinstellungen) {
         try {
             Konfiguration.grenzeNode.removeNode();

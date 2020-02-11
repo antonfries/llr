@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class Datei {
-
     public Datei(Gui gui) {
         // TODO: Nach Entwicklung Home-Directory nutzen
         File currentDirectoryPath = FileSystemView.getFileSystemView().getHomeDirectory();

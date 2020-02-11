@@ -16,6 +16,5 @@ public class Utility {
         } catch (NumberFormatException e) {
             return 0.0;
         }
-
     }
 }

@@ -15,6 +15,7 @@ public class EinstellungenSpeichern {
                 Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);
             } else {
                 Konfiguration.setKoeffizientAnzahl(koeffizientAnzahl);
+                // TODO: An dieser Stelle valide Koeffizienten befüllen
             }
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);

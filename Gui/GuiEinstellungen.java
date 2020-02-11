@@ -72,7 +72,7 @@ public class GuiEinstellungen extends JFrame {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(gui, Konfiguration.ARBEITSZEIT);
         }
-        // TODO: Geeignetes Layout für Gui's, sodass individuelle Feinjustierungen nicht notwendig sind
+        // TODO: Grid- bzw. GridBagLayout mit Bordern implementieren
     }
 
     private void init() {
@@ -122,7 +122,7 @@ public class GuiEinstellungen extends JFrame {
         zeileEndeFrage = new JLabel("Zeilenende:");
         zeileEndeFrage.setToolTipText("Wert -1 setzen, falls keine EInschränkung auftreten soll");
         koeffizientAnzahlTextfeld = new JTextField(3);
-        koeffizientAnzahlTextfeld.getDocument().addDocumentListener(new KoeffizientListener(GuiEinstellungen.this));
+        koeffizientAnzahlTextfeld.getDocument().addDocumentListener(new KoeffizientListener(this));
         wertTextfeld = new JTextField(3);
         mengeTextfeld = new JTextField(3);
         minSummandTextfeld = new JTextField(7);
@@ -132,9 +132,9 @@ public class GuiEinstellungen extends JFrame {
         zeileAnfangTextfeld = new JTextField(15);
         zeileEndeTextfeld = new JTextField(15);
         koeffizientEinstellungenButton = new JButton("Koeffizienten-Einstellungen");
-        koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(GuiEinstellungen.this));
+        koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(this));
         speichernButton = new JButton("Speichern");
-        speichernButton.addActionListener(new EinstellungenSpeichernListener(GuiEinstellungen.this));
+        speichernButton.addActionListener(new EinstellungenSpeichernListener(this));
         startButton = new JButton("Start");
         startButton.setEnabled(ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad(), this));
         startButton.addActionListener(new GeneralStartListener(this));

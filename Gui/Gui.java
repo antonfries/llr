@@ -61,12 +61,12 @@ public class Gui extends JFrame {
         dateipfadTextfeld = new JTextField(20);
         arbeitszeitTextfeld = new JTextField(30);
         einstellungsButton = new JButton("Einstellungen öffnen");
-        einstellungsButton.addActionListener(e1 -> new GuiEinstellungen(Gui.this));
+        einstellungsButton.addActionListener(new EinstellungenListener(this));
         startButton = new JButton("Start");
-        dateipfadTextfeld.getDocument().addDocumentListener(new PfadListener(Gui.this));
-        startButton.addActionListener(new StartListener(Gui.this));
+        dateipfadTextfeld.getDocument().addDocumentListener(new PfadListener(this));
+        startButton.addActionListener(new StartListener(this));
         dateiButton = new JButton("Datei auswählen...");
-        dateiButton.addActionListener(new DateiListener(Gui.this));
+        dateiButton.addActionListener(new DateiListener(this));
         sheetContainer = new JPanel();
         sheetContainer.setLayout(new BoxLayout(sheetContainer, BoxLayout.PAGE_AXIS));
         jScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
@@ -76,7 +76,7 @@ public class Gui extends JFrame {
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
         jScrollPane.setPreferredSize(new Dimension(230, 174));
         resetButton = new JButton("Einstellungen zurücksetzen");
-        resetButton.addActionListener(new ResetListener(Gui.this));
+        resetButton.addActionListener(new ResetListener(this));
 
         JLayeredPane jLayeredPane = getLayeredPane();
 

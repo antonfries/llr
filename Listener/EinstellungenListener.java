@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EinstellungenListener implements ActionListener {
-
     private Gui gui;
 
     public EinstellungenListener(Gui gui) {

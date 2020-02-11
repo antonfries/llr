@@ -64,10 +64,10 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         grenzeText = new JLabel("Grenzen:");
         koeffizientText = new JLabel("Koeffizienten:");
         speichernButton = new JButton("Speichern");
-        speichernButton.addActionListener(new KoeffizientenSpeichernListener(GuiKoeffizientenEinstellungen.this));
+        speichernButton.addActionListener(new KoeffizientenSpeichernListener(this));
         startButton = new JButton("Start");
         startButton.setEnabled(ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad(), this));
-        startButton.addActionListener(new GeneralStartListener(GuiKoeffizientenEinstellungen.this));
+        startButton.addActionListener(new GeneralStartListener(this));
         grenzeTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl() + 1];
         koeffizientTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl()];
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {

@@ -7,7 +7,6 @@ import Main.Utility;
 import Main.Validation;
 
 public class KoeffizientenEinstellungen {
-
     public KoeffizientenEinstellungen(GuiEinstellungen guiEinstellungen) {
         boolean continueFlag = true;
         try {
@@ -23,7 +22,7 @@ public class KoeffizientenEinstellungen {
             continueFlag = false;
         }
         guiEinstellungen.fillView();
-        if (continueFlag) {
+        if (continueFlag && Konfiguration.getKoeffizientAnzahl() > 0) { // damit nicht über Shortcut aufrufbar
             new GuiKoeffizientenEinstellungen();
         }
     }

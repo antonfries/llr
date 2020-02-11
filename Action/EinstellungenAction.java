@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class EinstellungenAction extends AbstractAction {
-
     private Gui gui;
 
     public EinstellungenAction(Gui gui) {

@@ -1,6 +1,7 @@
 package Main;
 
 public class Regler {
+
     private double min = 0.0;
     private double max = 0.0;
     private double koeffizient = 0.0;

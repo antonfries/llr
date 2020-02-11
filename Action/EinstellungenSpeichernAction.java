@@ -7,8 +7,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class EinstellungenSpeichernAction extends AbstractAction {
-
-
     private GuiEinstellungen guiEinstellungen;
 
     public EinstellungenSpeichernAction(GuiEinstellungen guiEinstellungen) {
