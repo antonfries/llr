@@ -1,7 +1,7 @@
 package Gui;
 
 import Action.CloseAction;
-import Action.KoeffizientenEinstellungenAction;
+import Action.KoeffizientenEinstellungenSpeichernAction;
 import Listener.GeneralStartListener;
 import Listener.KoeffizientenSpeichernListener;
 import Main.ExcelFileChecker;
@@ -84,7 +84,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         String saveAction = "Save";
         KeyStroke speichernStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
         jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(speichernStroke, saveAction);
-        jLayeredPane.getActionMap().put(saveAction, new KoeffizientenEinstellungenAction(this));
+        jLayeredPane.getActionMap().put(saveAction, new KoeffizientenEinstellungenSpeichernAction(this));
 
         String closeAction = "Close";
         KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);

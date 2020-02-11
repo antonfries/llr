@@ -1,15 +1,15 @@
-package Listener;
+package Action;
 
 import Class.Reset;
 import Gui.Gui;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class ResetListener implements ActionListener {
+public class ResetAction extends AbstractAction {
     private Gui gui;
 
-    public ResetListener(Gui gui) {
+    public ResetAction(Gui gui) {
         this.gui = gui;
     }
 

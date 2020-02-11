@@ -2,6 +2,7 @@ package Gui;
 
 import Action.CloseAction;
 import Action.EinstellungenSpeichernAction;
+import Action.KoeffizientenEinstellungenAction;
 import Listener.EinstellungenSpeichernListener;
 import Listener.GeneralStartListener;
 import Listener.KoeffizientListener;
@@ -146,9 +147,14 @@ public class GuiEinstellungen extends JFrame {
         jLayeredPane.getActionMap().put(saveAction, new EinstellungenSpeichernAction(this));
 
         String closeAction = "Close";
-        KeyStroke escapeStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        KeyStroke closeStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
         jLayeredPane.getActionMap().put(closeAction, new CloseAction(this));
-        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeStroke, closeAction);
+        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(closeStroke, closeAction);
+
+        String koeffizientAction = "Koeffizient";
+        KeyStroke koeffizientStroke = KeyStroke.getKeyStroke(KeyEvent.VK_K, KeyEvent.CTRL_DOWN_MASK);
+        jLayeredPane.getActionMap().put(koeffizientAction, new KoeffizientenEinstellungenAction(this));
+        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(koeffizientStroke, koeffizientAction);
 
         gui.fillView();
         fillView();

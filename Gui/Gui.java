@@ -1,6 +1,8 @@
 package Gui;
 
+import Action.DateiAction;
 import Action.EinstellungenAction;
+import Action.ResetAction;
 import Listener.*;
 import Main.ExcelFileChecker;
 import Main.Konfiguration;
@@ -77,10 +79,21 @@ public class Gui extends JFrame {
         resetButton.addActionListener(new ResetListener(Gui.this));
 
         JLayeredPane jLayeredPane = getLayeredPane();
+
         String einstellungenAktion = "Settings";
         KeyStroke einstellungenStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
         jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(einstellungenStroke, einstellungenAktion);
         jLayeredPane.getActionMap().put(einstellungenAktion, new EinstellungenAction(this));
+
+        String resetAktion = "Reset";
+        KeyStroke resetStroke = KeyStroke.getKeyStroke(KeyEvent.VK_R, KeyEvent.CTRL_DOWN_MASK);
+        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(resetStroke, resetAktion);
+        jLayeredPane.getActionMap().put(resetAktion, new ResetAction(this));
+
+        String openAction = "Open";
+        KeyStroke openStroke = KeyStroke.getKeyStroke(KeyEvent.VK_O, KeyEvent.CTRL_DOWN_MASK);
+        jLayeredPane.getActionMap().put(openAction, new DateiAction(this));
+        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(openStroke, openAction);
 
         fillView();
     }
