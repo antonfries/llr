@@ -5,8 +5,8 @@ import Main.Konfiguration;
 import Main.Utility;
 import Main.Validation;
 
-public class Einstellungen {
-    public Einstellungen(GuiEinstellungen guiEinstellungen) {
+public class EinstellungenSpeichern {
+    public EinstellungenSpeichern(GuiEinstellungen guiEinstellungen) {
         boolean persistMenge = false;
         boolean persistWert = false;
         try {

@@ -1,8 +1,8 @@
 package Gui;
 
 import Action.CloseAction;
-import Action.EinstellungenAction;
-import Listener.EinstellungenListener;
+import Action.EinstellungenSpeichernAction;
+import Listener.EinstellungenSpeichernListener;
 import Listener.GeneralStartListener;
 import Listener.KoeffizientListener;
 import Listener.KoeffizientenEinstellungenListener;
@@ -133,7 +133,7 @@ public class GuiEinstellungen extends JFrame {
         koeffizientEinstellungenButton = new JButton("Koeffizienten-Einstellungen");
         koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(GuiEinstellungen.this));
         speichernButton = new JButton("Speichern");
-        speichernButton.addActionListener(new EinstellungenListener(GuiEinstellungen.this));
+        speichernButton.addActionListener(new EinstellungenSpeichernListener(GuiEinstellungen.this));
         startButton = new JButton("Start");
         startButton.setEnabled(ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad(), this));
         startButton.addActionListener(new GeneralStartListener(this));
@@ -143,7 +143,7 @@ public class GuiEinstellungen extends JFrame {
         String saveAction = "Save";
         KeyStroke speichernStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
         jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(speichernStroke, saveAction);
-        jLayeredPane.getActionMap().put(saveAction, new EinstellungenAction(this));
+        jLayeredPane.getActionMap().put(saveAction, new EinstellungenSpeichernAction(this));
 
         String closeAction = "Close";
         KeyStroke escapeStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);

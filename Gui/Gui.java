@@ -1,11 +1,13 @@
 package Gui;
 
+import Action.EinstellungenAction;
 import Listener.*;
 import Main.ExcelFileChecker;
 import Main.Konfiguration;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class Gui extends JFrame {
 
@@ -73,6 +75,13 @@ public class Gui extends JFrame {
         jScrollPane.setPreferredSize(new Dimension(230, 174));
         resetButton = new JButton("Einstellungen zurücksetzen");
         resetButton.addActionListener(new ResetListener(Gui.this));
+
+        JLayeredPane jLayeredPane = getLayeredPane();
+        String einstellungenAktion = "Settings";
+        KeyStroke einstellungenStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
+        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(einstellungenStroke, einstellungenAktion);
+        jLayeredPane.getActionMap().put(einstellungenAktion, new EinstellungenAction(this));
+
         fillView();
     }
 

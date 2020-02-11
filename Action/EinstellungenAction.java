@@ -1,6 +1,6 @@
 package Action;
 
-import Class.Einstellungen;
+import Gui.Gui;
 import Gui.GuiEinstellungen;
 
 import javax.swing.*;
@@ -8,14 +8,13 @@ import java.awt.event.ActionEvent;
 
 public class EinstellungenAction extends AbstractAction {
 
+    private Gui gui;
 
-    private GuiEinstellungen guiEinstellungen;
-
-    public EinstellungenAction(GuiEinstellungen guiEinstellungen) {
-        this.guiEinstellungen = guiEinstellungen;
+    public EinstellungenAction(Gui gui) {
+        this.gui = gui;
     }
 
     public void actionPerformed(ActionEvent actionEvent) {
-        new Einstellungen(guiEinstellungen);
+        new GuiEinstellungen(gui);
     }
 }

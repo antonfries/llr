@@ -9,7 +9,7 @@ import Main.Validation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class KoeffizientenEinstellungenListener implements ActionListener {
+public class KoeffizientenEinstellungenListener implements ActionListener { // TODO: class
     private GuiEinstellungen guiEinstellungen;
 
     public KoeffizientenEinstellungenListener(GuiEinstellungen guiEinstellungen) {

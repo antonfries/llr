@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
-public class ResetListener implements ActionListener {
+public class ResetListener implements ActionListener { // TODO: class
     private Gui gui;
 
     public ResetListener(Gui gui) {
