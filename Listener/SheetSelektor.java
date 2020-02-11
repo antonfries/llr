@@ -12,7 +12,7 @@ public class SheetSelektor {
         Excel excel = new Excel();
         gui.sheetContainer.removeAll();
         gui.sheetListe = new ButtonGroup();
-        if (Konfiguration.getSheetPosition() >= excel.ExcelSheetListe.length) {
+        if (Konfiguration.getSheetPosition() >= excel.ExcelSheetListe.length) { // TODO: macht das Sinn?
             Konfiguration.setSheetPosition(0);
         }
         int counter = 0;
@@ -20,6 +20,9 @@ public class SheetSelektor {
             JRadioButton sheetButton = new JRadioButton(excel.ExcelSheetListe[i].getSheetName());
             int zeilenAnzahl = excel.ExcelSheetListe[i].getLastRowNum() + 1;
             if (zeilenAnzahl <= 1) {
+                // Hack, damit die Sheetposition nicht übernommen wird bei einem neuen Sheet mit leeren Mappen
+//                Konfiguration.setSheetPosition(Konfiguration.getSheetPosition() - 1);
+                // TODO: funktioniert so noch nicht ganz :D
                 continue;
             } else {
                 counter++;

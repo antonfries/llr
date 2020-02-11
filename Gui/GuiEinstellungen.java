@@ -1,5 +1,7 @@
 package Gui;
 
+import Action.CloseAction;
+import Action.EinstellungenAction;
 import Listener.EinstellungenListener;
 import Listener.GeneralStartListener;
 import Listener.KoeffizientListener;
@@ -8,6 +10,7 @@ import Main.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 
 public class GuiEinstellungen extends JFrame {
@@ -41,6 +44,7 @@ public class GuiEinstellungen extends JFrame {
         init();
         initComponents();
         addComponents();
+        getRootPane().setDefaultButton(startButton);
         setVisible(true);
     }
 
@@ -132,7 +136,20 @@ public class GuiEinstellungen extends JFrame {
         speichernButton.addActionListener(new EinstellungenListener(GuiEinstellungen.this));
         startButton = new JButton("Start");
         startButton.setEnabled(ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad(), this));
-        startButton.addActionListener(new GeneralStartListener(GuiEinstellungen.this));
+        startButton.addActionListener(new GeneralStartListener(this));
+
+        JLayeredPane jLayeredPane = getLayeredPane();
+
+        String saveAction = "Save";
+        KeyStroke speichernStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
+        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(speichernStroke, saveAction);
+        jLayeredPane.getActionMap().put(saveAction, new EinstellungenAction(this));
+
+        String closeAction = "Close";
+        KeyStroke escapeStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        jLayeredPane.getActionMap().put(closeAction, new CloseAction(this));
+        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escapeStroke, closeAction);
+
         gui.fillView();
         fillView();
     }

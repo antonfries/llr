@@ -45,7 +45,6 @@ public class Buchung {
         if (summand < Konfiguration.getMinimalSummand() && summand != 0.0) {
             summand = Konfiguration.getMinimalSummand();
         }
-        System.out.format("Summand: %.2f\tKoeffizient:%.2f\tMenge: %.2f\tWert: %.2f\n", summand, getKoeffizient(), getMenge(), wert);
         return summand;
     }
 

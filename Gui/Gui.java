@@ -26,6 +26,7 @@ public class Gui extends JFrame {
         init();
         initComponents();
         addComponents();
+        getRootPane().setDefaultButton(startButton);
         setVisible(true);
     }
 

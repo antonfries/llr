@@ -1,5 +1,7 @@
 package Gui;
 
+import Action.CloseAction;
+import Action.KoeffizientenEinstellungenAction;
 import Listener.GeneralStartListener;
 import Listener.KoeffizientenSpeichernListener;
 import Main.ExcelFileChecker;
@@ -8,6 +10,7 @@ import Main.Utility;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 
 public class GuiKoeffizientenEinstellungen extends JFrame {
 
@@ -22,6 +25,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         init();
         initComponents();
         addComponents();
+        getRootPane().setDefaultButton(startButton);
         setVisible(true);
     }
 
@@ -69,12 +73,23 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
             grenzeTextfeldListe[i] = new JTextField(4);
             if (i == Konfiguration.getKoeffizientAnzahl()) {
-                grenzeTextfeldListe[i].setToolTipText("-1 setzen, falls es keine obere Grenze gibt");
+                grenzeTextfeldListe[i].setToolTipText("Wert -1 setzen, falls es keine obere Grenze gibt");
             }
         }
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
             koeffizientTextfeldListe[i] = new JTextField(4);
         }
+        JLayeredPane jLayeredPane = getLayeredPane();
+
+        String saveAction = "Save";
+        KeyStroke speichernStroke = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
+        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(speichernStroke, saveAction);
+        jLayeredPane.getActionMap().put(saveAction, new KoeffizientenEinstellungenAction(this));
+
+        String closeAction = "Close";
+        KeyStroke keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0);
+        jLayeredPane.getActionMap().put(closeAction, new CloseAction(this));
+        jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(keyStroke, closeAction);
         fillView();
     }
 

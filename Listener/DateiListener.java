@@ -47,7 +47,6 @@ public class DateiListener implements ActionListener {
                 Konfiguration.setDateiPfad(dateiPfad);
                 // TODO: Prominente Shortcuts binden (Strg+s, Enter, Escape)
                 // TODO: Evaluation, ob Fehlermeldung angezeigt werden soll, Verbesserung oder ein Mix von beidem
-                // TODO: Anton -> Testmappe 1 keine Default Sheet Position
                 gui.fillView();
             } else {
                 Validation.showSelectionErrorMessage(gui);

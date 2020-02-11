@@ -27,12 +27,7 @@ public class Rechner {
         int min = Konfiguration.getZeileAnfang();
         int max = Konfiguration.getZeileEnde();
         int zeilenAnzahl = sheet.getLastRowNum() + 1;
-        int progressLength;
-        if (max == -1) {
-            progressLength = zeilenAnzahl - min;
-        } else {
-            progressLength = max - min;
-        }
+        int progressLength = max == -1 ? zeilenAnzahl - min : max - min;
         if (zeilenAnzahl < min) {
             Validation.showZeileAnfangErrorMessage(jFrame);
             return;
@@ -53,7 +48,7 @@ public class Rechner {
                 if (counter < min) {
                     continue;
                 }
-                if (max >= 1) {
+                if (max >= 1) { // TODO: macht das Sinn?
                     if (counter > max) {
                         break;
                     }
