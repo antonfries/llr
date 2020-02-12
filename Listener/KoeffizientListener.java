@@ -1,6 +1,7 @@
 package Listener;
 
 import Gui.GuiEinstellungen;
+import Main.Konfiguration;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -31,7 +32,7 @@ public class KoeffizientListener implements DocumentListener {
             koeffizientAnzahl = Integer.parseInt(guiEinstellungen.koeffizientAnzahlTextfeld.getText());
         } catch (NumberFormatException ignored) {
         }
-        if (koeffizientAnzahl > 0) {
+        if (koeffizientAnzahl > 0 && koeffizientAnzahl <= Konfiguration.MAXIMAL_KOEFFIZIENT_ANZAHL) {
             validKoeffizientAnzahl = true;
         }
         guiEinstellungen.koeffizientEinstellungenButton.setEnabled(validKoeffizientAnzahl);

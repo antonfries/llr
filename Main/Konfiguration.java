@@ -22,6 +22,8 @@ public class Konfiguration {
     public static final String ZEILE_ENDE = "Zeile-Ende";
     public static final String STANDARD_KOEFFIZIENT = "Standard-Koeffizient";
 
+    public static final int MAXIMAL_KOEFFIZIENT_ANZAHL = 100;
+
     public static Regler[] getReglerListe() {
         Regler[] reglerListe = new Regler[getKoeffizientAnzahl()];
         for (int i = 0; i < getKoeffizientAnzahl(); i++) {

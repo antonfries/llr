@@ -6,7 +6,7 @@ import Listener.GeneralStartListener;
 import Listener.KoeffizientenSpeichernListener;
 import Main.ExcelFileChecker;
 import Main.Konfiguration;
-import Main.Utility;
+import Main.WrapLayout;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +16,8 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
 
     public JTextField[] grenzeTextfeldListe;
     public JTextField[] koeffizientTextfeldListe;
+    private JScrollPane jScrollPane;
+    private JPanel jPanel;
     private JLabel koeffizientText;
     private JLabel grenzeText;
     private JButton speichernButton;
@@ -37,25 +39,16 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    public static void adjustGrenzen() {
-        for (int i = 1; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
-            double current = Konfiguration.grenzeNode.getDouble(String.valueOf(i), 0.0);
-            double previous = Konfiguration.grenzeNode.getDouble(String.valueOf(i - 1), 0.0);
-            if (current <= previous && i != Konfiguration.getKoeffizientAnzahl()) {
-                Konfiguration.grenzeNode.putDouble(String.valueOf(i), Utility.round2Digits(previous + 0.01));
-            }
-        }
-    }
-
     private void addComponents() {
-        add(grenzeText);
+        jPanel.add(grenzeText);
         for (JTextField grenzeTextfeld : grenzeTextfeldListe) {
-            add(grenzeTextfeld);
+            jPanel.add(grenzeTextfeld);
         }
-        add(koeffizientText);
+        jPanel.add(koeffizientText);
         for (JTextField koeffizienttextfeld : koeffizientTextfeldListe) {
-            add(koeffizienttextfeld);
+            jPanel.add(koeffizienttextfeld);
         }
+        add(jScrollPane);
         add(speichernButton);
         add(startButton);
     }
@@ -79,6 +72,15 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
             koeffizientTextfeldListe[i] = new JTextField(4);
         }
+        jPanel = new JPanel();
+        jPanel.setLayout(new WrapLayout());
+        jScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
+                ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        jScrollPane.add(jPanel);
+        jScrollPane.setViewportView(jPanel);
+        jScrollPane.setBorder(BorderFactory.createEmptyBorder());
+        jScrollPane.setPreferredSize(new Dimension(700, 200));
+
         JLayeredPane jLayeredPane = getLayeredPane();
 
         String saveAction = "Save";
@@ -94,8 +96,6 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     }
 
     public void fillView() {
-        adjustGrenzen();
-        // TODO: Bei Initialisierung -1 als letzten Wert anzeigen
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
             grenzeTextfeldListe[i].setText(Konfiguration.grenzeNode.get(String.valueOf(i), "0.0"));
         }

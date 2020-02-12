@@ -1,5 +1,7 @@
 package Main;
 
+import java.util.prefs.BackingStoreException;
+
 public class Utility {
 
     public static double round2Digits(double value) {
@@ -15,6 +17,37 @@ public class Utility {
             return parseDouble(value);
         } catch (NumberFormatException e) {
             return 0.0;
+        }
+    }
+
+    public static void removeOldGrenzen() {
+        try {
+            // TODO: merken, ob in alten maximalen Wert -1 stand und das mitnehmen
+            for (String g : Konfiguration.grenzeNode.keys()) {
+                if (Integer.parseInt(g) < 0 || Integer.parseInt(g) > Konfiguration.getKoeffizientAnzahl()) {
+                    Konfiguration.grenzeNode.remove(g);
+                }
+            }
+            for (String k : Konfiguration.koeffizientNode.keys()) {
+                if (Integer.parseInt(k) < 0 || Integer.parseInt(k) >= Konfiguration.getKoeffizientAnzahl()) {
+                    Konfiguration.koeffizientNode.remove(k);
+                }
+            }
+        } catch (BackingStoreException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void adjustGrenzen() {
+        for (int i = 1; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
+            double current = Konfiguration.grenzeNode.getDouble(String.valueOf(i), 0.0);
+            double previous = Konfiguration.grenzeNode.getDouble(String.valueOf(i - 1), 0.0);
+            if (current <= previous && i != Konfiguration.getKoeffizientAnzahl()) {
+                Konfiguration.grenzeNode.putDouble(String.valueOf(i), Utility.round2Digits(previous + 0.01));
+            }
+            if (i == Konfiguration.getKoeffizientAnzahl() && current == 0.0) {
+                Konfiguration.grenzeNode.putDouble(String.valueOf(i), -1.0);
+            }
         }
     }
 }
