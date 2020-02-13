@@ -20,16 +20,19 @@ public class Utility {
         }
     }
 
-    public static void removeOldGrenzen() {
+    public static void removeOldGrenzen(int koeffizientAnzahl) {
+        boolean unlimited = Konfiguration.grenzeNode.getDouble(String.valueOf(Konfiguration.getKoeffizientAnzahl()), 0.0) == -1;
+        if (unlimited) {
+            Konfiguration.grenzeNode.putDouble(String.valueOf(koeffizientAnzahl), -1.0);
+        }
         try {
-            // TODO: merken, ob in alten maximalen Wert -1 stand und das mitnehmen
             for (String g : Konfiguration.grenzeNode.keys()) {
-                if (Integer.parseInt(g) < 0 || Integer.parseInt(g) > Konfiguration.getKoeffizientAnzahl()) {
+                if (Integer.parseInt(g) < 0 || Integer.parseInt(g) > koeffizientAnzahl) {
                     Konfiguration.grenzeNode.remove(g);
                 }
             }
             for (String k : Konfiguration.koeffizientNode.keys()) {
-                if (Integer.parseInt(k) < 0 || Integer.parseInt(k) >= Konfiguration.getKoeffizientAnzahl()) {
+                if (Integer.parseInt(k) < 0 || Integer.parseInt(k) >= koeffizientAnzahl) {
                     Konfiguration.koeffizientNode.remove(k);
                 }
             }

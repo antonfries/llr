@@ -14,8 +14,8 @@ public class EinstellungenSpeichern {
             if (koeffizientAnzahl < 0) {
                 Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);
             } else {
+                Utility.removeOldGrenzen(koeffizientAnzahl);
                 Konfiguration.setKoeffizientAnzahl(koeffizientAnzahl);
-                Utility.removeOldGrenzen();
                 Utility.adjustGrenzen();
             }
         } catch (NumberFormatException e) {
@@ -79,6 +79,7 @@ public class EinstellungenSpeichern {
         if (standardMenge > maximalMenge) {
             Validation.showMaximalErrorMessage(guiEinstellungen);
         } else {
+            // TODO: Trotz Fehlermeldung die Mengen nicht immer persistieren
             Konfiguration.setStandardMenge(standardMenge);
             Konfiguration.setMaximalMenge(maximalMenge);
         }

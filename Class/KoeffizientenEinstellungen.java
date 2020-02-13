@@ -15,8 +15,8 @@ public class KoeffizientenEinstellungen {
                 Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);
                 continueFlag = false;
             } else {
+                Utility.removeOldGrenzen(koeffizientAnzahl);
                 Konfiguration.setKoeffizientAnzahl(koeffizientAnzahl);
-                Utility.removeOldGrenzen();
                 Utility.adjustGrenzen();
             }
         } catch (NumberFormatException e) {
