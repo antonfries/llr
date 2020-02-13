@@ -7,7 +7,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.io.File;
-import java.io.IOException;
 
 public class Datei {
     public Datei(Gui gui) {
@@ -15,7 +14,7 @@ public class Datei {
         File currentDirectoryPath = FileSystemView.getFileSystemView().getHomeDirectory();
         String developerPath = "C:\\antonfries\\projects\\llr\\files";
         JFileChooser jFileChooser = new JFileChooser(developerPath);
-        FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel files (*.xlsx)", "xlsx");
+        FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel-Dateien (*.xlsx)", "xlsx");
         jFileChooser.setFileFilter(excelFilter);
         int r = jFileChooser.showOpenDialog(null);
         if (r == JFileChooser.APPROVE_OPTION) {
@@ -30,14 +29,10 @@ public class Datei {
                     if (sheetPosition != -1) {
                         Konfiguration.setSheetPosition(sheetPosition);
                     }
-                    try {
-                        excel.wb.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    excel.close();
                 }
                 Konfiguration.setDateiPfad(dateiPfad);
-                // TODO: Evaluation, ob Fehlermeldung angezeigt werden soll, Verbesserung oder ein Mix von beidem
+                // TODO: Evaluation bei allen Feldern, ob Fehlermeldung angezeigt werden soll, automatische Verbesserung oder ein Mix von beidem
                 gui.fillView();
             } else {
                 Validation.showSelectionErrorMessage(gui);

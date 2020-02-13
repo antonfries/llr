@@ -36,8 +36,7 @@ public class Utility {
                     Konfiguration.koeffizientNode.remove(k);
                 }
             }
-        } catch (BackingStoreException e) {
-            e.printStackTrace();
+        } catch (BackingStoreException ignored) {
         }
     }
 

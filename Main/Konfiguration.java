@@ -4,9 +4,14 @@ import java.util.prefs.Preferences;
 
 public class Konfiguration {
 
-    public static Preferences basisNode = Preferences.userRoot().node("Basis");
-    public static Preferences grenzeNode = Preferences.userRoot().node("Grenzen");
-    public static Preferences koeffizientNode = Preferences.userRoot().node("Koeffizienten");
+    public static final String BASIS = "Basis";
+    public static final String GRENZEN = "Grenzen";
+    public static final String KOEFFIZIENTEN = "Koeffizienten";
+    public static final String WERT = "Wert";
+    public static final String MENGE = "Menge";
+    public static Preferences basisNode = Preferences.userRoot().node(BASIS);
+    public static Preferences grenzeNode = Preferences.userRoot().node(GRENZEN);
+    public static Preferences koeffizientNode = Preferences.userRoot().node(KOEFFIZIENTEN);
     // Sollen händisch falsche Einstellungen in der Registry abgefangen werden?
     public static final String DATEI_PFAD = "Datei-Pfad";
     public static final String ARBEITSZEIT = "Arbeitszeit";

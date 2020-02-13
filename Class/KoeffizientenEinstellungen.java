@@ -11,8 +11,8 @@ public class KoeffizientenEinstellungen {
         boolean continueFlag = true;
         try {
             int koeffizientAnzahl = (int) Utility.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText());
-            if (koeffizientAnzahl < 0) {
-                Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);
+            if (koeffizientAnzahl < 0 || koeffizientAnzahl > Konfiguration.MAXIMAL_KOEFFIZIENT_ANZAHL) {
+                Validation.showKoeffizientErrorMessage(guiEinstellungen);
                 continueFlag = false;
             } else {
                 Utility.removeOldGrenzen(koeffizientAnzahl);

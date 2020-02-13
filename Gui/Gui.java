@@ -35,6 +35,7 @@ public class Gui extends JFrame {
     }
 
     private void init() {
+        // TODO: Absolute Werte als Konstanten im Rumpf festlegen
         setTitle("LLR");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());

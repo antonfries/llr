@@ -28,12 +28,11 @@ public class Reset {
                 Konfiguration.basisNode.removeNode();
                 Konfiguration.grenzeNode.removeNode();
                 Konfiguration.koeffizientNode.removeNode();
-                Konfiguration.basisNode = Preferences.userRoot().node("Basis");
-                Konfiguration.grenzeNode = Preferences.userRoot().node("Grenzen");
-                Konfiguration.koeffizientNode = Preferences.userRoot().node("Koeffizienten");
+                Konfiguration.basisNode = Preferences.userRoot().node(Konfiguration.BASIS);
+                Konfiguration.grenzeNode = Preferences.userRoot().node(Konfiguration.GRENZEN);
+                Konfiguration.koeffizientNode = Preferences.userRoot().node(Konfiguration.KOEFFIZIENTEN);
             }
-        } catch (BackingStoreException e) {
-            e.printStackTrace();
+        } catch (BackingStoreException ignored) {
         }
     }
 }

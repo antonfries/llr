@@ -9,7 +9,6 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.WindowEvent;
-import java.io.IOException;
 
 public class Rechner {
 
@@ -62,11 +61,7 @@ public class Rechner {
                 }
                 ergebnis += summand;
             }
-            try {
-                excel.wb.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                excel.close();
             ergebnis *= Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
             rechenFrame.dispatchEvent(new WindowEvent(rechenFrame, WindowEvent.WINDOW_CLOSING));
             StringSelection stringSelection = new StringSelection(String.valueOf(ergebnis));

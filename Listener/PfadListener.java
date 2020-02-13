@@ -8,7 +8,6 @@ import Main.SheetHelper;
 
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
-import java.io.IOException;
 
 public class PfadListener implements DocumentListener {
 
@@ -41,11 +40,7 @@ public class PfadListener implements DocumentListener {
             if (sheetPosition != -1) {
                 Konfiguration.setSheetPosition(sheetPosition);
             }
-            try {
-                excel.wb.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            excel.close();
             Konfiguration.setDateiPfad(dateiPfad);
             new SheetSelektor(gui);
         }

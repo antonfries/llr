@@ -32,7 +32,7 @@ public class Validation {
     public static void showSpaltenErrorMessage(JFrame jFrame, String spalte) {
         showErrorMessage(
                 jFrame,
-                "Bitte geben Sie Buchstaben von A-Z an!",
+                "Bitte geben Sie Buchstaben von A-Z ein!",
                 spalte + "-Validation"
         );
     }
@@ -56,7 +56,7 @@ public class Validation {
     public static void showMaximalErrorMessage(JFrame jframe) {
         showErrorMessage(
                 jframe,
-                "Die Minimal-Menge darf nicht kleiner als die Standard-Menge sein!",
+                "Die Maximal-Menge darf nicht kleiner als die Standard-Menge sein!",
                 Konfiguration.MAXIMAL_MENGE + "-Validation"
         );
     }
@@ -82,6 +82,14 @@ public class Validation {
                 jFrame,
                 "Bitte nutzen Sie den vorgeschlagenen Excel-Filter zur Selektion von Arbeitsmappen!",
                 "Datei-Validation"
+        );
+    }
+
+    public static void showKoeffizientErrorMessage(JFrame jFrame) {
+        showErrorMessage(
+                jFrame,
+                "Bitte geben Sie Koeffizienten von 0 bis " + Konfiguration.MAXIMAL_KOEFFIZIENT_ANZAHL + " ein!",
+                "Koeffizient-Validation"
         );
     }
 }

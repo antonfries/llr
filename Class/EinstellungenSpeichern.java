@@ -11,8 +11,8 @@ public class EinstellungenSpeichern {
         boolean persistWert = false;
         try {
             int koeffizientAnzahl = (int) Utility.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText());
-            if (koeffizientAnzahl < 0) {
-                Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);
+            if (koeffizientAnzahl < 0 || koeffizientAnzahl > Konfiguration.MAXIMAL_KOEFFIZIENT_ANZAHL) {
+                Validation.showKoeffizientErrorMessage(guiEinstellungen);
             } else {
                 Utility.removeOldGrenzen(koeffizientAnzahl);
                 Konfiguration.setKoeffizientAnzahl(koeffizientAnzahl);
@@ -25,13 +25,13 @@ public class EinstellungenSpeichern {
         if (checkValidity(wertSpalte)) {
             persistWert = true;
         } else {
-            Validation.showSpaltenErrorMessage(guiEinstellungen, "Wert");
+            Validation.showSpaltenErrorMessage(guiEinstellungen, Konfiguration.WERT);
         }
         String mengeSpalte = guiEinstellungen.mengeTextfeld.getText().toUpperCase();
         if (checkValidity(mengeSpalte)) {
             persistMenge = true;
         } else {
-            Validation.showSpaltenErrorMessage(guiEinstellungen, "Menge");
+            Validation.showSpaltenErrorMessage(guiEinstellungen, Konfiguration.MENGE);
         }
         if (persistMenge && persistWert) {
             if (checkDuplicates(mengeSpalte, wertSpalte)) {
@@ -82,7 +82,7 @@ public class EinstellungenSpeichern {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_MENGE);
         }
-        if (standardMenge > maximalMenge && persistMaximalMenge) {
+        if (standardMenge > maximalMenge) { // TODO: maximal 1 Fehlermeldung pro Feld anzeigen
             Validation.showMaximalErrorMessage(guiEinstellungen);
         } else {
             if (persistStandardMenge) {

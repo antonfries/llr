@@ -12,7 +12,6 @@ import Main.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 public class GuiEinstellungen extends JFrame {
 
@@ -56,11 +55,7 @@ public class GuiEinstellungen extends JFrame {
             if (sheetPosition != -1) {
                 Konfiguration.setSheetPosition(sheetPosition);
             }
-            try {
-                excel.wb.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            excel.close();
         }
         try {
             double arbeitszeit = Utility.parseDouble(gui.arbeitszeitTextfeld.getText());
@@ -110,9 +105,9 @@ public class GuiEinstellungen extends JFrame {
     private void initComponents() {
         koeffizientAnzahlFrage = new JLabel("Anzahl Koeffizienten:");
         wertFrage = new JLabel("In welcher Spalte steht Wert?");
-        wertFrage.setToolTipText("Möglich sind beliebig viele aneinandergeheftete Spalten (Bsp. FZ,R,PQR");
+        wertFrage.setToolTipText("Möglich sind beliebig viele aneinandergeheftete Buchstaben (Bsp. FZ,R,PQR");
         mengeFrage = new JLabel("In welcher Spalte steht Menge?");
-        mengeFrage.setToolTipText("Möglich sind beliebig viele aneinandergeheftete Spalten (Bsp. FZ,R,PQR");
+        mengeFrage.setToolTipText("Möglich sind beliebig viele aneinandergeheftete Buchstaben (Bsp. FZ,R,PQR");
         minSummandFrage = new JLabel("Minimal-Summand:");
         standardMengeFrage = new JLabel("Standard-Menge:");
         maxMengeFrage = new JLabel("Maximal-Menge:");
@@ -151,7 +146,7 @@ public class GuiEinstellungen extends JFrame {
         jLayeredPane.getActionMap().put(closeAction, new CloseAction(this));
         jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(closeStroke, closeAction);
 
-        String koeffizientAction = "Koeffizient";
+        String koeffizientAction = "Koeffizienten";
         KeyStroke koeffizientStroke = KeyStroke.getKeyStroke(KeyEvent.VK_K, KeyEvent.CTRL_DOWN_MASK);
         jLayeredPane.getActionMap().put(koeffizientAction, new KoeffizientenEinstellungenAction(this));
         jLayeredPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(koeffizientStroke, koeffizientAction);

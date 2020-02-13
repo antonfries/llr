@@ -5,6 +5,7 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.File;
+import java.io.IOException;
 
 public class Excel {
 
@@ -32,5 +33,12 @@ public class Excel {
             }
         }
         return -1;
+    }
+
+    public void close() {
+        try {
+            wb.close();
+        } catch (IOException ignored) {
+        }
     }
 }

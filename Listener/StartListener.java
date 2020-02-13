@@ -5,7 +5,6 @@ import Main.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 public class StartListener implements ActionListener {
     private Gui gui;
@@ -21,11 +20,7 @@ public class StartListener implements ActionListener {
         if (sheetPosition != -1) {
             Konfiguration.setSheetPosition(sheetPosition);
         }
-        try {
-            excel.wb.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        excel.close();
         try {
             double arbeitszeit = Utility.parseDouble(gui.arbeitszeitTextfeld.getText());
             if (arbeitszeit <= 0.0) {

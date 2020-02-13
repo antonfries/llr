@@ -66,7 +66,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
             grenzeTextfeldListe[i] = new JTextField(4);
             if (i == Konfiguration.getKoeffizientAnzahl()) {
-                grenzeTextfeldListe[i].setToolTipText("Wert -1 setzen, falls es keine obere Grenze gibt");
+                grenzeTextfeldListe[i].setToolTipText("Wert -1 setzen, falls es keine obere Grenze geben soll");
             }
         }
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
@@ -97,7 +97,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
 
     public void fillView() {
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
-            grenzeTextfeldListe[i].setText(Konfiguration.grenzeNode.get(String.valueOf(i), "0.0"));
+            grenzeTextfeldListe[i].setText(Konfiguration.grenzeNode.get(String.valueOf(i), String.valueOf(0.0)));
         }
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
             koeffizientTextfeldListe[i].setText(Konfiguration.koeffizientNode.get(String.valueOf(i), String.valueOf(Konfiguration.getStandardKoeffizient())));

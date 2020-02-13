@@ -29,14 +29,13 @@ public class ExcelFileChecker {
             } catch (POIXMLException e) {
                 Validation.showStrictErrorMessage(jFrame);
                 return false;
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ignored) {
             }
         }
         return false;
     }
 
-    private static String getExtensionByStringHandling(String dateiPfad) {
+    private static String getExtensionByStringHandling(String dateiPfad) { // TODO: [Interesse]
         Optional<String> optional = Optional.ofNullable(dateiPfad)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(dateiPfad.lastIndexOf(".") + 1));

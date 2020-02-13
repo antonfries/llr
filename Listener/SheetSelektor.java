@@ -5,7 +5,6 @@ import Main.Excel;
 import Main.Konfiguration;
 
 import javax.swing.*;
-import java.io.IOException;
 
 public class SheetSelektor {
     public SheetSelektor(Gui gui) {
@@ -31,11 +30,7 @@ public class SheetSelektor {
             gui.sheetListe.add(sheetButton);
             gui.sheetContainer.add(sheetButton);
         }
-        try {
-            excel.wb.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        excel.close();
         if (counter == 0) {
             gui.sheetContainer.add(new JLabel("<html>Die Excel-Datei enthält<br>keine nicht leeren Sheets!</html>"));
         }
