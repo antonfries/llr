@@ -60,10 +60,14 @@ public class EinstellungenSpeichern {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MINIMAL_SUMMAND);
         }
+        boolean persistStandardMenge = false;
+        boolean persistMaximalMenge = false;
         try {
             standardMenge = Utility.parseDouble(guiEinstellungen.standardMengeTextfeld.getText());
             if (standardMenge <= 0.0) {
                 Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.STANDARD_MENGE);
+            } else {
+                persistStandardMenge = true;
             }
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.STANDARD_MENGE);
@@ -72,16 +76,21 @@ public class EinstellungenSpeichern {
             maximalMenge = Utility.parseDouble(guiEinstellungen.maxMengeTextfeld.getText());
             if (maximalMenge <= 0.0) {
                 Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_MENGE);
+            } else {
+                persistMaximalMenge = true;
             }
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_MENGE);
         }
-        if (standardMenge > maximalMenge) {
+        if (standardMenge > maximalMenge && persistMaximalMenge) {
             Validation.showMaximalErrorMessage(guiEinstellungen);
         } else {
-            // TODO: Trotz Fehlermeldung die Mengen nicht immer persistieren
-            Konfiguration.setStandardMenge(standardMenge);
-            Konfiguration.setMaximalMenge(maximalMenge);
+            if (persistStandardMenge) {
+                Konfiguration.setStandardMenge(standardMenge);
+            }
+            if (persistMaximalMenge) {
+                Konfiguration.setMaximalMenge(maximalMenge);
+            }
         }
         try {
             double buchungKoeffizient = Utility.parseDouble(guiEinstellungen.buchungKoeffizientTextfeld.getText());
