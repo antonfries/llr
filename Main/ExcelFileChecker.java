@@ -35,7 +35,7 @@ public class ExcelFileChecker {
         return false;
     }
 
-    private static String getExtensionByStringHandling(String dateiPfad) { // TODO: [Interesse]
+    private static String getExtensionByStringHandling(String dateiPfad) {
         Optional<String> optional = Optional.ofNullable(dateiPfad)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(dateiPfad.lastIndexOf(".") + 1));

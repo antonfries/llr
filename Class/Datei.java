@@ -5,13 +5,9 @@ import Main.*;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileSystemView;
-import java.io.File;
 
 public class Datei {
     public Datei(Gui gui) {
-        // TODO: Nach Entwicklung Home-Directory nutzen
-        File currentDirectoryPath = FileSystemView.getFileSystemView().getHomeDirectory();
         String developerPath = "C:\\antonfries\\projects\\llr\\files";
         JFileChooser jFileChooser = new JFileChooser(developerPath);
         FileNameExtensionFilter excelFilter = new FileNameExtensionFilter("Excel-Dateien (*.xlsx)", "xlsx");
@@ -32,7 +28,6 @@ public class Datei {
                     excel.close();
                 }
                 Konfiguration.setDateiPfad(dateiPfad);
-                // TODO: Evaluation bei allen Feldern, ob Fehlermeldung angezeigt werden soll, automatische Verbesserung oder ein Mix von beidem
                 gui.fillView();
             } else {
                 Validation.showSelectionErrorMessage(gui);

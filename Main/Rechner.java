@@ -31,18 +31,18 @@ public class Rechner {
         int max = Konfiguration.getZeileEnde();
         int zeilenAnzahl = sheet.getLastRowNum() + 1;
         int progressLength = max == -1 ? zeilenAnzahl - min : max - min;
-        if (zeilenAnzahl < min) { // TODO: +-1 überprüfen bei zeilenanzahl - min
+        if (zeilenAnzahl < min) { // TODO: +-1 überprüfen bei max = -1
             Validation.showZeileAnfangErrorMessage(jFrame);
             return;
         }
-        JFrame rechenFrame = new JFrame(); // TODO: Auslagern in GUI-Klasse mit Schnittstelle
+        JFrame rechenFrame = new JFrame();
         rechenFrame.setTitle(TITEL);
         rechenFrame.setSize(WIDTH, HEIGHT);
         JProgressBar jProgressBar = new JProgressBar(0, progressLength);
         jProgressBar.setStringPainted(true);
         jProgressBar.setValue(0); // TODO: notwendig?
         Thread t = new Thread(() -> {
-            double wert, menge, summand, ergebnis = 0.0; // TODO: ist das guter Codestyle?
+            double wert, menge, summand, ergebnis = 0.0;
             int counter = 0, erfolgCounter = 0;
             for (Row r : sheet) {
                 final int percent = counter;
@@ -86,7 +86,7 @@ public class Rechner {
             Cell entitaetZelle = r.getCell(charZuExcelSpalte(entitaetSpalte));
             einzelEntitaet = entitaetZelle != null
                     ? Utility.parseDoubleIgnoreError(entitaetZelle.getStringCellValue()) : 0.0;
-            if (einzelEntitaet != 0.0) { // TODO: Reihenfolge des Auslesens der Spalten rausfinden
+            if (einzelEntitaet != 0.0) {
                 entitaet = einzelEntitaet;
             }
         }

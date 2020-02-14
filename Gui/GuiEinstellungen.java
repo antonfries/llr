@@ -71,7 +71,6 @@ public class GuiEinstellungen extends JFrame {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(gui, Konfiguration.ARBEITSZEIT);
         }
-        // TODO: Grid- bzw. GridBagLayout mit Bordern implementieren
     }
 
     private void init() {

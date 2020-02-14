@@ -91,7 +91,7 @@ public class EinstellungenSpeichern {
                 Konfiguration.setStandardMenge(standardMenge);
             }
             if (persistMaximalMenge) {
-                Konfiguration.setMaximalMenge(maximalMenge); // TODO: Maximalmenge -1 erlauben
+                Konfiguration.setMaximalMenge(maximalMenge);
             }
         }
         try {

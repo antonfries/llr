@@ -22,7 +22,7 @@ public class KoeffizientenEinstellungen {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);
             continueFlag = false;
-        } // TODO: Trennzeichen bei Spalten zulassen
+        }
         guiEinstellungen.fillView();
         if (continueFlag) {
             new GuiKoeffizientenEinstellungen();

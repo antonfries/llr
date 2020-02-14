@@ -32,7 +32,6 @@ public class Gui extends JFrame {
     private JButton resetButton;
 
     public Gui() {
-        // TODO: [Prio] Konzept für Anzeige jedweder Fehlermeldung in Dialog
         init();
         initComponents();
         addComponents();
@@ -73,7 +72,7 @@ public class Gui extends JFrame {
         startButton.addActionListener(new StartListener(this));
         dateiButton = new JButton("Datei auswählen...");
         dateiButton.addActionListener(new DateiListener(this));
-        sheetContainer = new JPanel(); // TODO: Erstellung aller J-Komponenten evaluieren
+        sheetContainer = new JPanel();
         sheetContainer.setLayout(new BoxLayout(sheetContainer, BoxLayout.PAGE_AXIS));
         jScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
