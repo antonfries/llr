@@ -41,13 +41,14 @@ public class Utility {
     }
 
     public static void adjustGrenzen() {
+        // TODO: Falsche Settings in der Registry?
         for (int i = 1; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
             double current = Konfiguration.grenzeNode.getDouble(String.valueOf(i), 0.0);
             double previous = Konfiguration.grenzeNode.getDouble(String.valueOf(i - 1), 0.0);
             if (current <= previous && i != Konfiguration.getKoeffizientAnzahl()) {
                 Konfiguration.grenzeNode.putDouble(String.valueOf(i), Utility.round2Digits(previous + 0.01));
             }
-            if (i == Konfiguration.getKoeffizientAnzahl() && current == 0.0) {
+            if (i == Konfiguration.getKoeffizientAnzahl() && current == 0.0) { // TODO: macht dieser Abschnitt Sinn?
                 Konfiguration.grenzeNode.putDouble(String.valueOf(i), -1.0);
             }
         }

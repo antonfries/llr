@@ -15,6 +15,10 @@ import java.awt.event.KeyEvent;
 
 public class GuiEinstellungen extends JFrame {
 
+    public static final String TITEL = "Einstellungen";
+    public static final int WIDTH = 300;
+    public static final int HEIGHT = 400;
+
     public JTextField koeffizientAnzahlTextfeld;
     public JTextField wertTextfeld;
     public JTextField mengeTextfeld;
@@ -71,9 +75,9 @@ public class GuiEinstellungen extends JFrame {
     }
 
     private void init() {
-        setTitle("Einstellungen");
+        setTitle(TITEL);
         setLayout(new FlowLayout());
-        setSize(300, 400);
+        setSize(WIDTH, HEIGHT);
         setResizable(false);
         setLocationRelativeTo(null);
     }

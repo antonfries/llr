@@ -13,6 +13,12 @@ import java.awt.event.KeyEvent;
 
 public class Gui extends JFrame {
 
+    public static final String TITEL = "LLR";
+    public static final int WIDTH = 500;
+    public static final int HEIGHT = 315;
+    public static final int SCROLL_WIDTH = 230;
+    public static final int SCROLL_HEIGHT = 174;
+
     public JTextField dateipfadTextfeld;
     public JTextField arbeitszeitTextfeld;
     public JButton startButton;
@@ -35,11 +41,10 @@ public class Gui extends JFrame {
     }
 
     private void init() {
-        // TODO: Absolute Werte als Konstanten im Rumpf festlegen
-        setTitle("LLR");
+        setTitle(TITEL);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
-        setSize(500, 315);
+        setSize(WIDTH, HEIGHT);
         setResizable(true);
         setLocationRelativeTo(null);
     }
@@ -68,14 +73,14 @@ public class Gui extends JFrame {
         startButton.addActionListener(new StartListener(this));
         dateiButton = new JButton("Datei auswählen...");
         dateiButton.addActionListener(new DateiListener(this));
-        sheetContainer = new JPanel();
+        sheetContainer = new JPanel(); // TODO: Erstellung aller J-Komponenten evaluieren
         sheetContainer.setLayout(new BoxLayout(sheetContainer, BoxLayout.PAGE_AXIS));
         jScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
         jScrollPane.add(sheetContainer);
         jScrollPane.setViewportView(sheetContainer);
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
-        jScrollPane.setPreferredSize(new Dimension(230, 174));
+        jScrollPane.setPreferredSize(new Dimension(SCROLL_WIDTH, SCROLL_HEIGHT));
         resetButton = new JButton("Einstellungen zurücksetzen");
         resetButton.addActionListener(new ResetListener(this));
 

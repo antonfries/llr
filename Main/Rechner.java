@@ -12,6 +12,10 @@ import java.awt.event.WindowEvent;
 
 public class Rechner {
 
+    public static final String TITEL = "Rechen-Operationen";
+    public static final int WIDTH = 300;
+    public static final int HEIGHT = 100;
+
     public static int charZuExcelSpalte(char c) {
         return Character.getNumericValue(c) - 10;
     }
@@ -27,18 +31,18 @@ public class Rechner {
         int max = Konfiguration.getZeileEnde();
         int zeilenAnzahl = sheet.getLastRowNum() + 1;
         int progressLength = max == -1 ? zeilenAnzahl - min : max - min;
-        if (zeilenAnzahl < min) {
+        if (zeilenAnzahl < min) { // TODO: Überprüfen, ob das korrekt ist
             Validation.showZeileAnfangErrorMessage(jFrame);
             return;
         }
-        JFrame rechenFrame = new JFrame();
-        rechenFrame.setTitle("Rechen-Operationen");
-        rechenFrame.setSize(300, 100);
+        JFrame rechenFrame = new JFrame(); // TODO: Auslagern in GUI-Klasse mit Schnittstelle
+        rechenFrame.setTitle(TITEL);
+        rechenFrame.setSize(WIDTH, HEIGHT);
         JProgressBar jProgressBar = new JProgressBar(0, progressLength);
         jProgressBar.setStringPainted(true);
-        jProgressBar.setValue(0);
+        jProgressBar.setValue(0); // TODO: notwendig?
         Thread t = new Thread(() -> {
-            double wert, menge, summand, ergebnis = 0.0;
+            double wert, menge, summand, ergebnis = 0.0; // TODO: ist das guter Codestyle?
             int counter = 0, erfolgCounter = 0;
             for (Row r : sheet) {
                 final int percent = counter;
@@ -82,7 +86,7 @@ public class Rechner {
             Cell entitaetZelle = r.getCell(charZuExcelSpalte(entitaetSpalte));
             einzelEntitaet = entitaetZelle != null
                     ? Utility.parseDoubleIgnoreError(entitaetZelle.getStringCellValue()) : 0.0;
-            if (einzelEntitaet != 0.0) {
+            if (einzelEntitaet != 0.0) {  // TODO: Ursache der Reihenfolge des Auslesens überprüfen
                 entitaet = einzelEntitaet;
             }
         }

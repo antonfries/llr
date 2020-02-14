@@ -14,6 +14,12 @@ import java.awt.event.KeyEvent;
 
 public class GuiKoeffizientenEinstellungen extends JFrame {
 
+    public static final String TITEL = "Koeffizienten-Einstellungen";
+    public static final int WIDTH = 800;
+    public static final int HEIGHT = 300;
+    public static final int SCROLL_WIDTH = 700;
+    public static final int SCROLL_HEIGHT = 200; // TODO: ganzen Code nun nach Zahlen durchsuchen
+
     public JTextField[] grenzeTextfeldListe;
     public JTextField[] koeffizientTextfeldListe;
     private JScrollPane jScrollPane;
@@ -32,9 +38,9 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     }
 
     private void init() {
-        setTitle("Koeffizienten-Einstellungen");
+        setTitle(TITEL);
         setLayout(new FlowLayout());
-        setSize(800, 300);
+        setSize(WIDTH, HEIGHT);
         setResizable(false);
         setLocationRelativeTo(null);
     }
@@ -79,7 +85,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         jScrollPane.add(jPanel);
         jScrollPane.setViewportView(jPanel);
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
-        jScrollPane.setPreferredSize(new Dimension(700, 200));
+        jScrollPane.setPreferredSize(new Dimension(SCROLL_WIDTH, SCROLL_HEIGHT));
 
         JLayeredPane jLayeredPane = getLayeredPane();
 
