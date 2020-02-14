@@ -17,7 +17,7 @@ public class StartListener implements ActionListener {
         boolean continueFlag = true;
         Excel excel = new Excel();
         int sheetPosition = excel.getSheetPosition(SheetHelper.getSelectedSheetName(gui));
-        if (sheetPosition != -1) { // TODO: Ist der Default-Fall gut genug?
+        if (sheetPosition != -1) {
             Konfiguration.setSheetPosition(sheetPosition);
         }
         excel.close();

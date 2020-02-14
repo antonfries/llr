@@ -18,7 +18,7 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     public static final int WIDTH = 800;
     public static final int HEIGHT = 300;
     public static final int SCROLL_WIDTH = 700;
-    public static final int SCROLL_HEIGHT = 200; // TODO: ganzen Code nun nach Zahlen durchsuchen
+    public static final int SCROLL_HEIGHT = 200;
 
     public JTextField[] grenzeTextfeldListe;
     public JTextField[] koeffizientTextfeldListe;

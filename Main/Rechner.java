@@ -31,7 +31,7 @@ public class Rechner {
         int max = Konfiguration.getZeileEnde();
         int zeilenAnzahl = sheet.getLastRowNum() + 1;
         int progressLength = max == -1 ? zeilenAnzahl - min : max - min;
-        if (zeilenAnzahl < min) { // TODO: Überprüfen, ob das korrekt ist
+        if (zeilenAnzahl < min) { // TODO: +-1 überprüfen bei zeilenanzahl - min
             Validation.showZeileAnfangErrorMessage(jFrame);
             return;
         }
@@ -86,7 +86,7 @@ public class Rechner {
             Cell entitaetZelle = r.getCell(charZuExcelSpalte(entitaetSpalte));
             einzelEntitaet = entitaetZelle != null
                     ? Utility.parseDoubleIgnoreError(entitaetZelle.getStringCellValue()) : 0.0;
-            if (einzelEntitaet != 0.0) {  // TODO: Ursache der Reihenfolge des Auslesens überprüfen
+            if (einzelEntitaet != 0.0) { // TODO: Reihenfolge des Auslesens der Spalten rausfinden
                 entitaet = einzelEntitaet;
             }
         }

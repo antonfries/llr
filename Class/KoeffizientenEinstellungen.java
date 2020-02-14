@@ -23,8 +23,8 @@ public class KoeffizientenEinstellungen {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.KOEFFIZIENT_ANZAHL);
             continueFlag = false;
         } // TODO: Trennzeichen bei Spalten zulassen
-        guiEinstellungen.fillView(); // TODO: auf max Koeffizient überprüfen
-        if (continueFlag && Konfiguration.getKoeffizientAnzahl() > 0) { // damit nicht über Shortcut aufrufbar
+        guiEinstellungen.fillView();
+        if (continueFlag) {
             new GuiKoeffizientenEinstellungen();
         }
     }
