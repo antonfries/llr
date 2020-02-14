@@ -1,4 +1,4 @@
-#Lager-Leistung-Rechner
+# Lager-Leistung-Rechner
 ### Feature-Requests
 - -1 als maximale Menge erlauben
 - Beliebiges (auch kein) Trennzeichen für Spaltenangaben erlauben,
