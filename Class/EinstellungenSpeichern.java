@@ -82,8 +82,10 @@ public class EinstellungenSpeichern {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_MENGE);
         }
-        if (standardMenge > maximalMenge) { // TODO: maximal 1 Fehlermeldung pro Feld anzeigen
-            Validation.showMaximalErrorMessage(guiEinstellungen);
+        if (standardMenge > maximalMenge) {
+            if (persistStandardMenge && persistMaximalMenge) {
+                Validation.showMaximalErrorMessage(guiEinstellungen);
+            }
         } else {
             if (persistStandardMenge) {
                 Konfiguration.setStandardMenge(standardMenge);
