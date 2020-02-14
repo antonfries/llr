@@ -96,7 +96,7 @@ public class EinstellungenSpeichern {
         }
         try {
             double buchungKoeffizient = Utility.parseDouble(guiEinstellungen.buchungKoeffizientTextfeld.getText());
-            if (buchungKoeffizient < 0.0) {
+            if (buchungKoeffizient <= 0.0) {
                 Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.BUCHUNG_KOEFFIZIENT);
             } else {
                 Konfiguration.setBuchungKoeffizient(buchungKoeffizient);
