@@ -15,7 +15,7 @@ public class Buchung {
     }
 
     public void setMenge(double menge) {
-        if (menge > Konfiguration.getMaximalMenge()) {
+        if (menge > Konfiguration.getMaximalMenge() && Konfiguration.getMaximalMenge() != -1) {
             menge = Konfiguration.getStandardMenge();
         }
         this.menge = menge;

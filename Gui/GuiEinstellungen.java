@@ -32,7 +32,7 @@ public class GuiEinstellungen extends JFrame {
     private JLabel wertFrage;
     private JLabel mengeFrage;
     private JLabel minSummandFrage;
-    private JLabel standardMengeFrage;
+    public JLabel standardMengeFrage;
     private JLabel maxMengeFrage;
     private JLabel buchungKoeffizientFrage;
     private JLabel zeileAnfangFrage;
@@ -112,13 +112,19 @@ public class GuiEinstellungen extends JFrame {
         mengeFrage = new JLabel("In welcher Spalte steht Menge?");
         mengeFrage.setToolTipText("Möglich sind beliebig viele aneinandergeheftete Buchstaben (Bsp. FZ,R,PQR");
         minSummandFrage = new JLabel("Minimal-Summand:");
+        minSummandFrage.setToolTipText("Wert 0 setzen, falls keine Manipulation auftreten soll");
         standardMengeFrage = new JLabel("Standard-Menge:");
+        if (Konfiguration.getMaximalMenge() == -1) {
+            standardMengeFrage.setToolTipText("Hat aktuell keine Auswirkung, da Maximal-Menge -1");
+        }
         maxMengeFrage = new JLabel("Maximal-Menge:");
+        maxMengeFrage.setToolTipText("Wert -1 setzen, falls keine Einschränkung auftreten soll");
         buchungKoeffizientFrage = new JLabel("Buchungs-Koeffizient:");
+        buchungKoeffizientFrage.setToolTipText("Wert 1 setzen, falls keine Manipulation auftreten soll");
         zeileAnfangFrage = new JLabel("Zeilenanfang:");
         zeileAnfangFrage.setToolTipText("Wert gleich 1 setzen, falls keine Einschränkung auftreten soll");
         zeileEndeFrage = new JLabel("Zeilenende:");
-        zeileEndeFrage.setToolTipText("Wert -1 setzen, falls keine EInschränkung auftreten soll");
+        zeileEndeFrage.setToolTipText("Wert -1 setzen, falls keine Einschränkung auftreten soll");
         koeffizientAnzahlTextfeld = new JTextField(3);
         koeffizientAnzahlTextfeld.getDocument().addDocumentListener(new KoeffizientListener(this));
         wertTextfeld = new JTextField(3);

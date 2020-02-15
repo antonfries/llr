@@ -74,7 +74,8 @@ public class EinstellungenSpeichern {
         }
         try {
             maximalMenge = Utility.parseDouble(guiEinstellungen.maxMengeTextfeld.getText());
-            if (maximalMenge <= 0.0) {
+            maximalMenge = Math.max(-1.0, maximalMenge);
+            if (maximalMenge <= 0.0 && maximalMenge != -1) {
                 Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_MENGE);
             } else {
                 persistMaximalMenge = true;
@@ -82,7 +83,7 @@ public class EinstellungenSpeichern {
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_MENGE);
         }
-        if (standardMenge > maximalMenge) {
+        if (standardMenge > maximalMenge && maximalMenge != -1) {
             if (persistStandardMenge && persistMaximalMenge) {
                 Validation.showMaximalErrorMessage(guiEinstellungen);
             }
@@ -94,6 +95,9 @@ public class EinstellungenSpeichern {
                 Konfiguration.setMaximalMenge(maximalMenge);
             }
         }
+        guiEinstellungen.standardMengeFrage.setToolTipText(
+                Konfiguration.getMaximalMenge() == 1
+                        ? "Hat aktuell keine Auswirkung, da Maximal-Menge -1" : "");
         try {
             double buchungKoeffizient = Utility.parseDouble(guiEinstellungen.buchungKoeffizientTextfeld.getText());
             if (buchungKoeffizient <= 0.0) {
