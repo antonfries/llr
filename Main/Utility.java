@@ -47,7 +47,8 @@ public class Utility {
             if (current <= previous && i != Konfiguration.getKoeffizientAnzahl()) {
                 Konfiguration.grenzeNode.putDouble(String.valueOf(i), Utility.round2Digits(previous + 0.01));
             }
-            if (i == Konfiguration.getKoeffizientAnzahl() && current == 0.0) { // TODO: letzte Bedingung verstehen
+            // Das funktioniert, weil die Anpassung erst nach der Abfrage ausgeführt wird
+            if (i == Konfiguration.getKoeffizientAnzahl() && current == 0.0) {
                 Konfiguration.grenzeNode.putDouble(String.valueOf(i), -1.0);
             }
         }

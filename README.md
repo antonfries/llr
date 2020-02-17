@@ -10,13 +10,9 @@ wenn innerhalb des Feldes und über die Felder hinaus das gleiche Trennzeichen v
 bzw. Evaluation, wo überhaupt welche Fehler passieren können
 - Evaluation, ob eine Fehlermeldung, automatische Verbesserung der Fehleingabe
 oder ein Mix von beidem pro Feld passieren soll
-- Else-Zweige vermeiden und dadurch Verschachtelungen vermeiden (md-Tool)
 ### Interesse
-- Reihenfolge des Auslesens der Spalten in Tooltips klarstellen
 - Handling mit Optionals, Kettenoperationen und Default-Werten
 - Übersicht zur Erstellung jeweiliger J-Komponenten und abstrakten Typen erstellen
-### Bug-Vermutungen
-- Letzte Bedingung zur Anpassung der Grenzen (Utility Zeile 50)
 ### Bei Finalisierung
 ```java
 public class Datei {

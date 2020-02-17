@@ -82,6 +82,7 @@ public class Rechner {
             einzelEntitaet = entitaetZelle != null
                     ? Utility.parseDoubleIgnoreError(entitaetZelle.getStringCellValue()) : 0.0;
             if (einzelEntitaet != 0.0) {
+                // Aufgrund dieser Überschreibung wird der Eingabestring reversed
                 entitaet = einzelEntitaet;
             }
         }
