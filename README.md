@@ -9,8 +9,6 @@ wenn innerhalb des Feldes und über die Felder hinaus das gleiche Trennzeichen v
 bzw. Evaluation, wo überhaupt welche Fehler passieren können
 - Evaluation, ob eine Fehlermeldung, automatische Verbesserung der Fehleingabe
 oder ein Mix von beidem pro Feld passieren soll
-### Interesse
-- Handling mit Optionals, Kettenoperationen und Default-Werten
 ### Bei Finalisierung
 ```java
 public class Datei {
