@@ -33,7 +33,7 @@ public class Buchung {
                 }
             }
         }
-        return Konfiguration.getStandardKoeffizient();
+        return Konfiguration.STANDARD_KOEFFIZIENT;
     }
 
     private double getProdukt() {

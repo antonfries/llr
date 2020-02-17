@@ -108,9 +108,18 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     public void fillView() {
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
             grenzeTextfeldListe[i].setText(Konfiguration.grenzeNode.get(String.valueOf(i), String.valueOf(0.0)));
+            String tooltipText = "Folgender Koeffizient: " + Konfiguration.koeffizientNode.get(String.valueOf(i), String.valueOf(Konfiguration.STANDARD_KOEFFIZIENT));
+            if (i != Konfiguration.getKoeffizientAnzahl()) {
+                grenzeTextfeldListe[i].setToolTipText(tooltipText);
+            }
         }
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
-            koeffizientTextfeldListe[i].setText(Konfiguration.koeffizientNode.get(String.valueOf(i), String.valueOf(Konfiguration.getStandardKoeffizient())));
+            koeffizientTextfeldListe[i].setText(Konfiguration.koeffizientNode.get(String.valueOf(i), String.valueOf(Konfiguration.STANDARD_KOEFFIZIENT)));
+            String tooltipText = "Dazugehörige Grenzen: "
+                    + Konfiguration.grenzeNode.get(String.valueOf(i), "0.0")
+                    + " und "
+                    + Konfiguration.grenzeNode.get(String.valueOf(i + 1), "0.0");
+            koeffizientTextfeldListe[i].setToolTipText(tooltipText);
         }
     }
 }

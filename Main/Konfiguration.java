@@ -25,9 +25,9 @@ public class Konfiguration {
     public static final String BUCHUNG_KOEFFIZIENT = "Buchung-Koeffizient";
     public static final String ZEILE_ANFANG = "Zeile-Anfang";
     public static final String ZEILE_ENDE = "Zeile-Ende";
-    public static final String STANDARD_KOEFFIZIENT = "Standard-Koeffizient";
 
     public static final int MAXIMAL_KOEFFIZIENT_ANZAHL = 100;
+    public static final double STANDARD_KOEFFIZIENT = 2.0;
 
     public static Regler[] getReglerListe() {
         Regler[] reglerListe = new Regler[getKoeffizientAnzahl()];
@@ -35,7 +35,7 @@ public class Konfiguration {
             reglerListe[i] = new Regler(
                     grenzeNode.getDouble(String.valueOf(i), 0.0),
                     grenzeNode.getDouble(String.valueOf(i + 1), 0.0),
-                    koeffizientNode.getDouble(String.valueOf(i), getStandardKoeffizient())
+                    koeffizientNode.getDouble(String.valueOf(i), STANDARD_KOEFFIZIENT)
             );
         }
         return reglerListe;
@@ -79,14 +79,6 @@ public class Konfiguration {
 
     public static void setArbeitszeit(double arbeitszeit) {
         basisNode.putDouble(ARBEITSZEIT, arbeitszeit);
-    }
-
-    public static double getStandardKoeffizient() {
-        return basisNode.getDouble(STANDARD_KOEFFIZIENT, Default.STANDARD_KOEFFIZIENT);
-    }
-
-    public static void setStandardKoeffizient(double standardKoeffizient) {
-        basisNode.putDouble(STANDARD_KOEFFIZIENT, standardKoeffizient);
     }
 
     public static int getKoeffizientAnzahl() {
