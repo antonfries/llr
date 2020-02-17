@@ -76,6 +76,7 @@ public class GuiEinstellungen extends JFrame {
             double arbeitszeit = Utility.parseDouble(gui.arbeitszeitTextfeld.getText());
             if (arbeitszeit <= 0.0) {
                 Validation.showNegativErrorMessage(gui, Konfiguration.ARBEITSZEIT);
+                // Anmerkung: Gui wird trotz Fehleingabe geöffnet (Beispiel für Registry-Manipulation)
             } else {
                 Konfiguration.setArbeitszeit(arbeitszeit);
             }

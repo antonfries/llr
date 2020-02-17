@@ -82,6 +82,7 @@ public class Konfiguration {
     }
 
     public static int getKoeffizientAnzahl() {
+        // TODO: Validierung, falls Nutzer über Registry falsche Einstellungen tätigt?
         return basisNode.getInt(KOEFFIZIENT_ANZAHL, Default.KOEFFIZIENT_ANZAHL);
     }
 
