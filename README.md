@@ -11,7 +11,6 @@ bzw. Evaluation, wo überhaupt welche Fehler passieren können
 oder ein Mix von beidem pro Feld passieren soll
 ### Interesse
 - Handling mit Optionals, Kettenoperationen und Default-Werten
-- Übersicht zur Erstellung jeweiliger J-Komponenten und abstrakten Typen erstellen
 ### Bei Finalisierung
 ```java
 public class Datei {
