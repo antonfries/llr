@@ -5,6 +5,7 @@ import Action.EinstellungenAction;
 import Action.ResetAction;
 import Listener.*;
 import Main.ExcelFileChecker;
+import Main.FocusTextField;
 import Main.Konfiguration;
 
 import javax.swing.*;
@@ -19,8 +20,8 @@ public class Gui extends JFrame {
     public static final int SCROLL_WIDTH = 230;
     public static final int SCROLL_HEIGHT = 174;
 
-    public JTextField dateipfadTextfeld;
-    public JTextField arbeitszeitTextfeld;
+    public FocusTextField dateipfadTextfeld;
+    public FocusTextField arbeitszeitTextfeld;
     public JButton startButton;
     public ButtonGroup sheetListe;
     public JPanel sheetContainer;
@@ -63,8 +64,8 @@ public class Gui extends JFrame {
     private void initComponents() {
         dateipfad = new JLabel("Dateipfad:");
         arbeitszeit = new JLabel("Arbeitszeit:");
-        dateipfadTextfeld = new JTextField(20);
-        arbeitszeitTextfeld = new JTextField(30);
+        dateipfadTextfeld = new FocusTextField(20);
+        arbeitszeitTextfeld = new FocusTextField(30);
         einstellungsButton = new JButton("Einstellungen öffnen");
         einstellungsButton.addActionListener(new EinstellungenListener(this));
         startButton = new JButton("Start");

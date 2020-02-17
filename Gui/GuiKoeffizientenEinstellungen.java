@@ -5,6 +5,7 @@ import Action.KoeffizientenEinstellungenSpeichernAction;
 import Listener.GeneralStartListener;
 import Listener.KoeffizientenSpeichernListener;
 import Main.ExcelFileChecker;
+import Main.FocusTextField;
 import Main.Konfiguration;
 import Main.WrapLayout;
 
@@ -20,8 +21,8 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     public static final int SCROLL_WIDTH = 700;
     public static final int SCROLL_HEIGHT = 200;
 
-    public JTextField[] grenzeTextfeldListe;
-    public JTextField[] koeffizientTextfeldListe;
+    public FocusTextField[] grenzeTextfeldListe;
+    public FocusTextField[] koeffizientTextfeldListe;
     private JScrollPane jScrollPane;
     private JPanel jPanel;
     private JLabel koeffizientText;
@@ -47,11 +48,11 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
 
     private void addComponents() {
         jPanel.add(grenzeText);
-        for (JTextField grenzeTextfeld : grenzeTextfeldListe) {
+        for (FocusTextField grenzeTextfeld : grenzeTextfeldListe) {
             jPanel.add(grenzeTextfeld);
         }
         jPanel.add(koeffizientText);
-        for (JTextField koeffizienttextfeld : koeffizientTextfeldListe) {
+        for (FocusTextField koeffizienttextfeld : koeffizientTextfeldListe) {
             jPanel.add(koeffizienttextfeld);
         }
         add(jScrollPane);
@@ -67,16 +68,16 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         startButton = new JButton("Start");
         startButton.setEnabled(ExcelFileChecker.checkExcelFile(Konfiguration.getDateiPfad(), this));
         startButton.addActionListener(new GeneralStartListener(this));
-        grenzeTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl() + 1];
-        koeffizientTextfeldListe = new JTextField[Konfiguration.getKoeffizientAnzahl()];
+        grenzeTextfeldListe = new FocusTextField[Konfiguration.getKoeffizientAnzahl() + 1];
+        koeffizientTextfeldListe = new FocusTextField[Konfiguration.getKoeffizientAnzahl()];
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
-            grenzeTextfeldListe[i] = new JTextField(4);
+            grenzeTextfeldListe[i] = new FocusTextField(4);
             if (i == Konfiguration.getKoeffizientAnzahl()) {
                 grenzeTextfeldListe[i].setToolTipText("Wert -1 setzen, falls es keine obere Grenze geben soll");
             }
         }
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
-            koeffizientTextfeldListe[i] = new JTextField(4);
+            koeffizientTextfeldListe[i] = new FocusTextField(4);
         }
         jPanel = new JPanel();
         jPanel.setLayout(new WrapLayout());
