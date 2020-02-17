@@ -19,7 +19,6 @@ oder ein Mix von beidem pro Feld passieren soll
 - Übersicht zur Erstellung jeweiliger J-Komponenten und abstrakten Typen erstellen
 ### Bug-Vermutungen
 - Letzte Bedingung zur Anpassung der Grenzen (Utility Zeile 50)
-- Initialisiertes Setzen der ProgressBar auf 0 notwendig? (Rechner 43)
 ### Bei Finalisierung
 ```java
 public class Datei {

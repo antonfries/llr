@@ -32,12 +32,13 @@ public class Rechner {
         int zeilenAnzahl = sheet.getLastRowNum() + 1;
         int progressLength;
         if (max == -1) {
-            progressLength = zeilenAnzahl - min; // Beispiel: (1 + 1) - 1 = 1
+            progressLength = zeilenAnzahl - min;
         } else {
-            progressLength = max - min + 1; // Beispiel: 1 - 1 + 1
+            progressLength = max - min;
             // Falls das Maximum größer ist als das angegebene Zeilen-Ende:
             progressLength = Math.min(progressLength, zeilenAnzahl - min);
         }
+        progressLength++;
         if (zeilenAnzahl < min) {
             Validation.showZeileAnfangErrorMessage(jFrame);
             return;
@@ -51,13 +52,9 @@ public class Rechner {
             double wert, menge, summand, ergebnis = 0.0;
             int counter = 0, erfolgCounter = 0;
             for (Row r : sheet) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ignored) {
-                }
-                final int percent = counter;
-                SwingUtilities.invokeLater(() -> jProgressBar.setValue(percent));
                 counter++;
+                final int nextValue = counter;
+                SwingUtilities.invokeLater(() -> jProgressBar.setValue(nextValue));
                 if (counter < min) {
                     continue;
                 }
@@ -70,10 +67,10 @@ public class Rechner {
                 menge = getEntitaet(mengeSpalteListe, r);
                 Buchung buchung = new Buchung(menge, wert);
                 summand = buchung.getSummand();
+                ergebnis += summand;
                 if (summand > 0.0) {
                     erfolgCounter++;
                 }
-                ergebnis += summand;
             }
             excel.close();
             ergebnis *= Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
