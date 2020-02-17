@@ -20,7 +20,6 @@ oder ein Mix von beidem pro Feld passieren soll
 ### Bug-Vermutungen
 - Letzte Bedingung zur Anpassung der Grenzen (Utility Zeile 50)
 - Initialisiertes Setzen der ProgressBar auf 0 notwendig? (Rechner 43)
-- +-1 unklar bei zeilenanzahl - min (Rechner 34)
 ### Bei Finalisierung
 ```java
 public class Datei {

@@ -30,8 +30,15 @@ public class Rechner {
         int min = Konfiguration.getZeileAnfang();
         int max = Konfiguration.getZeileEnde();
         int zeilenAnzahl = sheet.getLastRowNum() + 1;
-        int progressLength = max == -1 ? zeilenAnzahl - min : max - min;
-        if (zeilenAnzahl < min) { // TODO: +-1 überprüfen bei max = -1
+        int progressLength;
+        if (max == -1) {
+            progressLength = zeilenAnzahl - min; // Beispiel: (1 + 1) - 1 = 1
+        } else {
+            progressLength = max - min + 1; // Beispiel: 1 - 1 + 1
+            // Falls das Maximum größer ist als das angegebene Zeilen-Ende:
+            progressLength = Math.min(progressLength, zeilenAnzahl - min);
+        }
+        if (zeilenAnzahl < min) {
             Validation.showZeileAnfangErrorMessage(jFrame);
             return;
         }
@@ -40,11 +47,14 @@ public class Rechner {
         rechenFrame.setSize(WIDTH, HEIGHT);
         JProgressBar jProgressBar = new JProgressBar(0, progressLength);
         jProgressBar.setStringPainted(true);
-        jProgressBar.setValue(0); // TODO: notwendig?
         Thread t = new Thread(() -> {
             double wert, menge, summand, ergebnis = 0.0;
             int counter = 0, erfolgCounter = 0;
             for (Row r : sheet) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ignored) {
+                }
                 final int percent = counter;
                 SwingUtilities.invokeLater(() -> jProgressBar.setValue(percent));
                 counter++;
@@ -65,7 +75,7 @@ public class Rechner {
                 }
                 ergebnis += summand;
             }
-                excel.close();
+            excel.close();
             ergebnis *= Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
             rechenFrame.dispatchEvent(new WindowEvent(rechenFrame, WindowEvent.WINDOW_CLOSING));
             StringSelection stringSelection = new StringSelection(String.valueOf(ergebnis));
