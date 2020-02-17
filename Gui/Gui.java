@@ -20,11 +20,14 @@ public class Gui extends JFrame {
     public static final int SCROLL_WIDTH = 230;
     public static final int SCROLL_HEIGHT = 174;
 
+    public static final int DATEIPFAD_BREITE = 20;
+    public static final int ARBEITSZEIT_BREITE = 30;
+
     public FocusTextField dateipfadTextfeld;
     public FocusTextField arbeitszeitTextfeld;
     public JButton startButton;
     public ButtonGroup sheetListe;
-    public JPanel sheetContainer;
+    public JPanel jPanel;
     public JScrollPane jScrollPane;
     private JLabel dateipfad;
     private JLabel arbeitszeit;
@@ -64,8 +67,8 @@ public class Gui extends JFrame {
     private void initComponents() {
         dateipfad = new JLabel("Dateipfad:");
         arbeitszeit = new JLabel("Arbeitszeit:");
-        dateipfadTextfeld = new FocusTextField(20);
-        arbeitszeitTextfeld = new FocusTextField(30);
+        dateipfadTextfeld = new FocusTextField(DATEIPFAD_BREITE);
+        arbeitszeitTextfeld = new FocusTextField(ARBEITSZEIT_BREITE);
         einstellungsButton = new JButton("Einstellungen öffnen");
         einstellungsButton.addActionListener(new EinstellungenListener(this));
         startButton = new JButton("Start");
@@ -73,12 +76,12 @@ public class Gui extends JFrame {
         startButton.addActionListener(new StartListener(this));
         dateiButton = new JButton("Datei auswählen...");
         dateiButton.addActionListener(new DateiListener(this));
-        sheetContainer = new JPanel();
-        sheetContainer.setLayout(new BoxLayout(sheetContainer, BoxLayout.PAGE_AXIS));
+        jPanel = new JPanel();
+        jPanel.setLayout(new BoxLayout(jPanel, BoxLayout.PAGE_AXIS));
         jScrollPane = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,
                 ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        jScrollPane.add(sheetContainer);
-        jScrollPane.setViewportView(sheetContainer);
+        jScrollPane.add(jPanel);
+        jScrollPane.setViewportView(jPanel);
         jScrollPane.setBorder(BorderFactory.createEmptyBorder());
         jScrollPane.setPreferredSize(new Dimension(SCROLL_WIDTH, SCROLL_HEIGHT));
         resetButton = new JButton("Einstellungen zurücksetzen");

@@ -6,7 +6,6 @@ wenn innerhalb des Feldes und über die Felder hinaus das gleiche Trennzeichen v
 - Grid- bzw. GridBagLayout implementieren mit Abständen zur Außenkomponente
 - Bei Grenzen und Koeffizienten nach dem Speichern Tooltips zu jeweiligen Belegungen anzeigen
 ### Codestyle
-- Auslagerung bzw. Kapselung der individuellen Breiten der J-Textfelder
 - Anzeige jeweder Fehlermeldung in Dialog der jeweiligen aktiven GUI,
 bzw. Evaluation, wo überhaupt welche Fehler passieren können
 - Evaluation, ob eine Fehlermeldung, automatische Verbesserung der Fehleingabe

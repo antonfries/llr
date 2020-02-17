@@ -19,6 +19,17 @@ public class GuiEinstellungen extends JFrame {
     public static final int WIDTH = 300;
     public static final int HEIGHT = 400;
 
+    public static final int KOEFFIZIENT_ANZAHL_BREITE = 3;
+    public static final int WERT_BREITE = 3;
+    public static final int MENGE_BREITE = 3;
+    public static final int MINIMAL_SUMMAND_BREITE = 7;
+    public static final int STANDARD_MENGE_BREITE = 8;
+    public static final int MAXIMAL_MENGE_BREITE = 6;
+    public static final int BUCHUNG_KOEFFIZIENT_BREITE = 7;
+    public static final int ZEILE_ANFANG_BREITE = 15;
+    public static final int ZEILE_ENDE_BREITE = 15;
+
+
     public FocusTextField koeffizientAnzahlTextfeld;
     public FocusTextField wertTextfeld;
     public FocusTextField mengeTextfeld;
@@ -125,16 +136,16 @@ public class GuiEinstellungen extends JFrame {
         zeileAnfangFrage.setToolTipText("Wert gleich 1 setzen, falls keine Einschränkung auftreten soll");
         zeileEndeFrage = new JLabel("Zeilenende:");
         zeileEndeFrage.setToolTipText("Wert -1 setzen, falls keine Einschränkung auftreten soll");
-        koeffizientAnzahlTextfeld = new FocusTextField(3);
+        koeffizientAnzahlTextfeld = new FocusTextField(KOEFFIZIENT_ANZAHL_BREITE);
         koeffizientAnzahlTextfeld.getDocument().addDocumentListener(new KoeffizientListener(this));
-        wertTextfeld = new FocusTextField(3);
-        mengeTextfeld = new FocusTextField(3);
-        minSummandTextfeld = new FocusTextField(7);
-        standardMengeTextfeld = new FocusTextField(8);
-        maxMengeTextfeld = new FocusTextField(6);
-        buchungKoeffizientTextfeld = new FocusTextField(7);
-        zeileAnfangTextfeld = new FocusTextField(15);
-        zeileEndeTextfeld = new FocusTextField(15);
+        wertTextfeld = new FocusTextField(WERT_BREITE);
+        mengeTextfeld = new FocusTextField(MENGE_BREITE);
+        minSummandTextfeld = new FocusTextField(MINIMAL_SUMMAND_BREITE);
+        standardMengeTextfeld = new FocusTextField(STANDARD_MENGE_BREITE);
+        maxMengeTextfeld = new FocusTextField(MAXIMAL_MENGE_BREITE);
+        buchungKoeffizientTextfeld = new FocusTextField(BUCHUNG_KOEFFIZIENT_BREITE);
+        zeileAnfangTextfeld = new FocusTextField(ZEILE_ANFANG_BREITE);
+        zeileEndeTextfeld = new FocusTextField(ZEILE_ENDE_BREITE);
         koeffizientEinstellungenButton = new JButton("Koeffizienten-Einstellungen");
         koeffizientEinstellungenButton.addActionListener(new KoeffizientenEinstellungenListener(this));
         speichernButton = new JButton("Speichern");

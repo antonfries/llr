@@ -21,6 +21,9 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
     public static final int SCROLL_WIDTH = 700;
     public static final int SCROLL_HEIGHT = 200;
 
+    public static final int GRENZE_BREITE = 4;
+    public static final int KOEFFIZIENT_BREITE = 4;
+
     public FocusTextField[] grenzeTextfeldListe;
     public FocusTextField[] koeffizientTextfeldListe;
     private JScrollPane jScrollPane;
@@ -71,13 +74,13 @@ public class GuiKoeffizientenEinstellungen extends JFrame {
         grenzeTextfeldListe = new FocusTextField[Konfiguration.getKoeffizientAnzahl() + 1];
         koeffizientTextfeldListe = new FocusTextField[Konfiguration.getKoeffizientAnzahl()];
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
-            grenzeTextfeldListe[i] = new FocusTextField(4);
+            grenzeTextfeldListe[i] = new FocusTextField(GRENZE_BREITE);
             if (i == Konfiguration.getKoeffizientAnzahl()) {
                 grenzeTextfeldListe[i].setToolTipText("Wert -1 setzen, falls es keine obere Grenze geben soll");
             }
         }
         for (int i = 0; i < Konfiguration.getKoeffizientAnzahl(); i++) {
-            koeffizientTextfeldListe[i] = new FocusTextField(4);
+            koeffizientTextfeldListe[i] = new FocusTextField(KOEFFIZIENT_BREITE);
         }
         jPanel = new JPanel();
         jPanel.setLayout(new WrapLayout());

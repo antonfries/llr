@@ -9,7 +9,7 @@ import javax.swing.*;
 public class SheetSelektor {
     public SheetSelektor(Gui gui) {
         Excel excel = new Excel();
-        gui.sheetContainer.removeAll();
+        gui.jPanel.removeAll();
         gui.sheetListe = new ButtonGroup();
         if (Konfiguration.getSheetPosition() >= excel.ExcelSheetListe.length) {
             Konfiguration.setSheetPosition(0);
@@ -28,11 +28,11 @@ public class SheetSelektor {
                 sheetButton.setSelected(true);
             }
             gui.sheetListe.add(sheetButton);
-            gui.sheetContainer.add(sheetButton);
+            gui.jPanel.add(sheetButton);
         }
         excel.close();
         if (counter == 0) {
-            gui.sheetContainer.add(new JLabel("<html>Die Excel-Datei enthält<br>keine nicht leeren Sheets!</html>"));
+            gui.jPanel.add(new JLabel("<html>Die Excel-Datei enthält<br>keine nicht leeren Sheets!</html>"));
         }
         gui.repaint(); // Sheet-Container enthält sonst manchmal noch alten Text
         gui.revalidate();
