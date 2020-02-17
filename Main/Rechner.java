@@ -1,5 +1,6 @@
 package Main;
 
+import Gui.GuiProgress;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -8,14 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.WindowEvent;
 
 public class Rechner {
-
-    public static final String TITEL = "Rechen-Operationen";
-    public static final int WIDTH = 300;
-    public static final int HEIGHT = 100;
-
     public static int charZuExcelSpalte(char c) {
         return Character.getNumericValue(c) - 10;
     }
@@ -43,18 +38,14 @@ public class Rechner {
             Validation.showZeileAnfangErrorMessage(jFrame);
             return;
         }
-        JFrame rechenFrame = new JFrame();
-        rechenFrame.setTitle(TITEL);
-        rechenFrame.setSize(WIDTH, HEIGHT);
-        JProgressBar jProgressBar = new JProgressBar(0, progressLength);
-        jProgressBar.setStringPainted(true);
-        Thread t = new Thread(() -> {
+        GuiProgress guiProgress = new GuiProgress(progressLength);
+        new Thread(() -> {
             double wert, menge, summand, ergebnis = 0.0;
             int counter = 0, erfolgCounter = 0;
             for (Row r : sheet) {
                 counter++;
                 final int nextValue = counter;
-                SwingUtilities.invokeLater(() -> jProgressBar.setValue(nextValue));
+                SwingUtilities.invokeLater(() -> guiProgress.setValueOfProgressBar(nextValue));
                 if (counter < min) {
                     continue;
                 }
@@ -74,17 +65,14 @@ public class Rechner {
             }
             excel.close();
             ergebnis *= Konfiguration.getBuchungKoeffizient() / Konfiguration.getArbeitszeit();
-            rechenFrame.dispatchEvent(new WindowEvent(rechenFrame, WindowEvent.WINDOW_CLOSING));
+            guiProgress.closeProgressBar();
             StringSelection stringSelection = new StringSelection(String.valueOf(ergebnis));
             Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             clipboard.setContents(stringSelection, null);
             JOptionPane.showMessageDialog(jFrame, "Lager-Leistung:    " + ergebnis,
                     "Ergebnis über " + erfolgCounter + " Zeilen",
                     JOptionPane.INFORMATION_MESSAGE);
-        });
-        rechenFrame.add(jProgressBar);
-        rechenFrame.setVisible(true);
-        t.start();
+        }).start();
     }
 
     private static double getEntitaet(char[] entitaetSpalteListe, Row r) {
