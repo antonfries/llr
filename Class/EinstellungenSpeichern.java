@@ -76,7 +76,7 @@ public class EinstellungenSpeichern {
             maximalMenge = Utility.parseDouble(guiEinstellungen.maxMengeTextfeld.getText());
             maximalMenge = Math.max(-1.0, maximalMenge);
             if (maximalMenge <= 0.0 && maximalMenge != -1) {
-                Validation.showNegativErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_MENGE);
+                Validation.showNegativOrUnlimitedErrorMessage(guiEinstellungen, Konfiguration.MAXIMAL_MENGE);
             } else {
                 persistMaximalMenge = true;
             }
@@ -121,6 +121,7 @@ public class EinstellungenSpeichern {
             zeileEnde = Math.max(-1, zeileEnde);
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.ZEILE_ENDE);
+            // TODO: -0.5 bei Zeilenende und maximaler Grenze gescheite Validierung implementieren
         }
         if (zeileEnde < zeileAnfang && zeileEnde != -1) {
             Validation.showZeileErrorMessage(guiEinstellungen);

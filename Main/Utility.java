@@ -22,7 +22,7 @@ public class Utility {
 
     public static void removeOldGrenzen(int koeffizientAnzahl) {
         boolean unlimited = Konfiguration.grenzeNode.getDouble(String.valueOf(Konfiguration.getKoeffizientAnzahl()), 0.0) == -1;
-        if (unlimited) {
+        if (unlimited && koeffizientAnzahl != 0) {
             Konfiguration.grenzeNode.putDouble(String.valueOf(koeffizientAnzahl), -1.0);
         }
         try {

@@ -29,6 +29,14 @@ public class Validation {
         );
     }
 
+    public static void showNegativOrUnlimitedErrorMessage(JFrame jFrame, String spalte) {
+        showErrorMessage(
+                jFrame,
+                "Bitte geben Sie positive Zahlen oder -1 ein!",
+                spalte + "-Validation"
+        );
+    }
+
     public static void showSpaltenErrorMessage(JFrame jFrame, String spalte) {
         showErrorMessage(
                 jFrame,
@@ -90,6 +98,14 @@ public class Validation {
                 jFrame,
                 "Bitte geben Sie Koeffizienten von 0 bis " + Konfiguration.MAXIMAL_KOEFFIZIENT_ANZAHL + " ein!",
                 "Koeffizient-Validation"
+        );
+    }
+
+    public static void showGuiErrorMessage(JFrame jFrame) {
+        showErrorMessage(
+                jFrame,
+                "Koeffizienten-Einstellungen sind bei 0 Koeffizienten nicht verfügbar!",
+                "Gui-Validation"
         );
     }
 }

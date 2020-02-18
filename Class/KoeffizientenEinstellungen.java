@@ -24,8 +24,11 @@ public class KoeffizientenEinstellungen {
             continueFlag = false;
         }
         guiEinstellungen.fillView();
-        if (continueFlag) {
+        if (continueFlag
+                && Konfiguration.getKoeffizientAnzahl() > 0
+                && Konfiguration.getKoeffizientAnzahl() <= Konfiguration.MAXIMAL_KOEFFIZIENT_ANZAHL) {
             new GuiKoeffizientenEinstellungen();
         }
+        // TODO: Hinweis anzeigen, warum Koeffizienten-Einstellungen bei 0 Koeffizienten nicht aufrufbar
     }
 }
