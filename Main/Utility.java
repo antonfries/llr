@@ -44,10 +44,9 @@ public class Utility {
         for (int i = 1; i < Konfiguration.getKoeffizientAnzahl() + 1; i++) {
             double current = Konfiguration.grenzeNode.getDouble(String.valueOf(i), 0.0);
             double previous = Konfiguration.grenzeNode.getDouble(String.valueOf(i - 1), 0.0);
-            if (current <= previous && i != Konfiguration.getKoeffizientAnzahl()) {
+            if (current <= previous && current != -1.0) { // Nur 0.01 addieren, falls obere Grenze nicht -1
                 Konfiguration.grenzeNode.putDouble(String.valueOf(i), Utility.round2Digits(previous + 0.01));
             }
-            // TODO: falls letzte Grenze nicht -1 ist, wird diese nicht automatisch erhöht
             // Das funktioniert, weil die Anpassung erst nach der Abfrage ausgeführt wird
             if (i == Konfiguration.getKoeffizientAnzahl() && current == 0.0) {
                 Konfiguration.grenzeNode.putDouble(String.valueOf(i), -1.0);
