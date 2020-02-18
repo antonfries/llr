@@ -152,7 +152,7 @@ public class EinstellungenSpeichern {
                 return false;
             }
         }
-        return true;
+        return !s.equals("");
     }
 
     private boolean isLetter(Character c) {
