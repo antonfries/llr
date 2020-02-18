@@ -119,9 +119,11 @@ public class EinstellungenSpeichern {
         try {
             zeileEnde = (int) Utility.parseDouble(guiEinstellungen.zeileEndeTextfeld.getText());
             zeileEnde = Math.max(-1, zeileEnde);
+            if (zeileEnde < 1) {
+                zeileEnde = -1;
+            } // Automatische Verbesserung, auch wenn der Nutzer sich dabei wundert
         } catch (NumberFormatException e) {
             Validation.showZahlenErrorMessage(guiEinstellungen, Konfiguration.ZEILE_ENDE);
-            // TODO: -0.5 bei Zeilenende und maximaler Grenze gescheite Validierung implementieren
         }
         if (zeileEnde < zeileAnfang && zeileEnde != -1) {
             Validation.showZeileErrorMessage(guiEinstellungen);
