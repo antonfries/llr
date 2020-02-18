@@ -9,8 +9,9 @@ import Main.Validation;
 public class KoeffizientenEinstellungen {
     public KoeffizientenEinstellungen(GuiEinstellungen guiEinstellungen) {
         boolean continueFlag = true;
+        int koeffizientAnzahl = -1;
         try {
-            int koeffizientAnzahl = (int) Utility.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText());
+            koeffizientAnzahl = (int) Utility.parseDouble(guiEinstellungen.koeffizientAnzahlTextfeld.getText());
             if (koeffizientAnzahl < 0 || koeffizientAnzahl > Konfiguration.MAXIMAL_KOEFFIZIENT_ANZAHL) {
                 Validation.showKoeffizientErrorMessage(guiEinstellungen);
                 continueFlag = false;
@@ -29,6 +30,10 @@ public class KoeffizientenEinstellungen {
                 && Konfiguration.getKoeffizientAnzahl() <= Konfiguration.MAXIMAL_KOEFFIZIENT_ANZAHL) {
             new GuiKoeffizientenEinstellungen();
         }
-        // TODO: Hinweis anzeigen, warum Koeffizienten-Einstellungen bei 0 Koeffizienten nicht aufrufbar
+        if (Konfiguration.getKoeffizientAnzahl() == 0
+                && koeffizientAnzahl >= 0
+                && koeffizientAnzahl < Konfiguration.MAXIMAL_KOEFFIZIENT_ANZAHL) {
+            Validation.showGuiErrorMessage(guiEinstellungen);
+        }
     }
 }
