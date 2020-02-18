@@ -13,8 +13,11 @@ public class KoeffizientenEinstellungenSpeichern {
                 double grenze = Utility.round2Digits(Utility.parseDouble(guiKoeffizientenEinstellungen.grenzeTextfeldListe[i].getText()));
                 if (grenze < 0.0 && i != Konfiguration.getKoeffizientAnzahl()) {
                     Validation.showNegativErrorMessage(guiKoeffizientenEinstellungen, (i + 1) + ". " + Konfiguration.GRENZEN);
-                } else { // TODO: hier zwischen -1 und Wert abfangen
+                } else {
                     grenze = Math.max(-1.0, grenze);
+                    if (grenze < 0.0) {
+                        grenze = -1.0; // Fall abfangen, bei dem Nutzer Zahl zwischen -0 bis 0 eingibt
+                    }
                     Konfiguration.grenzeNode.putDouble(String.valueOf(i), grenze);
                 }
             } catch (NumberFormatException e) {
