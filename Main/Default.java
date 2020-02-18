@@ -8,10 +8,9 @@ public class Default {
     public static final String WERT_SPALTE = "V";
     public static final String MENGE_SPALTE = "PQ";
     public static final double MINIMAL_SUMMAND = 0.0;
-    public static final double STANDARD_MENGE = 50.0;
-    public static final double MAXIMAL_MENGE = 100.0;
+    public static final double STANDARD_MENGE = 1.0;
+    public static final double MAXIMAL_MENGE = -1.0;
     public static final double BUCHUNG_KOEFFIZIENT = 1.0;
     public static final int ZEILE_ANFANG = 1;
     public static final int ZEILE_ENDE = -1;
-    public static final double STANDARD_KOEFFIZIENT = 2.0;
 }
