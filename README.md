@@ -8,7 +8,14 @@ wenn innerhalb des Feldes und über die Felder hinaus das gleiche Trennzeichen v
 - Anzeige jeweder Fehlermeldung in Dialog der jeweiligen aktiven GUI,
 bzw. Evaluation, wo überhaupt welche Fehler passieren können
 - Evaluation, ob eine Fehlermeldung, automatische Verbesserung der Fehleingabe
-oder ein Mix von beidem pro Feld passieren soll
+oder ein Mix von beidem pro Feld passieren soll, Idealfall:
+```java
+public class Test {
+    public Test() {
+        zeileAnfang = Math.max(1, zeileAnfang);
+    }
+}
+```
 ### Bei Finalisierung
 ```java
 public class Datei {
