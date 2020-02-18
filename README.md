@@ -1,5 +1,6 @@
 # Lager-Leistung-Rechner
 ### Feature-Requests
+- Zusätzlich zur ProgressBar einen InputMonitor mit lustigen Sprüchen oder Informationen zu Summanden
 - Beliebiges (auch kein) Trennzeichen für Spaltenangaben erlauben,
 wenn innerhalb des Feldes und über die Felder hinaus das gleiche Trennzeichen verwendet wird
 - Handling von invaliden Einstellungen in der Windows-Registry bei manueller Bearbeitung des Nutzers
