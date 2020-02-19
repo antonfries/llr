@@ -31,6 +31,7 @@ public class Reset {
                 Konfiguration.basisNode = Preferences.userRoot().node(Konfiguration.BASIS);
                 Konfiguration.grenzeNode = Preferences.userRoot().node(Konfiguration.GRENZEN);
                 Konfiguration.koeffizientNode = Preferences.userRoot().node(Konfiguration.KOEFFIZIENTEN);
+                gui.fillView();
             }
         } catch (BackingStoreException ignored) {
         }
